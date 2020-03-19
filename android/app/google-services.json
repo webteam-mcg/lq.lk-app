@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "612878491224",
+    "firebase_url": "https://lqlk-5370b.firebaseio.com",
+    "project_id": "lqlk-5370b",
+    "storage_bucket": "lqlk-5370b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:612878491224:android:cb2c3d60c9b989bf7c742d",
+        "android_client_info": {
+          "package_name": "lk.lq.lq_live_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "612878491224-q5j3df72kcrnloe8jamj11lhqd8n9rdo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGD9-_rNa7c4rwNZUA4l8J-BLVmPgcUnw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "612878491224-q5j3df72kcrnloe8jamj11lhqd8n9rdo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
