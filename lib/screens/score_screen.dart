@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class Data {
   String name;
@@ -51,27 +52,27 @@ class _ScoreScreenState extends State<ScoreScreen> {
           body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         padding: EdgeInsets.all(10.0),
-        child: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  padding: EdgeInsets.only(top: 14.7, bottom: 11.7),
-                  child: Text("Scoreboard",
-                      style: TextStyle(
-                        color: Color(0xff444b54),
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                        fontStyle: FontStyle.normal,
-                      )),
-                ),
-                new Container(
-                    width: 1000,
-                    height: 3,
-                    decoration: new BoxDecoration(color: Color(0xffe0e3e5))),
-                showfirstmahinda == true
-                    ? Column(
+              child: AnimationConfiguration.synchronized(child: SlideAnimation(child: Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.only(top: 14.7, bottom: 11.7),
+                        child: Text("Scoreboard",
+                            style: TextStyle(
+                              color: Color(0xff444b54),
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                              fontStyle: FontStyle.normal,
+                            )),
+                      ),
+                      new Container(
+                          width: 1000,
+                          height: 3,
+                          decoration: new BoxDecoration(color: Color(0xffe0e3e5))),
+                      showfirstmahinda == true
+                          ? Column(
                         children: <Widget>[
                           Container(
                             padding: EdgeInsets.only(top: 14.7, bottom: 11.7),
@@ -95,19 +96,19 @@ class _ScoreScreenState extends State<ScoreScreen> {
                               ],
                               rows: mcg1
                                   .map((mcg1s) => DataRow(cells: [
-                                        DataCell(Text(mcg1s.name)),
-                                        DataCell(Text(mcg1s.r)),
-                                        DataCell(Text(mcg1s.m)),
-                                        DataCell(Text(mcg1s.fours)),
-                                        DataCell(Text(mcg1s.sixes)),
-                                        DataCell(Text(mcg1s.rs)),
-                                      ]))
+                                DataCell(Text(mcg1s.name)),
+                                DataCell(Text(mcg1s.r)),
+                                DataCell(Text(mcg1s.m)),
+                                DataCell(Text(mcg1s.fours)),
+                                DataCell(Text(mcg1s.sixes)),
+                                DataCell(Text(mcg1s.rs)),
+                              ]))
                                   .toList()),
                         ],
                       )
-                    : SizedBox.shrink(),
-                showfirstrichmond == true
-                    ? Column(
+                          : SizedBox.shrink(),
+                      showfirstrichmond == true
+                          ? Column(
                         children: <Widget>[
                           Container(
                             padding: EdgeInsets.only(top: 14.7, bottom: 11.7),
@@ -131,19 +132,19 @@ class _ScoreScreenState extends State<ScoreScreen> {
                               ],
                               rows: rcg1
                                   .map((rcg1s) => DataRow(cells: [
-                                        DataCell(Text(rcg1s.name)),
-                                        DataCell(Text(rcg1s.r)),
-                                        DataCell(Text(rcg1s.m)),
-                                        DataCell(Text(rcg1s.fours)),
-                                        DataCell(Text(rcg1s.sixes)),
-                                        DataCell(Text(rcg1s.rs)),
-                                      ]))
+                                DataCell(Text(rcg1s.name)),
+                                DataCell(Text(rcg1s.r)),
+                                DataCell(Text(rcg1s.m)),
+                                DataCell(Text(rcg1s.fours)),
+                                DataCell(Text(rcg1s.sixes)),
+                                DataCell(Text(rcg1s.rs)),
+                              ]))
                                   .toList()),
                         ],
                       )
-                    : SizedBox.shrink(),
-                showsecondmahinda == true
-                    ? Column(
+                          : SizedBox.shrink(),
+                      showsecondmahinda == true
+                          ? Column(
                         children: <Widget>[
                           Container(
                             padding: EdgeInsets.only(top: 14.7, bottom: 11.7),
@@ -167,19 +168,19 @@ class _ScoreScreenState extends State<ScoreScreen> {
                               ],
                               rows: mcg2
                                   .map((mcg2s) => DataRow(cells: [
-                                        DataCell(Text(mcg2s.name)),
-                                        DataCell(Text(mcg2s.r)),
-                                        DataCell(Text(mcg2s.m)),
-                                        DataCell(Text(mcg2s.fours)),
-                                        DataCell(Text(mcg2s.sixes)),
-                                        DataCell(Text(mcg2s.rs)),
-                                      ]))
+                                DataCell(Text(mcg2s.name)),
+                                DataCell(Text(mcg2s.r)),
+                                DataCell(Text(mcg2s.m)),
+                                DataCell(Text(mcg2s.fours)),
+                                DataCell(Text(mcg2s.sixes)),
+                                DataCell(Text(mcg2s.rs)),
+                              ]))
                                   .toList()),
                         ],
                       )
-                    : SizedBox.shrink(),
-                showsecondrichmond == true
-                    ? Column(
+                          : SizedBox.shrink(),
+                      showsecondrichmond == true
+                          ? Column(
                         children: <Widget>[
                           Container(
                             padding: EdgeInsets.only(top: 14.7, bottom: 11.7),
@@ -203,34 +204,34 @@ class _ScoreScreenState extends State<ScoreScreen> {
                               ],
                               rows: rcg2
                                   .map((rcg2s) => DataRow(cells: [
-                                        DataCell(Text(rcg2s.name)),
-                                        DataCell(Text(rcg2s.r)),
-                                        DataCell(Text(rcg2s.m)),
-                                        DataCell(Text(rcg2s.fours)),
-                                        DataCell(Text(rcg2s.sixes)),
-                                        DataCell(Text(rcg2s.rs)),
-                                      ]))
+                                DataCell(Text(rcg2s.name)),
+                                DataCell(Text(rcg2s.r)),
+                                DataCell(Text(rcg2s.m)),
+                                DataCell(Text(rcg2s.fours)),
+                                DataCell(Text(rcg2s.sixes)),
+                                DataCell(Text(rcg2s.rs)),
+                              ]))
                                   .toList()),
                         ],
                       )
-                    : SizedBox.shrink(),
-                SizedBox(
-                  height: 20,
-                  width: 10,
-                )
-              ],
-            ),
-            decoration: BoxDecoration(
-              color: Color(0xffffffff),
-              borderRadius: BorderRadius.circular(15),
-              boxShadow: [
-                BoxShadow(
-                    color: Color(0x26000000),
-                    offset: Offset(0, 0),
-                    blurRadius: 75,
-                    spreadRadius: 0)
-              ],
-            )),
+                          : SizedBox.shrink(),
+                      SizedBox(
+                        height: 20,
+                        width: 10,
+                      )
+                    ],
+                  ),
+                  decoration: BoxDecoration(
+                    color: Color(0xffffffff),
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Color(0x26000000),
+                          offset: Offset(0, 0),
+                          blurRadius: 75,
+                          spreadRadius: 0)
+                    ],
+                  )),verticalOffset: MediaQuery.of(context).size.height),duration: const Duration(seconds: 1))
       )),
     );
   }

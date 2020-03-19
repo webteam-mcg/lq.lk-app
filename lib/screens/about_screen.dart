@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class AboutScreen extends StatefulWidget {
   @override
@@ -21,7 +22,7 @@ class _AboutScreenState extends State<AboutScreen> {
           body: SingleChildScrollView(
               physics:BouncingScrollPhysics(),
               padding: EdgeInsets.all(10.0),
-              child: Container(
+              child: AnimationConfiguration.synchronized(child: SlideAnimation(child: Container(
                 child: Column(
                   children: <Widget>[
                     Container(
@@ -38,7 +39,7 @@ class _AboutScreenState extends State<AboutScreen> {
                         width: 982,
                         height: 3,
                         decoration:
-                            new BoxDecoration(color: Color(0xffe0e3e5))),
+                        new BoxDecoration(color: Color(0xffe0e3e5))),
                     SizedBox(
                       height: 10.0,
                     ),
@@ -100,7 +101,7 @@ class _AboutScreenState extends State<AboutScreen> {
                         spreadRadius: 0)
                   ],
                 ),
-              )),
+              ),verticalOffset: MediaQuery.of(context).size.height),duration: const Duration(seconds: 1))),
         ));
   }
 }

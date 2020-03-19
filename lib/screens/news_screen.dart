@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tweet_webview/tweet_webview.dart';
 
 class NewsScreen extends StatefulWidget {
   @override
@@ -19,9 +20,8 @@ class _NewsScreenState extends State<NewsScreen> {
       ),
       home: Scaffold(
         body: Center(
-            child: Container(
-          color: Colors.red,
-        )),
+            child: TweetWebView.tweetUrl('https://twitter.com/MahindaCollege')
+        ),
       ),
     );
   }
