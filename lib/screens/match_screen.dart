@@ -44,7 +44,7 @@ class _MatchScreenState extends State<MatchScreen> {
                 child: AnimationLimiter(
                     child: Column(
                   children: AnimationConfiguration.toStaggeredList(duration: const Duration(seconds: 1),
-                      childAnimationBuilder: (widget)=> SlideAnimation(horizontalOffset: MediaQuery.of(context).size.width,child: FadeInAnimation(child: widget)), children: <Widget>[
+                      childAnimationBuilder: (widget)=> SlideAnimation(horizontalOffset: MediaQuery.of(context).size.width,child: FadeInAnimation(child: ScaleAnimation(child: widget))), children: <Widget>[
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
