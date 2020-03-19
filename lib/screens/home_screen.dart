@@ -11,6 +11,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String url;
   int _currentIndex = 0;
   final List<Widget> _children = [
     MatchScreen(),
@@ -33,13 +34,12 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         appBar: AppBar(
-          backgroundColor: Color(0xffe0e3e5),
-          title: Padding(
-              padding: EdgeInsets.symmetric(),
-              child: Image(
+          backgroundColor: Colors.transparent,
+          elevation: 0.0,
+          title: Image(
                 image: AssetImage('assets/images/bitmap.png'),
                 height: 30,
-              )),
+              ),
         ),
         body: _children[_currentIndex],
         bottomNavigationBar: Theme(
@@ -54,25 +54,53 @@ class _HomeScreenState extends State<HomeScreen> {
             currentIndex: _currentIndex,
             items: [
               BottomNavigationBarItem(
-                icon: Image(image: AssetImage('assets/icons/score.png'),height: 30,width: 30,),
-                title: SizedBox.shrink(),
-                activeIcon: Image(image: AssetImage('assets/icons/score-active.png'),height: 30,width: 30,)
-              ),
-              BottomNavigationBarItem(
-                  icon: Image(image: AssetImage('assets/icons/board.png'),height: 30,width: 30,),
+                  icon: Image(
+                    image: AssetImage('assets/icons/score.png'),
+                    height: 30,
+                    width: 30,
+                  ),
                   title: SizedBox.shrink(),
-                  activeIcon: Image(image: AssetImage('assets/icons/board-active.png'),height: 30,width: 30,)
-              ),
+                  activeIcon: Image(
+                    image: AssetImage('assets/icons/score-active.png'),
+                    height: 30,
+                    width: 30,
+                  )),
               BottomNavigationBarItem(
-                  icon: Image(image: AssetImage('assets/icons/news.png'),height: 30,width: 30,),
+                  icon: Image(
+                    image: AssetImage('assets/icons/board.png'),
+                    height: 30,
+                    width: 30,
+                  ),
                   title: SizedBox.shrink(),
-                  activeIcon: Image(image: AssetImage('assets/icons/news.png'),height: 30,width: 30,)
-              ),
+                  activeIcon: Image(
+                    image: AssetImage('assets/icons/board-active.png'),
+                    height: 30,
+                    width: 30,
+                  )),
               BottomNavigationBarItem(
-                  icon: Image(image: AssetImage('assets/icons/info.png'),height: 30,width: 30,),
+                  icon: Image(
+                    image: AssetImage('assets/icons/news.png'),
+                    height: 30,
+                    width: 30,
+                  ),
                   title: SizedBox.shrink(),
-                  activeIcon: Image(image: AssetImage('assets/icons/info-active.png'),height: 30,width: 30,)
-              ),
+                  activeIcon: Image(
+                    image: AssetImage('assets/icons/news.png'),
+                    height: 30,
+                    width: 30,
+                  )),
+              BottomNavigationBarItem(
+                  icon: Image(
+                    image: AssetImage('assets/icons/info.png'),
+                    height: 30,
+                    width: 30,
+                  ),
+                  title: SizedBox.shrink(),
+                  activeIcon: Image(
+                    image: AssetImage('assets/icons/info-active.png'),
+                    height: 30,
+                    width: 30,
+                  )),
             ],
           ),
         ));

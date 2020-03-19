@@ -17,6 +17,16 @@ class _MatchScreenState extends State<MatchScreen> {
   String wicket = '7';
   String college = 'MAHINDA COLLEGE';
   String strikerate = '5.5';
+  String specialmsg = 'Corona Hinda Gedarata Wela idala epawela 😥😥';
+  String batsmanonename = 'V. Dulsara';
+  String batsmantwoname = 'R. Kavindu';
+  String ballername = 'S. Stark';
+  String batsmanonescore = '60';
+  String batsmantwoscore = '30';
+  String batsmanoneballs = '75';
+  String batsmantwoballs = '15';
+  bool showsecond = true;
+  bool showmsgbox = false;
 
   @override
   Widget build(BuildContext context) {
@@ -29,19 +39,16 @@ class _MatchScreenState extends State<MatchScreen> {
         ),
         home: Scaffold(
             body: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
 //                padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
                   children: <Widget>[
-                    SizedBox(),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        SizedBox(
-                          height: 10.0,
-                        ),
                         Text(college,
                             style: TextStyle(
                               fontFamily: 'ProductSans',
@@ -73,73 +80,237 @@ class _MatchScreenState extends State<MatchScreen> {
                       ],
                     ),
                     Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                        child: Column(
                           children: <Widget>[
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    SizedBox(
+                                      height: 10,
+                                      width: 11,
+                                    ),
+                                    Image.asset(
+                                      'assets/images/Mahinda.png',
+                                      height: 70.0,
+//                                      width: 65.0,
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                      width: 5,
+                                    ),
+                                    Text('MCG',
+                                        style: TextStyle(
+                                          fontFamily: 'ProductSans',
+                                          color: Colors.black,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w700,
+                                          fontStyle: FontStyle.normal,
+                                        )),
+                                  ],
+                                ),
                                 SizedBox(
-                                  height: 10,
-                                  width: 11,
+                                  width: 8.0,
                                 ),
-                                Container(
-                                  padding: EdgeInsets.only(),
-                                  child: Image.asset(
-                                    'assets/images/Mahinda.png',
-//                                    height: 76.3,
-                                    width: 65.0,
-                                  ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    Row(
+                                      children: <Widget>[
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: <Widget>[
+                                            Text('210/7',
+                                                style: TextStyle(
+                                                  fontFamily: 'ProductSans',
+                                                  color: Colors.black,
+                                                  fontSize: 16.7,
+                                                  fontWeight: FontWeight.w700,
+                                                  fontStyle: FontStyle.normal,
+                                                )),
+                                            Text('(20.1)',
+                                                style: TextStyle(
+                                                  fontFamily: 'ProductSans',
+                                                  color: Colors.grey,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w700,
+                                                  fontStyle: FontStyle.normal,
+                                                )),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          width: 40.0,
+                                        ),
+                                        Text("1st",
+                                            style: TextStyle(
+                                              fontFamily: 'ProductSans',
+                                              color: Colors.grey,
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.w700,
+                                              fontStyle: FontStyle.normal,
+                                            )),
+                                        SizedBox(
+                                          width: 40.0,
+                                        ),
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: <Widget>[
+                                            Text('210/7',
+                                                style: TextStyle(
+                                                  fontFamily: 'ProductSans',
+                                                  color: Colors.black,
+                                                  fontSize: 16.7,
+                                                  fontWeight: FontWeight.w700,
+                                                  fontStyle: FontStyle.normal,
+                                                )),
+                                            Text('(20.1)',
+                                                style: TextStyle(
+                                                  fontFamily: 'ProductSans',
+                                                  color: Colors.grey,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w700,
+                                                  fontStyle: FontStyle.normal,
+                                                )),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 10.0,
+                                    ),
+                                    showsecond == true
+                                        ? Row(
+                                            children: <Widget>[
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: <Widget>[
+                                                  Text('210/7',
+                                                      style: TextStyle(
+                                                        fontFamily:
+                                                            'ProductSans',
+                                                        color: Colors.black,
+                                                        fontSize: 16.7,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                      )),
+                                                  Text('(20.1)',
+                                                      style: TextStyle(
+                                                        fontFamily:
+                                                            'ProductSans',
+                                                        color: Colors.grey,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                      )),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                width: 38.0,
+                                              ),
+                                              Text("2nd",
+                                                  style: TextStyle(
+                                                    fontFamily: 'ProductSans',
+                                                    color: Colors.grey,
+                                                    fontSize: 17,
+                                                    fontWeight: FontWeight.w700,
+                                                    fontStyle: FontStyle.normal,
+                                                  )),
+                                              SizedBox(
+                                                width: 38.0,
+                                              ),
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: <Widget>[
+                                                  Text('210/7',
+                                                      style: TextStyle(
+                                                        fontFamily:
+                                                            'ProductSans',
+                                                        color: Colors.black,
+                                                        fontSize: 16.7,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                      )),
+                                                  Text('(20.1)',
+                                                      style: TextStyle(
+                                                        fontFamily:
+                                                            'ProductSans',
+                                                        color: Colors.grey,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                      )),
+                                                ],
+                                              ),
+                                            ],
+                                          )
+                                        : SizedBox.shrink()
+                                  ],
                                 ),
                                 SizedBox(
-                                  height: 5,
-                                  width: 5,
+                                  width: 8.0,
                                 ),
-                                Text('MCG',
-                                    style: TextStyle(
-                                      fontFamily: 'ProductSans',
-                                      color: Colors.black,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w700,
-                                      fontStyle: FontStyle.normal,
-                                    )),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    SizedBox(
+                                      height: 10,
+                                      width: 11,
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.only(),
+                                      child: Image.asset(
+                                        'assets/images/RCG.png',
+                                        height: 70.0,
+//                                        width: 60,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                      width: 5,
+                                    ),
+                                    Text('RCG',
+                                        style: TextStyle(
+                                          fontFamily: 'ProductSans',
+                                          color: Colors.black,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w700,
+                                          fontStyle: FontStyle.normal,
+                                        )),
+                                  ],
+                                ),
                               ],
                             ),
-                            SizedBox(
-                              width: 8.0,
-                            ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
-                                Text('210/7',
-                                    style: TextStyle(
-                                      fontFamily: 'ProductSans',
-                                      color: Colors.black,
-                                      fontSize: 16.7,
-                                      fontWeight: FontWeight.w700,
-                                      fontStyle: FontStyle.normal,
-                                    )),
-                                Text('(20.1)',
-                                    style: TextStyle(
-                                      fontFamily: 'ProductSans',
-                                      color: Colors.grey,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w700,
-                                      fontStyle: FontStyle.normal,
-                                    )),
-                              ],
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                SizedBox(
-                                  width: 10,
-                                  height: 100,
-                                ),
                                 Text("115th Lovers' Quarrel",
                                     style: TextStyle(
                                       fontFamily: 'ProductSans',
@@ -156,64 +327,26 @@ class _MatchScreenState extends State<MatchScreen> {
                                       fontWeight: FontWeight.w700,
                                       fontStyle: FontStyle.normal,
                                     )),
+                                showmsgbox == true
+                                    ? SizedBox.shrink()
+                                    : Column(
+                                        children: <Widget>[
+                                          SizedBox(
+                                            height: 10.0,
+                                          ),
+                                          Text(specialmsg,
+                                              style: TextStyle(
+                                                fontFamily: 'ProductSans',
+                                                color: Colors.black87,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w700,
+                                                fontStyle: FontStyle.normal,
+                                              )),
+                                        ],
+                                      ),
                                 SizedBox(
-                                  height: 20.0,
+                                  height: 10.0,
                                 )
-                              ],
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Text('210/7',
-                                    style: TextStyle(
-                                      fontFamily: 'ProductSans',
-                                      color: Colors.black,
-                                      fontSize: 16.7,
-                                      fontWeight: FontWeight.w700,
-                                      fontStyle: FontStyle.normal,
-                                    )),
-                                Text('(20.1)',
-                                    style: TextStyle(
-                                      fontFamily: 'ProductSans',
-                                      color: Colors.grey,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w700,
-                                      fontStyle: FontStyle.normal,
-                                    )),
-                              ],
-                            ),
-                            SizedBox(
-                              width: 8.0,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                SizedBox(
-                                  height: 10,
-                                  width: 11,
-                                ),
-                                Container(
-                                  padding: EdgeInsets.only(),
-                                  child: Image.asset(
-                                    'assets/images/RCG.png',
-//                                    height: 76.3,
-                                    width: 60,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                  width: 5,
-                                ),
-                                Text('RCG',
-                                    style: TextStyle(
-                                      fontFamily: 'ProductSans',
-                                      color: Colors.black,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w700,
-                                      fontStyle: FontStyle.normal,
-                                    )),
                               ],
                             ),
                           ],
@@ -372,7 +505,7 @@ class _MatchScreenState extends State<MatchScreen> {
                           children: <Widget>[
                             Column(
                               children: <Widget>[
-                                Text('This Over',
+                                Text('Batting',
                                     style: TextStyle(
                                       fontFamily: 'ProductSans',
                                       color: Colors.grey,
@@ -380,18 +513,23 @@ class _MatchScreenState extends State<MatchScreen> {
                                       fontWeight: FontWeight.w600,
                                       fontStyle: FontStyle.normal,
                                     )),
-                                Text('data'),
-                                Text('data'),
-                                Text('data')
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                Text(
+                                    '$batsmanonename - $batsmanonescore ($batsmanoneballs)'),
+                                Text(
+                                    '$batsmantwoname - $batsmantwoscore ($batsmantwoballs)'),
                               ],
                             ),
                             Container(
                                 width: 3,
                                 height: 100,
-                                decoration: new BoxDecoration(color: Color(0xffe0e3e5))),
+                                decoration: new BoxDecoration(
+                                    color: Color(0xffe0e3e5))),
                             Column(
                               children: <Widget>[
-                                Text('This Over',
+                                Text('Balling',
                                     style: TextStyle(
                                       fontFamily: 'ProductSans',
                                       color: Colors.grey,
@@ -399,9 +537,11 @@ class _MatchScreenState extends State<MatchScreen> {
                                       fontWeight: FontWeight.w600,
                                       fontStyle: FontStyle.normal,
                                     )),
-                                Text('data'),
-                                Text('data'),
-                                Text('data')
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                Text(ballername),
+                                Text(''),
                               ],
                             )
                           ],
