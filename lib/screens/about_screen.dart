@@ -22,7 +22,7 @@ class _AboutScreenState extends State<AboutScreen> {
           body: SingleChildScrollView(
               physics:BouncingScrollPhysics(),
               padding: EdgeInsets.all(10.0),
-              child: AnimationConfiguration.synchronized(child: SlideAnimation(child: Container(
+              child: AnimationConfiguration.synchronized(child: SlideAnimation(child: FadeInAnimation(child: Container(
                 child: Column(
                   children: <Widget>[
                     Container(
@@ -101,7 +101,7 @@ class _AboutScreenState extends State<AboutScreen> {
                         spreadRadius: 0)
                   ],
                 ),
-              ),verticalOffset: MediaQuery.of(context).size.height),duration: const Duration(seconds: 1))),
+              )),verticalOffset: MediaQuery.of(context).size.height),duration: const Duration(seconds: 1))),
         ));
   }
 }

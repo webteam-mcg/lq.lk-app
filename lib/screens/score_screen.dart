@@ -52,7 +52,7 @@ class _ScoreScreenState extends State<ScoreScreen> {
           body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         padding: EdgeInsets.all(10.0),
-              child: AnimationConfiguration.synchronized(child: SlideAnimation(child: Container(
+              child: AnimationConfiguration.synchronized(child: SlideAnimation(child: FadeInAnimation(child: Container(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -231,7 +231,7 @@ class _ScoreScreenState extends State<ScoreScreen> {
                           blurRadius: 75,
                           spreadRadius: 0)
                     ],
-                  )),verticalOffset: MediaQuery.of(context).size.height),duration: const Duration(seconds: 1))
+                  ))),verticalOffset: MediaQuery.of(context).size.height),duration: const Duration(seconds: 1))
       )),
     );
   }
