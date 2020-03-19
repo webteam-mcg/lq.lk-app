@@ -19,6 +19,7 @@ class _AboutScreenState extends State<AboutScreen> {
         ),
         home: Scaffold(
           body: SingleChildScrollView(
+              physics:BouncingScrollPhysics(),
               padding: EdgeInsets.all(10.0),
               child: Container(
                 child: Column(

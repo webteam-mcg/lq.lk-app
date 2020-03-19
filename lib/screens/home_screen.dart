@@ -4,6 +4,7 @@ import 'package:lq_live_app/screens/about_screen.dart';
 import 'package:lq_live_app/screens/match_screen.dart';
 import 'package:lq_live_app/screens/news_screen.dart';
 import 'package:lq_live_app/screens/score_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -11,7 +12,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String url;
+  String url = 'www.youtube.com';
+
+  Future <void> launchyoutube(String url) async{
+    if(await canLaunch(url)){
+      final bool nativeapplaunchsuccessed = await launch(url,
+      forceSafariVC: false,
+        universalLinksOnly: true
+      );
+      if(!nativeapplaunchsuccessed){
+        await launch(url,forceSafariVC: true);
+      }
+    }
+  }
+  
   int _currentIndex = 0;
   final List<Widget> _children = [
     MatchScreen(),
@@ -24,7 +38,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            launchyoutube('https://youtube.com');
+          },
           child: Icon(
             Icons.play_arrow,
             size: 30,

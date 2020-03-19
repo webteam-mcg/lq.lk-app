@@ -49,6 +49,7 @@ class _ScoreScreenState extends State<ScoreScreen> {
       ),
       home: Scaffold(
           body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         padding: EdgeInsets.all(10.0),
         child: Container(
             child: Column(
