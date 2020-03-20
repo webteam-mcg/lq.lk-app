@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
@@ -57,7 +58,6 @@ class _MatchScreenState extends State<MatchScreen> {
                                       fontWeight: FontWeight.w600,
                                       fontStyle: FontStyle.normal,
                                     )),
-//                        SizedBox(height: 10,),
                                 Text(score + '/' + wicket,
                                     style: TextStyle(
                                       fontFamily: 'ProductSans',
@@ -410,36 +410,113 @@ class _MatchScreenState extends State<MatchScreen> {
                                 )),
                             SizedBox(height: 10.0),
                             Container(
-                              child: Center(
-                                child: Column(
-                                  children: <Widget>[
-                                    SizedBox(
-                                      height: 10,
-                                      width: 10,
-                                    ),
-                                    Text('This Over',
-                                        style: TextStyle(
-                                          fontFamily: 'ProductSans',
-                                          color: Colors.grey,
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w600,
-                                          fontStyle: FontStyle.normal,
-                                        )),
-                                    SizedBox(
-                                      height: 10,
-                                      width: 10,
-                                    ),
-                                    Text(thisover,
-                                        style: TextStyle(
-                                          fontFamily: 'ProductSans',
-                                          color: Colors.grey,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w600,
-                                          fontStyle: FontStyle.normal,
-                                        )),
-                                    SizedBox(height: 10.0),
-                                  ],
-                                ),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  SizedBox(
+                                    height: 10,
+                                    width: 10,
+                                  ),
+                                  Text('This over',
+                                      style: TextStyle(
+                                        fontFamily: 'ProductSans',
+                                        color: Colors.grey,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w600,
+                                        fontStyle: FontStyle.normal,
+                                      )),
+                                  Row(
+                                    children: <Widget>[
+                                      Chip(
+                                          label: Text('1'),
+                                          avatar: CircleAvatar(
+                                            backgroundColor: Colors.amber,
+                                            child: Text('1'),
+                                          )),
+                                      Chip(
+                                          label: Text('1'),
+                                          avatar: CircleAvatar(
+                                            backgroundColor: Colors.amber,
+                                            child: Text('1'),
+                                          )),
+                                      Chip(
+                                          label: Text('1'),
+                                          avatar: CircleAvatar(
+                                            backgroundColor: Colors.amber,
+                                            child: Text('1'),
+                                          )),
+                                      Chip(
+                                          label: Text('1'),
+                                          avatar: CircleAvatar(
+                                            backgroundColor: Colors.amber,
+                                            child: Text('1'),
+                                          )),
+                                      Chip(
+                                          label: Text('1'),
+                                          avatar: CircleAvatar(
+                                            backgroundColor: Colors.amber,
+                                            child: Text('1'),
+                                          )),
+                                      Chip(
+                                          label: Text('1'),
+                                          avatar: CircleAvatar(
+                                            backgroundColor: Colors.amber,
+                                            child: Text('1'),
+                                          )),
+                                    ],
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                  ),
+                                  Row(
+                                    children: <Widget>[
+                                      Chip(
+                                          label: Text('1'),
+                                          avatar: CircleAvatar(
+                                            backgroundColor: Colors.amber,
+                                            child: Text('1'),
+                                          )),
+                                      Chip(
+                                          label: Text('1'),
+                                          avatar: CircleAvatar(
+                                            backgroundColor: Colors.amber,
+                                            child: Text('1'),
+                                          )),
+                                      Chip(
+                                          label: Text('1'),
+                                          avatar: CircleAvatar(
+                                            backgroundColor: Colors.amber,
+                                            child: Text('1'),
+                                          )),
+                                      Chip(
+                                          label: Text('1'),
+                                          avatar: CircleAvatar(
+                                            backgroundColor: Colors.amber,
+                                            child: Text('1'),
+                                          )),
+                                      Chip(
+                                          label: Text('1'),
+                                          avatar: CircleAvatar(
+                                            backgroundColor: Colors.amber,
+                                            child: Text('1'),
+                                          )),
+                                      Chip(
+                                          label: Text('1'),
+                                          avatar: CircleAvatar(
+                                            backgroundColor: Colors.amber,
+                                            child: Text('1'),
+                                          )),
+                                    ],
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                  ),
+                                  SizedBox(height: 10.0),
+                                ],
                               ),
                               decoration: BoxDecoration(
                                 color: Color(0xffffffff),
@@ -606,7 +683,8 @@ class _MatchScreenState extends State<MatchScreen> {
                                 )),
                             SizedBox(height: 10.0),
                           ]),
-                        ),verticalOffset: MediaQuery.of(context).size.height,
+                        ),
+                        verticalOffset: MediaQuery.of(context).size.height,
                         duration: const Duration(seconds: 1))),
                 padding: EdgeInsets.all(10.0))));
   }

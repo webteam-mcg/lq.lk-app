@@ -27,15 +27,15 @@ class _NewsScreenState extends State<NewsScreen> {
                 child: SlideAnimation(
                     child: FadeInAnimation(
                         child: Container(
-                          padding: EdgeInsets.all(4.0),
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height-160,
-                          child: WebView(
-                            initialUrl: 'http://apps.kushan.info/twitter/light.html',
-                            javascriptMode: JavascriptMode.unrestricted,
-                            gestureNavigationEnabled: false,
-                            debuggingEnabled: false,
-                          ),
+                            padding: EdgeInsets.all(4.0),
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height - 160,
+                            child: WebView(
+                              initialUrl:
+                                  'http://apps.kushan.info/twitter/light.html',
+                              javascriptMode: JavascriptMode.unrestricted,
+                              gestureNavigationEnabled: false,
+                            ),
                             decoration: BoxDecoration(
                               color: Color(0xffffffff),
                               borderRadius: BorderRadius.circular(15),
@@ -46,8 +46,7 @@ class _NewsScreenState extends State<NewsScreen> {
                                     blurRadius: 75,
                                     spreadRadius: 0)
                               ],
-                            )
-                        )),
+                            ))),
                     verticalOffset: MediaQuery.of(context).size.height),
                 duration: const Duration(seconds: 1))),
       ),

@@ -26,7 +26,7 @@ class _AboutScreenState extends State<AboutScreen> {
                   child: SlideAnimation(
                       child: FadeInAnimation(
                           child: Container(
-                            height: MediaQuery.of(context).size.height-160,
+                        height: MediaQuery.of(context).size.height - 160,
                         child: Column(
                           children: <Widget>[
                             Container(

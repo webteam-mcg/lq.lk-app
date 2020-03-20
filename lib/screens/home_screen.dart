@@ -3,7 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:lq_live_app/screens/about_screen.dart';
 import 'package:lq_live_app/screens/match_screen.dart';
 import 'package:lq_live_app/screens/news_screen.dart';
-import 'package:lq_live_app/screens/score_screen.dart';
+import 'package:lq_live_app/screens/tab_screen.dart';
+import 'package:lq_live_app/screens/scoreboard/score_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,22 +15,20 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String url = 'www.youtube.com';
 
-  Future <void> launchyoutube(String url) async{
-    if(await canLaunch(url)){
-      final bool nativeapplaunchsuccessed = await launch(url,
-      forceSafariVC: false,
-        universalLinksOnly: true
-      );
-      if(!nativeapplaunchsuccessed){
-        await launch(url,forceSafariVC: true);
+  Future<void> launchyoutube(String url) async {
+    if (await canLaunch(url)) {
+      final bool nativeapplaunchsuccessed =
+          await launch(url, forceSafariVC: false, universalLinksOnly: true);
+      if (!nativeapplaunchsuccessed) {
+        await launch(url, forceSafariVC: true);
       }
     }
   }
-  
+
   int _currentIndex = 0;
   final List<Widget> _children = [
     MatchScreen(),
-    ScoreScreen(),
+    TabScreen(),
     NewsScreen(),
     AboutScreen()
   ];
@@ -53,9 +52,9 @@ class _HomeScreenState extends State<HomeScreen> {
           backgroundColor: Colors.transparent,
           elevation: 0.0,
           title: Image(
-                image: AssetImage('assets/images/bitmap.png'),
-                height: 30,
-              ),
+            image: AssetImage('assets/images/bitmap.png'),
+            height: 30,
+          ),
         ),
         body: _children[_currentIndex],
         bottomNavigationBar: Theme(
