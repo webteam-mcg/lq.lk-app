@@ -2,10 +2,10 @@ import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'scoreboard/2.dart';
-import 'scoreboard/3.dart';
-import 'scoreboard/4.dart';
-import 'scoreboard/score_screen.dart';
+import 'scoreboard/mcgfirst.dart';
+import 'scoreboard/rcgfirst.dart';
+import 'scoreboard/mcgsecond.dart';
+import 'scoreboard/rcgsecond.dart';
 
 class TabScreen extends StatefulWidget {
   TabScreen({Key key}) : super(key: key);
@@ -17,10 +17,10 @@ class TabScreen extends StatefulWidget {
 class _TabScreenState extends State<TabScreen>
     with SingleTickerProviderStateMixin {
   final List<Widget> tabs = [
-    ScoreScreen(),
-    ScoreScreenTwo(),
-    ScoreScreenThree(),
-    ScoreScreenFour()
+    McgFirst(),
+    RcgFirst(),
+    McgSecond(),
+    RcgSecond()
   ];
   final List<Widget> tabsname = [
     Text('MCG - 1st'),

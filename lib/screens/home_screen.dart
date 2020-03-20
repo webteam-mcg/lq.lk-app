@@ -4,7 +4,6 @@ import 'package:lq_live_app/screens/about_screen.dart';
 import 'package:lq_live_app/screens/match_screen.dart';
 import 'package:lq_live_app/screens/news_screen.dart';
 import 'package:lq_live_app/screens/tab_screen.dart';
-import 'package:lq_live_app/screens/scoreboard/score_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
