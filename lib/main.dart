@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lq_live_app/screens/home_screen.dart';
-import 'screens/match_screen.dart';
 
 void main() => runApp(MyApp());
 
