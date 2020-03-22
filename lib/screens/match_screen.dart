@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:meta/meta.dart';
 
 class MatchScreen extends StatefulWidget {
   @override
@@ -12,13 +13,12 @@ class MatchScreen extends StatefulWidget {
 }
 
 class _MatchScreenState extends State<MatchScreen> {
-  String overs = '25.1';
   String thisover = '0 , 0 , 0 , 0 , 0 , 0';
   String day = '1';
-  String score = '215';
+  int score = 215;
   String wicket = '7';
+  int ball = 70;
   String college = 'MAHINDA COLLEGE';
-  String strikerate = '5.5';
   String specialmsg = 'Corona Hinda Gedarata Wela idala epawela 😥😥';
   String batsmanonename = 'V. Dulsara';
   String batsmantwoname = 'R. Kavindu';
@@ -29,9 +29,21 @@ class _MatchScreenState extends State<MatchScreen> {
   String batsmantwoballs = '15';
   bool showsecond = true;
   bool showmsgbox = false;
+  double overs;
+  double strikerate;
 
-  @override
   Widget build(BuildContext context) {
+    overs(int balls) {
+      double over = (balls.toDouble()~/6+balls.toDouble()%6.toDouble()/10.0);
+      double overs = double.parse((over).toStringAsFixed(2));
+      return overs.toString();
+    }
+    strikerate(int balls,int score) {
+      double over = (balls.toDouble()~/6+balls.toDouble()%6.toDouble()/10.0);
+      double overs = double.parse((over).toStringAsFixed(2));
+      double strikerate = double.parse((score/overs).toStringAsFixed(2));
+      return strikerate.toString();
+    }
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -58,7 +70,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                       fontWeight: FontWeight.w600,
                                       fontStyle: FontStyle.normal,
                                     )),
-                                Text(score + '/' + wicket,
+                                Text('$score/$wicket',
                                     style: TextStyle(
                                       fontFamily: 'ProductSans',
                                       color: Colors.black,
@@ -66,7 +78,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                       fontWeight: FontWeight.w700,
                                       fontStyle: FontStyle.normal,
                                     )),
-                                Text('(' + overs + ' OVERS)',
+                                Text('('+overs(ball)+' OVERS)',
                                     style: TextStyle(
                                       fontFamily: 'ProductSans',
                                       color: Colors.black,
@@ -429,42 +441,12 @@ class _MatchScreenState extends State<MatchScreen> {
                                       )),
                                   Row(
                                     children: <Widget>[
-                                      Chip(
-                                          label: Text('1'),
-                                          avatar: CircleAvatar(
-                                            backgroundColor: Colors.amber,
-                                            child: Text('1'),
-                                          )),
-                                      Chip(
-                                          label: Text('1'),
-                                          avatar: CircleAvatar(
-                                            backgroundColor: Colors.amber,
-                                            child: Text('1'),
-                                          )),
-                                      Chip(
-                                          label: Text('1'),
-                                          avatar: CircleAvatar(
-                                            backgroundColor: Colors.amber,
-                                            child: Text('1'),
-                                          )),
-                                      Chip(
-                                          label: Text('1'),
-                                          avatar: CircleAvatar(
-                                            backgroundColor: Colors.amber,
-                                            child: Text('1'),
-                                          )),
-                                      Chip(
-                                          label: Text('1'),
-                                          avatar: CircleAvatar(
-                                            backgroundColor: Colors.amber,
-                                            child: Text('1'),
-                                          )),
-                                      Chip(
-                                          label: Text('1'),
-                                          avatar: CircleAvatar(
-                                            backgroundColor: Colors.amber,
-                                            child: Text('1'),
-                                          )),
+                                      Chip(label: Text('1')),
+                                      Chip(label: Text('1')),
+                                      Chip(label: Text('1')),
+                                      Chip(label: Text('1')),
+                                      Chip(label: Text('1')),
+                                      Chip(label: Text('1')),
                                     ],
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
@@ -473,42 +455,12 @@ class _MatchScreenState extends State<MatchScreen> {
                                   ),
                                   Row(
                                     children: <Widget>[
-                                      Chip(
-                                          label: Text('1'),
-                                          avatar: CircleAvatar(
-                                            backgroundColor: Colors.amber,
-                                            child: Text('1'),
-                                          )),
-                                      Chip(
-                                          label: Text('1'),
-                                          avatar: CircleAvatar(
-                                            backgroundColor: Colors.amber,
-                                            child: Text('1'),
-                                          )),
-                                      Chip(
-                                          label: Text('1'),
-                                          avatar: CircleAvatar(
-                                            backgroundColor: Colors.amber,
-                                            child: Text('1'),
-                                          )),
-                                      Chip(
-                                          label: Text('1'),
-                                          avatar: CircleAvatar(
-                                            backgroundColor: Colors.amber,
-                                            child: Text('1'),
-                                          )),
-                                      Chip(
-                                          label: Text('1'),
-                                          avatar: CircleAvatar(
-                                            backgroundColor: Colors.amber,
-                                            child: Text('1'),
-                                          )),
-                                      Chip(
-                                          label: Text('1'),
-                                          avatar: CircleAvatar(
-                                            backgroundColor: Colors.amber,
-                                            child: Text('1'),
-                                          )),
+                                      Chip(label: Text('1'),backgroundColor: Colors.amber,),
+                                      Chip(label: Text('1')),
+                                      Chip(label: Text('1')),
+                                      Chip(label: Text('1')),
+                                      Chip(label: Text('1')),
+                                      Chip(label: Text('1')),
                                     ],
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
@@ -551,7 +503,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                       height: 10,
                                       width: 10,
                                     ),
-                                    Text(strikerate,
+                                    Text(strikerate(ball, score),
                                         style: TextStyle(
                                           fontFamily: 'ProductSans',
                                           color: Colors.grey,

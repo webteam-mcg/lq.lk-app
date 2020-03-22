@@ -56,7 +56,6 @@ class _TabScreenState extends State<TabScreen>
           labelColor: Colors.white,
           indicatorSize: TabBarIndicatorSize.tab,
           indicator: new BubbleTabIndicator(
-            indicatorHeight: 30.0,
             indicatorColor: Colors.amber,
             tabBarIndicatorSize: TabBarIndicatorSize.tab,
           ),
