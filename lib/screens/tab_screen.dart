@@ -3,8 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'scoreboard/mcgfirst.dart';
-import 'scoreboard/rcgfirst.dart';
 import 'scoreboard/mcgsecond.dart';
+import 'scoreboard/rcgfirst.dart';
 import 'scoreboard/rcgsecond.dart';
 
 class TabScreen extends StatefulWidget {
@@ -16,12 +16,7 @@ class TabScreen extends StatefulWidget {
 
 class _TabScreenState extends State<TabScreen>
     with SingleTickerProviderStateMixin {
-  final List<Widget> tabs = [
-    McgFirst(),
-    RcgFirst(),
-    McgSecond(),
-    RcgSecond()
-  ];
+  final List<Widget> tabs = [McgFirst(), RcgFirst(), McgSecond(), RcgSecond()];
   final List<Widget> tabsname = [
     Text('MCG - 1st'),
     Text('RCG - 1st'),

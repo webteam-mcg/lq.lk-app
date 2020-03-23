@@ -30,7 +30,7 @@ class _AboutScreenState extends State<AboutScreen> {
                         child: Column(
                           children: <Widget>[
                             Container(
-                              padding: EdgeInsets.only(top: 14.7, bottom: 11.7),
+                              padding: EdgeInsets.only(top: 14.7, bottom: 17),
                               child: Text("About Us",
                                   style: TextStyle(
                                     color: Color(0xff444b54),
