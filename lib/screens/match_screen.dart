@@ -1,12 +1,11 @@
 import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:lq_live_app/models/functions_model.dart';
 
 class MatchScreen extends StatefulWidget {
@@ -17,13 +16,12 @@ class MatchScreen extends StatefulWidget {
 }
 
 class _MatchScreenState extends State<MatchScreen> {
-
   String emptyString = '';
   String thisOver = '';
   int day = 1;
   int score = 0;
-  int wicket = 7;
-  int ball = 70;
+  int wicket = 0;
+  int ball = 0;
   String college = 'MAHINDA COLLEGE';
   String specialMsg = '';
   Map player1;
@@ -41,19 +39,20 @@ class _MatchScreenState extends State<MatchScreen> {
   int bowlerWickets = 0;
   int inning = 1;
   int mcgScoreFirstInning = 0;
+  List thisSplit;
 
-  int mcgFirstScore=0;
-  int mcgFirstWickets=0;
-  int mcgFirstBalls=0;
-  int rcgFirstScore=0;
-  int rcgFirstWickets=0;
-  int rcgFirstBalls=0;
-  int mcgSecondScore=0;
-  int mcgSecondWickets=0;
-  int mcgSecondBalls=0;
-  int rcgSecondScore=0;
-  int rcgSecondWickets=0;
-  int rcgSecondBalls=0;
+  int mcgFirstScore = 0;
+  int mcgFirstWickets = 0;
+  int mcgFirstBalls = 0;
+  int rcgFirstScore = 0;
+  int rcgFirstWickets = 0;
+  int rcgFirstBalls = 0;
+  int mcgSecondScore = 0;
+  int mcgSecondWickets = 0;
+  int mcgSecondBalls = 0;
+  int rcgSecondScore = 0;
+  int rcgSecondWickets = 0;
+  int rcgSecondBalls = 0;
 
   StreamSubscription<DocumentSnapshot> subscription;
 
@@ -62,11 +61,24 @@ class _MatchScreenState extends State<MatchScreen> {
   StreamSubscription<QuerySnapshot> forFirstInningRcg;
   StreamSubscription<QuerySnapshot> forSecondInningRcg;
 
-  final documentReference = Firestore.instance.collection("main").document("live");
-  final firstInningMcg = Firestore.instance.collection('innings').where("team",isEqualTo: "mcg").where("inning",isEqualTo: 1);
-  final secondInningMcg = Firestore.instance.collection('innings').where("team",isEqualTo: "mcg").where("inning",isEqualTo: 2);
-  final firstInningRcg = Firestore.instance.collection('innings').where("team",isEqualTo: "rcg").where("inning",isEqualTo: 1);
-  final secondInningRcg = Firestore.instance.collection('innings').where("team",isEqualTo: "rcg").where("inning",isEqualTo: 2);
+  final documentReference =
+      Firestore.instance.collection("main").document("live");
+  final firstInningMcg = Firestore.instance
+      .collection('innings')
+      .where("team", isEqualTo: "mcg")
+      .where("inning", isEqualTo: 1);
+  final secondInningMcg = Firestore.instance
+      .collection('innings')
+      .where("team", isEqualTo: "mcg")
+      .where("inning", isEqualTo: 2);
+  final firstInningRcg = Firestore.instance
+      .collection('innings')
+      .where("team", isEqualTo: "rcg")
+      .where("inning", isEqualTo: 1);
+  final secondInningRcg = Firestore.instance
+      .collection('innings')
+      .where("team", isEqualTo: "rcg")
+      .where("inning", isEqualTo: 2);
 
   var firstInningMcgData;
   var secondInningMcgData;
@@ -79,6 +91,7 @@ class _MatchScreenState extends State<MatchScreen> {
     super.initState();
     subscription = documentReference.snapshots().listen((dataSnapshot) {
       if (dataSnapshot.exists) {
+        setState(() {
           day = dataSnapshot.data['day'];
           ball = dataSnapshot.data['balls'];
           score = dataSnapshot.data['score'];
@@ -99,56 +112,66 @@ class _MatchScreenState extends State<MatchScreen> {
           bowlerBalls = bowler['balls'];
           bowlerWickets = bowler['wickets'];
           thisOver = dataSnapshot.data['thisOver'];
+          thisSplit = thisOver.split(' ');
           inning = dataSnapshot.data['inning'];
+        });
       }
     });
-    forFirstInningMcg = firstInningMcg.snapshots().listen((querySnapshot){
-      setState(() {
-        firstInningMcgData = querySnapshot.documents.elementAt(0);
-      });
-      if (firstInningMcgData.exists){
-        mcgFirstScore = firstInningMcgData.data['score'];
-        mcgFirstBalls = firstInningMcgData.data['balls'];
-        mcgFirstWickets = firstInningMcgData.data['wickets'];
-      } else {
-
+    forFirstInningMcg = firstInningMcg.snapshots().listen((querySnapshot) {
+      if (querySnapshot != null) {
+        setState(() {
+          firstInningMcgData = querySnapshot.documents.first;
+        });
+        if (firstInningMcgData.exists) {
+          setState(() {
+            mcgFirstScore = firstInningMcgData.data['score'];
+            mcgFirstBalls = firstInningMcgData.data['balls'];
+            mcgFirstWickets = firstInningMcgData.data['wickets'];
+          });
+        }
       }
     });
 
-    forSecondInningMcg = secondInningMcg.snapshots().listen((querySnapshot){
-      setState(() {
-        secondInningMcgData = querySnapshot.documents.elementAt(0);
-      });
-      if (secondInningMcgData.exists){
-        mcgSecondScore = secondInningMcgData.data['score'];
-        mcgSecondBalls = secondInningMcgData.data['balls'];
-        mcgSecondWickets = secondInningMcgData.data['wickets'];
-      } else {
-
+    forSecondInningMcg = secondInningMcg.snapshots().listen((querySnapshot) {
+      if (querySnapshot != null) {
+        setState(() {
+          secondInningMcgData = querySnapshot.documents.first;
+        });
+        if (secondInningMcgData.exists) {
+          setState(() {
+            mcgSecondScore = secondInningMcgData.data['score'];
+            mcgSecondBalls = secondInningMcgData.data['balls'];
+            mcgSecondWickets = secondInningMcgData.data['wickets'];
+          });
+        }
       }
     });
-    forFirstInningRcg = firstInningRcg.snapshots().listen((querySnapshot){
-      setState(() {
-        firstInningRcgData = querySnapshot.documents.elementAt(0);
-      });
-      if (firstInningRcgData.exists){
-        rcgFirstScore = firstInningRcgData.data['score'];
-        rcgFirstBalls = firstInningRcgData.data['balls'];
-        rcgFirstWickets = firstInningRcgData.data['wickets'];
-      } else {
-
+    forFirstInningRcg = firstInningRcg.snapshots().listen((querySnapshot) {
+      if (querySnapshot != null) {
+        setState(() {
+          firstInningRcgData = querySnapshot.documents.first;
+        });
+        if (firstInningRcgData.exists) {
+          setState(() {
+            rcgFirstScore = firstInningRcgData.data['score'];
+            rcgFirstBalls = firstInningRcgData.data['balls'];
+            rcgFirstWickets = firstInningRcgData.data['wickets'];
+          });
+        }
       }
     });
-    forSecondInningRcg = secondInningRcg.snapshots().listen((querySnapshot){
-      setState(() {
-        secondInningRcgData = querySnapshot.documents.elementAt(0);
-      });
-      if (secondInningRcgData.exists){
-        rcgSecondScore = secondInningRcgData.data['score'];
-        rcgSecondBalls = secondInningRcgData.data['balls'];
-        rcgSecondWickets = secondInningRcgData.data['wickets'];
-      } else {
-
+    forSecondInningRcg = secondInningRcg.snapshots().listen((querySnapshot) {
+      if (querySnapshot != null) {
+        setState(() {
+          secondInningRcgData = querySnapshot.documents.first;
+        });
+        if (secondInningRcgData.exists) {
+          setState(() {
+            rcgSecondScore = secondInningRcgData.data['score'];
+            rcgSecondBalls = secondInningRcgData.data['balls'];
+            rcgSecondWickets = secondInningRcgData.data['wickets'];
+          });
+        }
       }
     });
   }
@@ -158,15 +181,20 @@ class _MatchScreenState extends State<MatchScreen> {
     // TODO: implement dispose
     super.dispose();
     subscription?.cancel();
+    forFirstInningMcg?.cancel();
+    forSecondInningMcg?.cancel();
+    forFirstInningRcg?.cancel();
+    forSecondInningRcg?.cancel();
   }
 
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor: Color(0xffffaa00),
-          accentColor: Color(0xFFD8ECF1),
-          scaffoldBackgroundColor: Color(0xffe0e3e5),
+//          primaryColor: Color(0xffffaa00),
+//          accentColor: Color(0xFFD8ECF1),
+//          scaffoldBackgroundColor: Color(0xffe0e3e5),
+        brightness: Brightness.dark
         ),
         home: Scaffold(
             body: SingleChildScrollView(
@@ -180,26 +208,26 @@ class _MatchScreenState extends State<MatchScreen> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 college == 'mcg'
-                                ? Text('Mahinda College',
-                                    style: TextStyle(
-                                      fontFamily: 'ProductSans',
-                                      color: Colors.black,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w600,
-                                      fontStyle: FontStyle.normal,
-                                    ))
-                                : Text('Richmond College',
-                                    style: TextStyle(
-                                      fontFamily: 'ProductSans',
-                                      color: Colors.black,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w600,
-                                      fontStyle: FontStyle.normal,
-                                    )),
+                                    ? Text('MAHINDA COLLEGE',
+                                        style: TextStyle(
+                                          fontFamily: 'ProductSans',
+//                                          color: Colors.black,
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w600,
+                                          fontStyle: FontStyle.normal,
+                                        ))
+                                    : Text('Richmond College',
+                                        style: TextStyle(
+                                          fontFamily: 'ProductSans',
+                                          color: Colors.black,
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w600,
+                                          fontStyle: FontStyle.normal,
+                                        )),
                                 Text('$score/$wicket',
                                     style: TextStyle(
                                       fontFamily: 'ProductSans',
-                                      color: Colors.black,
+//                                      color: Colors.black,
                                       fontSize: 80,
                                       fontWeight: FontWeight.w700,
                                       fontStyle: FontStyle.normal,
@@ -207,7 +235,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                 Text('(' + overs(ball) + ' OVERS)',
                                     style: TextStyle(
                                       fontFamily: 'ProductSans',
-                                      color: Colors.black,
+//                                      color: Colors.black,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600,
                                       fontStyle: FontStyle.normal,
@@ -272,7 +300,8 @@ class _MatchScreenState extends State<MatchScreen> {
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.center,
                                                   children: <Widget>[
-                                                    Text('$mcgFirstScore/$mcgFirstWickets',
+                                                    Text(
+                                                        '$mcgFirstScore/$mcgFirstWickets',
                                                         style: TextStyle(
                                                           fontFamily:
                                                               'ProductSans',
@@ -283,7 +312,11 @@ class _MatchScreenState extends State<MatchScreen> {
                                                           fontStyle:
                                                               FontStyle.normal,
                                                         )),
-                                                    Text('('+overs(mcgFirstBalls)+')',
+                                                    Text(
+                                                        '(' +
+                                                            overs(
+                                                                mcgFirstBalls) +
+                                                            ')',
                                                         style: TextStyle(
                                                           fontFamily:
                                                               'ProductSans',
@@ -319,7 +352,8 @@ class _MatchScreenState extends State<MatchScreen> {
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.center,
                                                   children: <Widget>[
-                                                    Text('$rcgFirstScore/$rcgFirstWickets',
+                                                    Text(
+                                                        '$rcgFirstScore/$rcgFirstWickets',
                                                         style: TextStyle(
                                                           fontFamily:
                                                               'ProductSans',
@@ -330,7 +364,11 @@ class _MatchScreenState extends State<MatchScreen> {
                                                           fontStyle:
                                                               FontStyle.normal,
                                                         )),
-                                                    Text('('+overs(rcgFirstBalls)+')',
+                                                    Text(
+                                                        '(' +
+                                                            overs(
+                                                                rcgFirstBalls) +
+                                                            ')',
                                                         style: TextStyle(
                                                           fontFamily:
                                                               'ProductSans',
@@ -359,7 +397,8 @@ class _MatchScreenState extends State<MatchScreen> {
                                                             CrossAxisAlignment
                                                                 .center,
                                                         children: <Widget>[
-                                                          Text('$mcgSecondScore/$mcgSecondWickets',
+                                                          Text(
+                                                              '$mcgSecondScore/$mcgSecondWickets',
                                                               style: TextStyle(
                                                                 fontFamily:
                                                                     'ProductSans',
@@ -373,7 +412,11 @@ class _MatchScreenState extends State<MatchScreen> {
                                                                     FontStyle
                                                                         .normal,
                                                               )),
-                                                          Text('('+overs(mcgSecondBalls)+')',
+                                                          Text(
+                                                              '(' +
+                                                                  overs(
+                                                                      mcgSecondBalls) +
+                                                                  ')',
                                                               style: TextStyle(
                                                                 fontFamily:
                                                                     'ProductSans',
@@ -414,7 +457,8 @@ class _MatchScreenState extends State<MatchScreen> {
                                                             CrossAxisAlignment
                                                                 .center,
                                                         children: <Widget>[
-                                                          Text('$rcgSecondScore/$rcgSecondWickets',
+                                                          Text(
+                                                              '$rcgSecondScore/$rcgSecondWickets',
                                                               style: TextStyle(
                                                                 fontFamily:
                                                                     'ProductSans',
@@ -428,7 +472,11 @@ class _MatchScreenState extends State<MatchScreen> {
                                                                     FontStyle
                                                                         .normal,
                                                               )),
-                                                          Text('('+overs(rcgSecondBalls)+'',
+                                                          Text(
+                                                              '(' +
+                                                                  overs(
+                                                                      rcgSecondBalls) +
+                                                                  ')',
                                                               style: TextStyle(
                                                                 fontFamily:
                                                                     'ProductSans',
@@ -511,23 +559,23 @@ class _MatchScreenState extends State<MatchScreen> {
                                         // ignore: unrelated_type_equality_checks
                                         specialMsg != emptyString
                                             ? Column(
-                                          children: <Widget>[
-                                            SizedBox(
-                                              height: 10.0,
-                                            ),
-                                            Text(specialMsg,
-                                                style: TextStyle(
-                                                  fontFamily:
-                                                  'ProductSans',
-                                                  color: Colors.black87,
-                                                  fontSize: 16,
-                                                  fontWeight:
-                                                  FontWeight.w700,
-                                                  fontStyle:
-                                                  FontStyle.normal,
-                                                )),
-                                          ],
-                                        )
+                                                children: <Widget>[
+                                                  SizedBox(
+                                                    height: 10.0,
+                                                  ),
+                                                  Text(specialMsg,
+                                                      style: TextStyle(
+                                                        fontFamily:
+                                                            'ProductSans',
+                                                        color: Colors.black87,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                      )),
+                                                ],
+                                              )
                                             : SizedBox.shrink(),
                                         SizedBox(
                                           height: 10.0,
@@ -565,47 +613,23 @@ class _MatchScreenState extends State<MatchScreen> {
                                         fontWeight: FontWeight.w600,
                                         fontStyle: FontStyle.normal,
                                       )),
-                                  Row(
-                                    children: <Widget>[
-                                      Chip(
-                                          label: Text('1'),
-                                          backgroundColor: Colors.amber),
-                                      Chip(
-                                          label: Text('1'),
-                                          backgroundColor: Colors.amber),
-                                      Chip(
-                                          label: Text('1'),
-                                          backgroundColor: Colors.amber),
-                                      Chip(
-                                          label: Text('1'),
-                                          backgroundColor: Colors.amber),
-                                      Chip(
-                                          label: Text('1'),
-                                          backgroundColor: Colors.amber),
-                                      Chip(
-                                          label: Text('1'),
-                                          backgroundColor: Colors.amber),
-                                      Chip(
-                                          label: Text('1'),
-                                          backgroundColor: Colors.amber),
-                                      Chip(
-                                          label: Text('1'),
-                                          backgroundColor: Colors.amber),
-                                      Chip(
-                                          label: Text('1'),
-                                          backgroundColor: Colors.amber),
-                                      Chip(
-                                          label: Text('1'),
-                                          backgroundColor: Colors.amber),
-                                      Chip(
-                                          label: Text('1'),
-                                          backgroundColor: Colors.amber),
-                                    ],
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.values[5],
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                  ),
+                                  thisOver.isNotEmpty == true
+                                      ? Row(
+                                          children: thisSplit
+                                              .map((i) => Chip(
+                                                    label:
+                                                        Text(i.toUpperCase()),
+                                                    backgroundColor: i == 'w'
+                                                        ? Colors.redAccent
+                                                        : Colors.amber,
+                                                  ))
+                                              .toList(),
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.values[5],
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                        )
+                                      : SizedBox.shrink(),
                                   SizedBox(height: 10.0),
                                 ],
                               ),
@@ -763,7 +787,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                   ],
                                 ),
                                 decoration: BoxDecoration(
-                                  color: Color(0xffffffff),
+                                  color: Colors.black45,
                                   borderRadius: BorderRadius.circular(15),
                                   boxShadow: [
                                     BoxShadow(

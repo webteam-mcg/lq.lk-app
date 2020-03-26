@@ -1,37 +1,9 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-
-class DataBat {
-  String name;
-  String r;
-  String m;
-  String fours;
-  String sixes;
-  String rs;
-
-  DataBat({this.name, this.r, this.m, this.fours, this.sixes, this.rs});
-}
-
-class DataBall {
-  String name;
-  String overs;
-  String m;
-  String r;
-  String w;
-  String econ;
-
-  DataBall({this.name, this.overs, this.m, this.r, this.w, this.econ});
-}
-
-var bats = <DataBat>[
-  DataBat(
-      name: 'Rusiru Anupama', r: '1', m: '2', fours: '3', sixes: '4', rs: '5'),
-];
-var balls = <DataBall>[
-  DataBall(
-      name: 'Rusiru Anupama', overs: '13.0', m: '3', r: '31', w: '3', econ: '2.72')
-];
-
+import 'package:lq_live_app/models/functions_model.dart';
 
 class McgSecond extends StatefulWidget {
   @override
@@ -39,8 +11,83 @@ class McgSecond extends StatefulWidget {
 }
 
 class _McgSecondState extends State<McgSecond> {
+  bool showMcgSecondTable = false;
+  List battingTable;
+  List bowlingTable;
+  Map mcgInningDetailsData;
+  var battingTableData;
+  int balls;
+  int score;
+  int wickets;
+  int b;
+  int lb;
+  int nb;
+  int total;
+  String over;
+  StreamSubscription<QuerySnapshot> forSecondInningMcgBat;
+  StreamSubscription<QuerySnapshot> forSecondInningMcgBall;
+  StreamSubscription<QuerySnapshot> forInningDetails;
 
-  bool showsecondmcg = true;
+  final inningDetails = Firestore.instance
+      .collection('innings')
+      .where("team", isEqualTo: 'mcg')
+      .where('inning', isEqualTo: 2)
+      .snapshots();
+  final firstInningMcgBat = Firestore.instance
+      .collection('batting')
+      .where("team", isEqualTo: "mcg")
+      .where("inning", isEqualTo: 2)
+      .snapshots();
+  final firstInningMcgBall = Firestore.instance
+      .collection('bowling')
+      .where("team", isEqualTo: "mcg")
+      .where("inning", isEqualTo: 2)
+      .snapshots();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    forSecondInningMcgBat = firstInningMcgBat.listen((querySnapshot) {
+      setState(() {
+        battingTable = querySnapshot.documents;
+      });
+    });
+    forSecondInningMcgBall = firstInningMcgBall.listen((querySnapshot) {
+      setState(() {
+        bowlingTable = querySnapshot.documents;
+      });
+    });
+    forInningDetails = inningDetails.listen((querySnapshot) {
+      if (querySnapshot != null) {
+        setState(() {
+          battingTableData = querySnapshot.documents.first;
+        });
+        if (battingTableData.exists) {
+          setState(() {
+            mcgInningDetailsData = battingTableData.data['extra'];
+            balls = battingTableData.data['balls'];
+            score = battingTableData.data['score'];
+            wickets = battingTableData.data['wickets'];
+            b = mcgInningDetailsData['b'];
+            lb = mcgInningDetailsData['lb'];
+            nb = mcgInningDetailsData['nb'];
+            total = mcgInningDetailsData['total'];
+            over = overs(balls);
+          });
+        }
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    forSecondInningMcgBat?.cancel();
+    forSecondInningMcgBall?.cancel();
+    forInningDetails?.cancel();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,130 +107,133 @@ class _McgSecondState extends State<McgSecond> {
                 child: FadeInAnimation(
                     child: Container(
                         width: MediaQuery.of(context).size.height,
-                        child: showsecondmcg == true
-                            ? Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              padding: EdgeInsets.only(
-                                  top: 14.7, bottom: 11.7),
-                              child: Text(
-                                  "Mahinda College - 2nd Innings",
-                                  style: TextStyle(
-                                    color: Color(0xff444b54),
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w400,
-                                    fontStyle: FontStyle.normal,
-                                  )),
-                            ),
-                            Container(
-                                width:
-                                MediaQuery.of(context).size.width - 60,
-                                height: 3,
-                                decoration: new BoxDecoration(
-                                    color: Color(0xffe0e3e5))),
-                            DataTable(
-                                columnSpacing: 10.0,
-                                columns: [
-                                  DataColumn(
-                                      label: Text('Batsman')),
-                                  DataColumn(label: Text('R')),
-                                  DataColumn(label: Text('M')),
-                                  DataColumn(label: Text('4s')),
-                                  DataColumn(label: Text('6s')),
-                                  DataColumn(
-                                      label: Text('R/S')),
-                                ],
-                                rows: bats
-                                    .map((bat) =>
-                                    DataRow(cells: [
-                                      DataCell(
-                                          Text(bat.name)),
-                                      DataCell(
-                                          Text(bat.r)),
-                                      DataCell(
-                                          Text(bat.m)),
-                                      DataCell(Text(
-                                          bat.fours)),
-                                      DataCell(Text(
-                                          bat.sixes)),
-                                      DataCell(
-                                          Text(bat.rs)),
-                                    ]))
-                                    .toList()),
-                            Container(
-                                width: MediaQuery.of(context).size.width -
-                                    60,
-                                height: 0.5,
-                                decoration: new BoxDecoration(
-                                    color: Color(0xffe0e3e5))),
-                            Container(
-                              child: Row(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                        child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
-                                  Text(
-                                    'Extras',
-                                    style: TextStyle(fontSize: 15.0),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                        top: 14.7, bottom: 11.7),
+                                    child: Text("Mahinda College - 2nd Innings",
+                                        style: TextStyle(
+                                          color: Color(0xff444b54),
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w400,
+                                          fontStyle: FontStyle.normal,
+                                        )),
                                   ),
-                                  Text('6   (B 4,LB 2)',
-                                      style: TextStyle(fontSize: 15.0))
+                                  Container(
+                                      width: MediaQuery.of(context).size.width -
+                                          60,
+                                      height: 3,
+                                      decoration: new BoxDecoration(
+                                          color: Color(0xffe0e3e5))),
+                                  DataTable(
+                                      columnSpacing: 10.0,
+                                      columns: [
+                                        DataColumn(label: Text('Batsman')),
+                                        DataColumn(label: Text('R')),
+                                        DataColumn(label: Text('B')),
+                                        DataColumn(label: Text('4s')),
+                                        DataColumn(label: Text('6s')),
+                                        DataColumn(label: Text('R/S')),
+                                      ],
+                                      rows: battingTable
+                                          .map((bat) => DataRow(cells: [
+                                                DataCell(Text(bat['name'])),
+                                                DataCell(Text(
+                                                    bat['score'].toString())),
+                                                DataCell(Text(
+                                                    bat['balls'].toString())),
+                                                DataCell(
+                                                    Text(bat['4s'].toString())),
+                                                DataCell(
+                                                    Text(bat['6s'].toString())),
+                                                DataCell(Text(batStrike(
+                                                    bat['score'],
+                                                    bat['balls']))),
+                                              ]))
+                                          .toList()),
+                                  Container(
+                                      width: MediaQuery.of(context).size.width -
+                                          60,
+                                      height: 0.5,
+                                      decoration: new BoxDecoration(
+                                          color: Color(0xffe0e3e5))),
+                                  Container(
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Text(
+                                          'Extras',
+                                          style: TextStyle(fontSize: 15.0),
+                                        ),
+                                        Text('$total   (B $b,LB $lb,NB $nb)',
+                                            style: TextStyle(fontSize: 15.0))
+                                      ],
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 45.0, vertical: 10.0),
+                                  ),
+                                  Container(
+                                      width: MediaQuery.of(context).size.width -
+                                          60,
+                                      height: 1,
+                                      decoration: new BoxDecoration(
+                                          color: Color(0xffe0e3e5))),
+                                  Container(
+                                    child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
+                                          Text('Total Runs',
+                                              style: TextStyle(fontSize: 15.0)),
+                                          Text(
+                                              '$score($wickets wkts, $over ov)',
+                                              style: TextStyle(fontSize: 15.0))
+                                        ]),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 45.0, vertical: 10.0),
+                                  ),
+                                  Container(
+                                      width: MediaQuery.of(context).size.width -
+                                          60,
+                                      height: 1,
+                                      decoration: new BoxDecoration(
+                                          color: Color(0xffe0e3e5))),
+                                  DataTable(
+                                      columnSpacing: 10.0,
+                                      columns: [
+                                        DataColumn(label: Text('Balling')),
+                                        DataColumn(label: Text('O')),
+                                        DataColumn(label: Text('M')),
+                                        DataColumn(label: Text('R')),
+                                        DataColumn(label: Text('W')),
+                                        DataColumn(label: Text('Econ')),
+                                      ],
+                                      rows: bowlingTable
+                                          .map((ball) => DataRow(cells: [
+                                                DataCell(Text(ball['name'])),
+                                                DataCell(
+                                                    Text(overs(ball['balls']))),
+                                                DataCell(Text(
+                                                    ball['maiden'].toString())),
+                                                DataCell(Text(
+                                                    ball['score'].toString())),
+                                                DataCell(Text(ball['wickets']
+                                                    .toString())),
+                                                DataCell(Text(econ(
+                                                    ball['score'],
+                                                    ball['balls']))),
+                                              ]))
+                                          .toList())
                                 ],
                               ),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20.0, vertical: 10.0),
-                            ),
-                            Container(
-                                width: MediaQuery.of(context).size.width -
-                                    60,
-                                height: 1,
-                                decoration: new BoxDecoration(
-                                    color: Color(0xffe0e3e5))),
-                            Container(
-                              child: Row(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Text('Total Runs',
-                                        style: TextStyle(fontSize: 15.0)),
-                                    Text('191(10 wkts, 59.3 ov)',
-                                        style: TextStyle(fontSize: 15.0))
-                                  ]),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20.0, vertical: 10.0),
-                            ),
-                            Container(
-                                width: MediaQuery.of(context).size.width -
-                                    60,
-                                height: 1,
-                                decoration: new BoxDecoration(
-                                    color: Color(0xffe0e3e5))),
-                            DataTable(
-                                columnSpacing: 10.0,
-                                columns: [
-                                  DataColumn(label: Text('Balling')),
-                                  DataColumn(label: Text('O')),
-                                  DataColumn(label: Text('M')),
-                                  DataColumn(label: Text('R')),
-                                  DataColumn(label: Text('W')),
-                                  DataColumn(label: Text('Econ')),
-                                ],
-                                rows: balls.map((ball) => DataRow(cells: [
-                                  DataCell(Text(ball.name)),
-                                  DataCell(Text(ball.overs)),
-                                  DataCell(Text(ball.m)),
-                                  DataCell(Text(ball.r)),
-                                  DataCell(Text(ball.w)),
-                                  DataCell(Text(ball.econ)),
-                                ])).toList())
-                          ],
-                        )
-                            : SizedBox.shrink(),
                         decoration: BoxDecoration(
                           color: Color(0xffffffff),
                           borderRadius: BorderRadius.circular(15),

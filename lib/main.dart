@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lq_live_app/screens/home_screen.dart';
 
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         platform: TargetPlatform.iOS,
         fontFamily: 'ProductSans',
+//        brightness: Brightness.dark,
         primaryColor: Color(0xffffaa00),
         accentColor: Color(0xFFD8ECF1),
         scaffoldBackgroundColor: Color(0xffe0e3e5),

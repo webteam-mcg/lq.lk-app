@@ -47,8 +47,8 @@ class _TabScreenState extends State<TabScreen>
           tabs: tabsname,
           controller: _tabController,
           isScrollable: true,
-          unselectedLabelColor: Colors.black,
-          labelColor: Colors.white,
+          unselectedLabelColor: Colors.white,
+          labelColor: Colors.black,
           indicatorSize: TabBarIndicatorSize.tab,
           indicator: new BubbleTabIndicator(
             indicatorColor: Colors.amber,

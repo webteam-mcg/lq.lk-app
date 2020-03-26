@@ -14,9 +14,10 @@ class _AboutScreenState extends State<AboutScreen> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor: Color(0xffffaa00),
-          accentColor: Color(0xFFD8ECF1),
-          scaffoldBackgroundColor: Color(0xffe0e3e6),
+//          primaryColor: Color(0xffffaa00),
+//          accentColor: Color(0xFFD8ECF1),
+//          scaffoldBackgroundColor: Color(0xffe0e3e6),
+        brightness: Brightness.dark
         ),
         home: Scaffold(
           body: SingleChildScrollView(
@@ -92,7 +93,7 @@ class _AboutScreenState extends State<AboutScreen> {
                           ],
                         ),
                         decoration: BoxDecoration(
-                          color: Color(0xffffffff),
+//                          color: Color(0xffffffff),
                           borderRadius: BorderRadius.circular(15),
                           boxShadow: [
                             BoxShadow(

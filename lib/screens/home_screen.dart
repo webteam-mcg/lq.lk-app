@@ -14,11 +14,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String url = 'www.youtube.com';
 
-  Future<void> launchyoutube(String url) async {
+  Future<void> launchYoutube(String url) async {
     if (await canLaunch(url)) {
-      final bool nativeapplaunchsuccessed =
+      final bool nativeAppLaunchSuccessed =
           await launch(url, forceSafariVC: false, universalLinksOnly: true);
-      if (!nativeapplaunchsuccessed) {
+      if (!nativeAppLaunchSuccessed) {
         await launch(url, forceSafariVC: true);
       }
     }
@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            launchyoutube('https://youtube.com');
+            launchYoutube('https://youtube.com');
           },
           child: Icon(
             Icons.play_arrow,
@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
         bottomNavigationBar: Theme(
           data: Theme.of(context).copyWith(
               // sets the background color of the `BottomNavigationBar`
-              canvasColor: Colors.white,
+//              canvasColor: Colors.white,
               // sets the active color of the `BottomNavigationBar` if `Brightness` is light
               primaryColor: Color(0xffffaa00)),
           child: BottomNavigationBar(
