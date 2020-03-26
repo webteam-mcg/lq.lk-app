@@ -164,8 +164,7 @@ class _MatchScreenState extends State<MatchScreen> {
       if (querySnapshot != null) {
         setState(() {
           secondInningRcgData = querySnapshot.documents.first;
-        });
-        if (secondInningRcgData.exists) {
+        });if (secondInningRcgData.exists) {
           setState(() {
             rcgSecondScore = secondInningRcgData.data['score'];
             rcgSecondBalls = secondInningRcgData.data['balls'];
@@ -191,10 +190,10 @@ class _MatchScreenState extends State<MatchScreen> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-//          primaryColor: Color(0xffffaa00),
-//          accentColor: Color(0xFFD8ECF1),
-//          scaffoldBackgroundColor: Color(0xffe0e3e5),
-        brightness: Brightness.dark
+          primaryColor: Color(0xffffaa00),
+          accentColor: Color(0xFFD8ECF1),
+          scaffoldBackgroundColor: Color(0xffe0e3e5),
+//        brightness: Brightness.dark
         ),
         home: Scaffold(
             body: SingleChildScrollView(
@@ -265,7 +264,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                               width: 11,
                                             ),
                                             Image.asset(
-                                              'assets/images/Mahinda.png',
+                                              'assets/images/MCG.png',
                                               height: 70.0,
 //                                      width: 65.0,
                                             ),
@@ -787,7 +786,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                   ],
                                 ),
                                 decoration: BoxDecoration(
-                                  color: Colors.black45,
+                                  color: Color(0xffffffff),
                                   borderRadius: BorderRadius.circular(15),
                                   boxShadow: [
                                     BoxShadow(

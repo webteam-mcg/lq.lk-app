@@ -12,7 +12,6 @@ class McgFirst extends StatefulWidget {
 }
 
 class _McgFirstState extends State<McgFirst> {
-  bool showMcgFirstTable = false;
   List battingTable;
   List bowlingTable;
   Map mcgInningDetailsData;
@@ -25,9 +24,11 @@ class _McgFirstState extends State<McgFirst> {
   int nb;
   int total;
   String over;
+  bool showMcgFirst = false;
   StreamSubscription<QuerySnapshot> forFirstInningMcgBat;
   StreamSubscription<QuerySnapshot> forFirstInningMcgBall;
   StreamSubscription<QuerySnapshot> forInningDetails;
+  StreamSubscription<DocumentSnapshot> dataStream;
 
   final inningDetails = Firestore.instance
       .collection('innings')
@@ -44,6 +45,7 @@ class _McgFirstState extends State<McgFirst> {
       .where("team", isEqualTo: "mcg")
       .where("inning", isEqualTo: 1)
       .snapshots();
+  final documentReference = Firestore.instance.collection('main').document('datastream');
 
   @override
   void initState() {
@@ -57,6 +59,11 @@ class _McgFirstState extends State<McgFirst> {
     forFirstInningMcgBall = firstInningMcgBall.listen((querySnapshot) {
       setState(() {
         bowlingTable = querySnapshot.documents;
+      });
+    });
+    dataStream = documentReference.snapshots().listen((dataSnapshot){
+      setState(() {
+        showMcgFirst = dataSnapshot.data['showfirstmcg'];
       });
     });
     forInningDetails = inningDetails.listen((querySnapshot) {
@@ -88,6 +95,7 @@ class _McgFirstState extends State<McgFirst> {
     forFirstInningMcgBat?.cancel();
     forFirstInningMcgBall?.cancel();
     forInningDetails?.cancel();
+    dataStream?.cancel();
   }
 
   @override
@@ -95,10 +103,10 @@ class _McgFirstState extends State<McgFirst> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-//        primaryColor: Color(0xffffaa00),
-//        accentColor: Color(0xFFD8ECF1),
-//        scaffoldBackgroundColor: Color(0xffe0e3e5),
-      brightness: Brightness.dark
+        primaryColor: Color(0xffffaa00),
+        accentColor: Color(0xFFD8ECF1),
+        scaffoldBackgroundColor: Color(0xffe0e3e5),
+//      brightness: Brightness.dark
       ),
       home: Scaffold(
         body: SingleChildScrollView(
@@ -107,7 +115,7 @@ class _McgFirstState extends State<McgFirst> {
           child: AnimationConfiguration.synchronized(
             child: SlideAnimation(
               child: FadeInAnimation(
-                child: showMcgFirstTable == true
+                child: showMcgFirst == true
                     ? Container(
                         width: MediaQuery.of(context).size.height,
                         child: Column(

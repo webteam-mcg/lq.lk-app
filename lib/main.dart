@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Travel UI',
+      title: 'Lq.lk',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         platform: TargetPlatform.iOS,

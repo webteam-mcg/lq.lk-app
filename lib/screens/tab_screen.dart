@@ -10,6 +10,7 @@ import 'scoreboard/rcgsecond.dart';
 class TabScreen extends StatefulWidget {
   TabScreen({Key key}) : super(key: key);
 
+
   @override
   _TabScreenState createState() => _TabScreenState();
 }
@@ -17,7 +18,7 @@ class TabScreen extends StatefulWidget {
 class _TabScreenState extends State<TabScreen>
     with SingleTickerProviderStateMixin {
   final List<Widget> tabs = [McgFirst(), RcgFirst(), McgSecond(), RcgSecond()];
-  final List<Widget> tabsname = [
+  final List<Widget> tabsName = [
     Text('MCG - 1st'),
     Text('RCG - 1st'),
     Text('MCG - 2nd'),
@@ -44,11 +45,11 @@ class _TabScreenState extends State<TabScreen>
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         title: TabBar(
-          tabs: tabsname,
+          tabs: tabsName,
           controller: _tabController,
           isScrollable: true,
-          unselectedLabelColor: Colors.white,
-          labelColor: Colors.black,
+          unselectedLabelColor: Colors.black,
+          labelColor: Colors.white,
           indicatorSize: TabBarIndicatorSize.tab,
           indicator: new BubbleTabIndicator(
             indicatorColor: Colors.amber,
