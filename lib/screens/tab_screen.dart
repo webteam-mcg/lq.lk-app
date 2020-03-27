@@ -10,7 +10,6 @@ import 'scoreboard/rcgsecond.dart';
 class TabScreen extends StatefulWidget {
   TabScreen({Key key}) : super(key: key);
 
-
   @override
   _TabScreenState createState() => _TabScreenState();
 }

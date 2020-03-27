@@ -8,6 +8,10 @@ import 'package:lq_live_app/screens/match_screen.dart';
 import 'package:lq_live_app/screens/news_screen.dart';
 import 'package:lq_live_app/screens/tab_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
+//import 'theme/themes.dart';
+//import 'package:provider/provider.dart';
+//import 'package:shared_preferences/shared_preferences.dart';
+//import 'theme/settings.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -85,17 +89,11 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 30,
           ),
           actions: <Widget>[
-            live == true ? Icon(Icons.score) : SizedBox.shrink()
+            live == true ? Icon(Icons.score) : SizedBox.shrink(),
           ],
         ),
         body: _children[_currentIndex],
-        bottomNavigationBar: Theme(
-          data: Theme.of(context).copyWith(
-              // sets the background color of the `BottomNavigationBar`
-//              canvasColor: Colors.white,
-              // sets the active color of the `BottomNavigationBar` if `Brightness` is light
-              primaryColor: Color(0xffffaa00)),
-          child: BottomNavigationBar(
+        bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             onTap: onTabTapped, // new
             currentIndex: _currentIndex,
@@ -104,53 +102,53 @@ class _HomeScreenState extends State<HomeScreen> {
                   icon: Image(
                     image: AssetImage('assets/icons/Home - Dark.png'),
                     height: 30,
-                    width: 30,
+//                    width: 30,
                   ),
                   title: SizedBox.shrink(),
                   activeIcon: Image(
                     image: AssetImage('assets/icons/Home - Active.png'),
                     height: 30,
-                    width: 30,
+//                    width: 30,
                   )),
               BottomNavigationBarItem(
                   icon: Image(
                     image: AssetImage('assets/icons/List - Dark.png'),
                     height: 30,
-                    width: 30,
+//                    width: 30,
                   ),
                   title: SizedBox.shrink(),
                   activeIcon: Image(
                     image: AssetImage('assets/icons/List - Active.png'),
                     height: 30,
-                    width: 30,
+//                    width: 30,
                   )),
               BottomNavigationBarItem(
                   icon: Image(
                     image: AssetImage('assets/icons/Twitter - Dark.png'),
                     height: 30,
-                    width: 30,
+//                    width: 30,
                   ),
                   title: SizedBox.shrink(),
                   activeIcon: Image(
                     image: AssetImage('assets/icons/Twitter - Active.png'),
                     height: 30,
-                    width: 30,
+//                    width: 30,
                   )),
               BottomNavigationBarItem(
                   icon: Image(
                     image: AssetImage('assets/icons/Info - Dark.png'),
                     height: 30,
-                    width: 30,
+//                    width: 30,
                   ),
                   title: SizedBox.shrink(),
                   activeIcon: Image(
                     image: AssetImage('assets/icons/Info - Active.png'),
                     height: 30,
-                    width: 30,
+//                    width: 30,
                   )),
             ],
           ),
-        ));
+        );
   }
 
   void onTabTapped(int index) {
