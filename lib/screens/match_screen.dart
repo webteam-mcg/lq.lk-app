@@ -6,7 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:provider/provider.dart';
+
 import 'package:lq_live_app/models/functions_model.dart';
+import 'package:lq_live_app/settings.dart';
+import 'package:lq_live_app/themes.dart';
 
 class MatchScreen extends StatefulWidget {
   @override
@@ -188,620 +192,528 @@ class _MatchScreenState extends State<MatchScreen> {
   }
 
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primaryColor: Color(0xffffaa00),
-          accentColor: Color(0xFFD8ECF1),
-          scaffoldBackgroundColor: Color(0xffe0e3e5),
-//        brightness: Brightness.dark
-        ),
-        home: Scaffold(
-            body: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                child: AnimationConfiguration.synchronized(
-                    child: SlideAnimation(
-                        child: FadeInAnimation(
-                          child: Column(children: <Widget>[
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.max,
-                              children: <Widget>[
-                                college == 'mcg'
-                                    ? Text('MAHINDA COLLEGE',
-                                        style: TextStyle(
-                                          fontFamily: 'ProductSans',
+    return Scaffold(
+        body: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: AnimationConfiguration.synchronized(
+                child: SlideAnimation(
+                    child: FadeInAnimation(
+                      child: Column(children: <Widget>[
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            college == 'mcg'
+                                ? Text('MAHINDA COLLEGE',
+                                    style: TextStyle(
+                                      fontFamily: 'ProductSans',
 //                                          color: Colors.black,
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w600,
-                                          fontStyle: FontStyle.normal,
-                                        ))
-                                    : Text('Richmond College',
-                                        style: TextStyle(
-                                          fontFamily: 'ProductSans',
-                                          color: Colors.black,
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w600,
-                                          fontStyle: FontStyle.normal,
-                                        )),
-                                Text('$score/$wicket',
-                                    style: TextStyle(
-                                      fontFamily: 'ProductSans',
-//                                      color: Colors.black,
-                                      fontSize: 80,
-                                      fontWeight: FontWeight.w700,
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w600,
                                       fontStyle: FontStyle.normal,
-                                    )),
-                                Text('(' + overs(ball) + ' OVERS)',
+                                    ))
+                                : Text('Richmond College',
                                     style: TextStyle(
                                       fontFamily: 'ProductSans',
 //                                      color: Colors.black,
-                                      fontSize: 16,
+                                      fontSize: 17,
                                       fontWeight: FontWeight.w600,
                                       fontStyle: FontStyle.normal,
                                     )),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                              ],
+                            Text('$score/$wicket',
+                                style: TextStyle(
+                                  fontFamily: 'ProductSans',
+//                                      color: Colors.black,
+                                  fontSize: 80,
+                                  fontWeight: FontWeight.w700,
+                                  fontStyle: FontStyle.normal,
+                                )),
+                            Text('(' + overs(ball) + ' OVERS)',
+                                style: TextStyle(
+                                  fontFamily: 'ProductSans',
+//                                      color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                  fontStyle: FontStyle.normal,
+                                )),
+                            SizedBox(
+                              height: 20,
                             ),
-                            Container(
-                              child: Column(
+                          ],
+                        ),
+                        Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                    MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: <Widget>[
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: <Widget>[
-                                          SizedBox(
-                                            height: 10,
-                                            width: 11,
-                                          ),
-                                          Image(image: AssetImage('assets/images/MCG.png'),height: 70.0,),
-                                          SizedBox(
-                                            height: 5,
-                                            width: 5,
-                                          ),
-                                          Text('MCG',
-                                              style: TextStyle(
-                                                fontFamily: 'ProductSans',
-                                                color: Colors.black,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w700,
-                                                fontStyle: FontStyle.normal,
-                                              )),
-                                        ],
+                                      SizedBox(
+                                        height: 10,
+                                        width: 11,
+                                      ),
+                                      Image(
+                                        image:
+                                        Provider.of<Settings>(context).isDarkMode ? AssetImage('assets/images/MCG (Gold).png') : AssetImage('assets/images/MCG.png'),
+                                        height: 70.0,
                                       ),
                                       SizedBox(
-                                        width: 8.0,
+                                        height: 5,
+                                        width: 5,
                                       ),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
+                                      Text('MCG',
+                                          style: TextStyle(
+                                            fontFamily: 'ProductSans',
+                                            color: Provider.of<Settings>(context).isDarkMode ? Color(0xffffffff) : Colors.black,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w700,
+                                            fontStyle: FontStyle.normal,
+                                          )),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    width: 8.0,
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Row(
                                         children: <Widget>[
-                                          Row(
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
                                             children: <Widget>[
-                                              Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: <Widget>[
-                                                  Text(
-                                                      '$mcgFirstScore/$mcgFirstWickets',
-                                                      style: TextStyle(
-                                                        fontFamily:
-                                                            'ProductSans',
-                                                        color: Colors.black,
-                                                        fontSize: 16.7,
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                      )),
-                                                  Text(
-                                                      '(' +
-                                                          overs(mcgFirstBalls) +
-                                                          ')',
-                                                      style: TextStyle(
-                                                        fontFamily:
-                                                            'ProductSans',
-                                                        color: Colors.grey,
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                      )),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                width: 40.0,
-                                              ),
-                                              Text("1st",
+                                              Text(
+                                                  '$mcgFirstScore/$mcgFirstWickets',
                                                   style: TextStyle(
                                                     fontFamily: 'ProductSans',
-                                                    color: Colors.grey,
-                                                    fontSize: 17,
+                                                    color: Provider.of<Settings>(context).isDarkMode ? Color(0xffffffff) : Colors.black,
+                                                    fontSize: 16.7,
                                                     fontWeight: FontWeight.w700,
                                                     fontStyle: FontStyle.normal,
                                                   )),
-                                              SizedBox(
-                                                width: 40.0,
-                                              ),
-                                              Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: <Widget>[
-                                                  Text(
-                                                      '$rcgFirstScore/$rcgFirstWickets',
-                                                      style: TextStyle(
-                                                        fontFamily:
-                                                            'ProductSans',
-                                                        color: Colors.black,
-                                                        fontSize: 16.7,
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                      )),
-                                                  Text(
-                                                      '(' +
-                                                          overs(rcgFirstBalls) +
-                                                          ')',
-                                                      style: TextStyle(
-                                                        fontFamily:
-                                                            'ProductSans',
-                                                        color: Colors.grey,
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        fontStyle:
-                                                            FontStyle.normal,
-                                                      )),
-                                                ],
-                                              ),
+                                              Text(
+                                                  '(' +
+                                                      overs(mcgFirstBalls) +
+                                                      ')',
+                                                  style: TextStyle(
+                                                    fontFamily: 'ProductSans',
+                                                    color: Provider.of<Settings>(context).isDarkMode ? Color(0xffffffff) : Colors.grey,
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w700,
+                                                    fontStyle: FontStyle.normal,
+                                                  )),
                                             ],
                                           ),
                                           SizedBox(
-                                            height: 10.0,
+                                            width: 40.0,
                                           ),
-                                          inning == 2
-                                              ? Row(
+                                          Text("1st",
+                                              style: TextStyle(
+                                                fontFamily: 'ProductSans',
+                                                color: Provider.of<Settings>(context).isDarkMode ? Color(0xffffffff) : Colors.grey,
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.w700,
+                                                fontStyle: FontStyle.normal,
+                                              )),
+                                          SizedBox(
+                                            width: 40.0,
+                                          ),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: <Widget>[
+                                              Text(
+                                                  '$rcgFirstScore/$rcgFirstWickets',
+                                                  style: TextStyle(
+                                                    fontFamily: 'ProductSans',
+                                                    color: Provider.of<Settings>(context).isDarkMode ? Color(0xffffffff) : Colors.black,
+                                                    fontSize: 16.7,
+                                                    fontWeight: FontWeight.w700,
+                                                    fontStyle: FontStyle.normal,
+                                                  )),
+                                              Text(
+                                                  '(' +
+                                                      overs(rcgFirstBalls) +
+                                                      ')',
+                                                  style: TextStyle(
+                                                    fontFamily: 'ProductSans',
+                                                    color: Provider.of<Settings>(context).isDarkMode ? Color(0xffffffff) : Colors.grey,
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w700,
+                                                    fontStyle: FontStyle.normal,
+                                                  )),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 10.0,
+                                      ),
+                                      inning == 2
+                                          ? Row(
+                                              children: <Widget>[
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
                                                   children: <Widget>[
-                                                    Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: <Widget>[
-                                                        Text(
-                                                            '$mcgSecondScore/$mcgSecondWickets',
-                                                            style: TextStyle(
-                                                              fontFamily:
-                                                                  'ProductSans',
-                                                              color:
-                                                                  Colors.black,
-                                                              fontSize: 16.7,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700,
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                            )),
-                                                        Text(
-                                                            '(' +
-                                                                overs(
-                                                                    mcgSecondBalls) +
-                                                                ')',
-                                                            style: TextStyle(
-                                                              fontFamily:
-                                                                  'ProductSans',
-                                                              color:
-                                                                  Colors.grey,
-                                                              fontSize: 12,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700,
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                            )),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      width: 38.0,
-                                                    ),
-                                                    Text("2nd",
+                                                    Text(
+                                                        '$mcgSecondScore/$mcgSecondWickets',
                                                         style: TextStyle(
                                                           fontFamily:
                                                               'ProductSans',
-                                                          color: Colors.grey,
-                                                          fontSize: 17,
+                                                          color: Provider.of<Settings>(context).isDarkMode ? Color(0xffffffff) : Colors.black,
+                                                          fontSize: 16.7,
                                                           fontWeight:
                                                               FontWeight.w700,
                                                           fontStyle:
                                                               FontStyle.normal,
                                                         )),
-                                                    SizedBox(
-                                                      width: 38.0,
-                                                    ),
-                                                    Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceEvenly,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: <Widget>[
-                                                        Text(
-                                                            '$rcgSecondScore/$rcgSecondWickets',
-                                                            style: TextStyle(
-                                                              fontFamily:
-                                                                  'ProductSans',
-                                                              color:
-                                                                  Colors.black,
-                                                              fontSize: 16.7,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700,
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                            )),
-                                                        Text(
-                                                            '(' +
-                                                                overs(
-                                                                    rcgSecondBalls) +
-                                                                ')',
-                                                            style: TextStyle(
-                                                              fontFamily:
-                                                                  'ProductSans',
-                                                              color:
-                                                                  Colors.grey,
-                                                              fontSize: 12,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700,
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                            )),
-                                                      ],
-                                                    ),
+                                                    Text(
+                                                        '(' +
+                                                            overs(
+                                                                mcgSecondBalls) +
+                                                            ')',
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              'ProductSans',
+                                                          color: Provider.of<Settings>(context).isDarkMode ? Color(0xffffffff) : Colors.grey,
+                                                          fontSize: 12,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          fontStyle:
+                                                              FontStyle.normal,
+                                                        )),
                                                   ],
-                                                )
-                                              : SizedBox.shrink()
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        width: 8.0,
-                                      ),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: <Widget>[
-                                          SizedBox(
-                                            height: 10,
-                                            width: 11,
-                                          ),
-                                          Container(
-                                            padding: EdgeInsets.only(),
-                                            child:
-                                            Image(image: AssetImage('assets/images/RCG.png'),height: 70.0,),
-                                          ),
-                                          SizedBox(
-                                            height: 5,
-                                            width: 5,
-                                          ),
-                                          Text('RCG',
-                                              style: TextStyle(
-                                                fontFamily: 'ProductSans',
-                                                color: Colors.black,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w700,
-                                                fontStyle: FontStyle.normal,
-                                              )),
-                                        ],
-                                      ),
+                                                ),
+                                                SizedBox(
+                                                  width: 38.0,
+                                                ),
+                                                Text("2nd",
+                                                    style: TextStyle(
+                                                      fontFamily: 'ProductSans',
+                                                      color: Provider.of<Settings>(context).isDarkMode ? Color(0xffffffff) : Colors.grey,
+                                                      fontSize: 17,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontStyle:
+                                                          FontStyle.normal,
+                                                    )),
+                                                SizedBox(
+                                                  width: 38.0,
+                                                ),
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: <Widget>[
+                                                    Text(
+                                                        '$rcgSecondScore/$rcgSecondWickets',
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              'ProductSans',
+                                                          color: Provider.of<Settings>(context).isDarkMode ? Color(0xffffffff) : Colors.black,
+                                                          fontSize: 16.7,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          fontStyle:
+                                                              FontStyle.normal,
+                                                        )),
+                                                    Text(
+                                                        '(' +
+                                                            overs(
+                                                                rcgSecondBalls) +
+                                                            ')',
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              'ProductSans',
+                                                          color: Provider.of<Settings>(context).isDarkMode ? Color(0xffffffff) : Colors.grey,
+                                                          fontSize: 12,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          fontStyle:
+                                                              FontStyle.normal,
+                                                        )),
+                                                  ],
+                                                ),
+                                              ],
+                                            )
+                                          : SizedBox.shrink()
                                     ],
+                                  ),
+                                  SizedBox(
+                                    width: 8.0,
                                   ),
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: <Widget>[
-                                      Text("115th Lovers' Quarrel",
-                                          style: TextStyle(
-                                            fontFamily: 'ProductSans',
-                                            color: Colors.grey,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w700,
-                                            fontStyle: FontStyle.normal,
-                                          )),
-                                      Text('Day $day',
-                                          style: TextStyle(
-                                            fontFamily: 'ProductSans',
-                                            color: Colors.grey,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w700,
-                                            fontStyle: FontStyle.normal,
-                                          )),
-                                      // ignore: unrelated_type_equality_checks
-                                      specialMsg != emptyString
-                                          ? Column(
-                                              children: <Widget>[
-                                                SizedBox(
-                                                  height: 10.0,
-                                                ),
-                                                Text(specialMsg,
-                                                    style: TextStyle(
-                                                      fontFamily: 'ProductSans',
-                                                      color: Colors.black87,
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      fontStyle:
-                                                          FontStyle.normal,
-                                                    )),
-                                              ],
-                                            )
-                                          : SizedBox.shrink(),
                                       SizedBox(
-                                        height: 10.0,
-                                      )
+                                        height: 10,
+                                        width: 11,
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.only(),
+                                        child: Image(
+                                          image: AssetImage(
+                                              'assets/images/RCG.png'),
+                                          height: 70.0,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                        width: 5,
+                                      ),
+                                      Text('RCG',
+                                          style: TextStyle(
+                                            fontFamily: 'ProductSans',
+                                            color: Provider.of<Settings>(context).isDarkMode ? Color(0xffffffff) : Colors.black,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w700,
+                                            fontStyle: FontStyle.normal,
+                                          )),
                                     ],
                                   ),
                                 ],
                               ),
-                              decoration: BoxDecoration(
-                                  color: Color(0xffffffff),
-                                  borderRadius: BorderRadius.circular(15),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Color(0x26000000),
-                                        offset: Offset(0, 0),
-                                        blurRadius: 75,
-                                        spreadRadius: 0)
-                                  ]),
-                              height: MediaQuery.of(context).size.height / 4,
-                            ),
-                            SizedBox(height: 10.0),
-                            Container(
-                              height: MediaQuery.of(context).size.height / 7,
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
-                                  SizedBox(
-                                    height: 10.0,
-                                  ),
-                                  Text('This over',
+                                  Text("115th Lovers' Quarrel",
                                       style: TextStyle(
                                         fontFamily: 'ProductSans',
-                                        color: Colors.grey,
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.w600,
+                                        color: Provider.of<Settings>(context).isDarkMode ? Color(0xffffffff) : Colors.grey,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w700,
                                         fontStyle: FontStyle.normal,
                                       )),
-                                  thisOver.isNotEmpty == true
-                                      ? Row(
-                                          children: thisSplit
-                                              .map((i) => Chip(
-                                                    label:
-                                                        Text(i.toUpperCase()),
-                                                    backgroundColor: i == 'w'
-                                                        ? Colors.redAccent
-                                                        : Colors.amber,
-                                                  ))
-                                              .toList(),
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.values[5],
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
+                                  Text('Day $day',
+                                      style: TextStyle(
+                                        fontFamily: 'ProductSans',
+                                        color: Provider.of<Settings>(context).isDarkMode ? Color(0xffffffff) : Colors.grey,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700,
+                                        fontStyle: FontStyle.normal,
+                                      )),
+                                  // ignore: unrelated_type_equality_checks
+                                  specialMsg != emptyString
+                                      ? Column(
+                                          children: <Widget>[
+                                            SizedBox(
+                                              height: 10.0,
+                                            ),
+                                            Text(specialMsg,
+                                                style: TextStyle(
+                                                  fontFamily: 'ProductSans',
+                                                  color: Provider.of<Settings>(context).isDarkMode ? Color(0xffffffff) :  Colors.black87,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w700,
+                                                  fontStyle: FontStyle.normal,
+                                                )),
+                                          ],
                                         )
                                       : SizedBox.shrink(),
-                                  SizedBox(height: 10.0),
+                                  SizedBox(
+                                    height: 10.0,
+                                  )
                                 ],
                               ),
-                              decoration: BoxDecoration(
-                                color: Color(0xffffffff),
-                                borderRadius: BorderRadius.circular(15),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Color(0x26000000),
-                                      offset: Offset(0, 0),
-                                      blurRadius: 75,
-                                      spreadRadius: 0)
-                                ],
+                            ],
+                          ),
+                          decoration: Provider.of<Settings>(context).isDarkMode ? setBlackCard : setWhiteCard,
+                          height: MediaQuery.of(context).size.height / 4,
+                        ),
+                        SizedBox(height: 10.0),
+                        Container(
+                          height: MediaQuery.of(context).size.height / 7,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              SizedBox(
+                                height: 10.0,
                               ),
+                              Text('This over',
+                                  style: TextStyle(
+                                    fontFamily: 'ProductSans',
+                                    color: Provider.of<Settings>(context).isDarkMode ? Color(0xffffffff) : Colors.grey,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w600,
+                                    fontStyle: FontStyle.normal,
+                                  )),
+                              thisOver.isNotEmpty == true
+                                  ? Row(
+                                      children: thisSplit
+                                          .map((i) => Chip(
+                                                label: Text(i.toUpperCase()),
+                                                backgroundColor: i == 'w'
+                                                    ? Colors.redAccent
+                                                    : Colors.amber,
+                                              ))
+                                          .toList(),
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.values[5],
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                    )
+                                  : SizedBox.shrink(),
+                              SizedBox(height: 10.0),
+                            ],
+                          ),
+                          decoration: Provider.of<Settings>(context).isDarkMode ? setBlackCard : setWhiteCard,
+                        ),
+                        SizedBox(height: 10.0),
+                        Container(
+                          height: MediaQuery.of(context).size.height / 8,
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                Text('Run Rate',
+                                    style: TextStyle(
+                                      fontFamily: 'ProductSans',
+                                      color: Provider.of<Settings>(context).isDarkMode ? Color(0xffffffff) : Colors.grey,
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w600,
+                                      fontStyle: FontStyle.normal,
+                                    )),
+                                Text(strikeRate(ball, score),
+                                    style: TextStyle(
+                                      fontFamily: 'ProductSans',
+                                      color: Provider.of<Settings>(context).isDarkMode ? Color(0xffffffff) : Colors.black54,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600,
+                                      fontStyle: FontStyle.normal,
+                                    )),
+                              ],
                             ),
-                            SizedBox(height: 10.0),
-                            Container(
-                              height: MediaQuery.of(context).size.height / 8,
-                              child: Center(
-                                child: Column(
+                          ),
+                          decoration: Provider.of<Settings>(context).isDarkMode ? setBlackCard : setWhiteCard,
+                        ),
+                        SizedBox(height: 10.0),
+                        Container(
+                          height: MediaQuery.of(context).size.height / 8,
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                Text("115th Lovers' Quarrel",
+                                    style: TextStyle(
+                                      fontFamily: 'ProductSans',
+                                      color: Provider.of<Settings>(context).isDarkMode ? Color(0xffffffff) : Colors.grey,
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w600,
+                                      fontStyle: FontStyle.normal,
+                                    )),
+                                Text('Day $day',
+                                    style: TextStyle(
+                                      fontFamily: 'ProductSans',
+                                      color: Provider.of<Settings>(context).isDarkMode ? Color(0xffffffff) : Colors.black54,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600,
+                                      fontStyle: FontStyle.normal,
+                                    )),
+                              ],
+                            ),
+                          ),
+                          decoration: Provider.of<Settings>(context).isDarkMode ? setBlackCard : setWhiteCard,
+                        ),
+                        SizedBox(height: 10.0),
+                        Container(
+                            height: MediaQuery.of(context).size.height / 7,
+                            width: double.infinity,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: <Widget>[
-                                    Text('Run Rate',
+                                    Text('Batting',
                                         style: TextStyle(
                                           fontFamily: 'ProductSans',
-                                          color: Colors.grey,
+                                          color:Provider.of<Settings>(context).isDarkMode ? Color(0xffffffff) :  Colors.grey,
                                           fontSize: 17,
                                           fontWeight: FontWeight.w600,
                                           fontStyle: FontStyle.normal,
                                         )),
-                                    Text(strikeRate(ball, score),
-                                        style: TextStyle(
-                                          fontFamily: 'ProductSans',
-                                          color: Colors.black54,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600,
-                                          fontStyle: FontStyle.normal,
-                                        )),
-                                  ],
-                                ),
-                              ),
-                              decoration: BoxDecoration(
-                                color: Color(0xffffffff),
-                                borderRadius: BorderRadius.circular(15),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Color(0x26000000),
-                                      offset: Offset(0, 0),
-                                      blurRadius: 75,
-                                      spreadRadius: 0)
-                                ],
-                              ),
-                            ),
-                            SizedBox(height: 10.0),
-                            Container(
-                              height: MediaQuery.of(context).size.height / 8,
-                              child: Center(
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: <Widget>[
-                                    Text("115th Lovers' Quarrel",
-                                        style: TextStyle(
-                                          fontFamily: 'ProductSans',
-                                          color: Colors.grey,
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w600,
-                                          fontStyle: FontStyle.normal,
-                                        )),
-                                    Text('Day $day',
-                                        style: TextStyle(
-                                          fontFamily: 'ProductSans',
-                                          color: Colors.black54,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600,
-                                          fontStyle: FontStyle.normal,
-                                        )),
-                                  ],
-                                ),
-                              ),
-                              decoration: BoxDecoration(
-                                color: Color(0xffffffff),
-                                borderRadius: BorderRadius.circular(15),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Color(0x26000000),
-                                      offset: Offset(0, 0),
-                                      blurRadius: 75,
-                                      spreadRadius: 0)
-                                ],
-                              ),
-                            ),
-                            SizedBox(height: 10.0),
-                            Container(
-                                height: MediaQuery.of(context).size.height / 7,
-                                width: double.infinity,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: <Widget>[
                                     Column(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
+                                          MainAxisAlignment.center,
                                       children: <Widget>[
-                                        Text('Batting',
-                                            style: TextStyle(
-                                              fontFamily: 'ProductSans',
-                                              color: Colors.grey,
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.w600,
-                                              fontStyle: FontStyle.normal,
-                                            )),
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: <Widget>[
-                                            Text(
-                                                '$player1name - $player1score ($player1balls)'),
-                                            SizedBox(
-                                              height: 10.0,
-                                            ),
-                                            Text(
-                                                '$player2name - $player2score ($player2balls)'),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                    Container(
-                                        width: 3,
-                                        height: 100,
-                                        decoration: new BoxDecoration(
-                                            color: Color(0xffe0e3e5))),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: <Widget>[
-                                        Text('Balling',
-                                            style: TextStyle(
-                                              fontFamily: 'ProductSans',
-                                              color: Colors.grey,
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.w600,
-                                              fontStyle: FontStyle.normal,
-                                            )),
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: <Widget>[
-                                            Text(
-                                                '$bowlerName - $bowlerScore ($bowlerBalls)'),
-                                            SizedBox(
-                                              height: 10.0,
-                                            ),
-                                            Text('Wickets - $bowlerWickets'),
-                                          ],
-                                        )
+                                        Text(
+                                            '$player1name - $player1score ( $player1balls )'),
+                                        SizedBox(
+                                          height: 10.0,
+                                        ),
+                                        Text(
+                                            '$player2name - $player2score ( $player2balls )'),
                                       ],
                                     )
                                   ],
                                 ),
-                                decoration: BoxDecoration(
-                                  color: Color(0xffffffff),
-                                  borderRadius: BorderRadius.circular(15),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Color(0x26000000),
-                                        offset: Offset(0, 0),
-                                        blurRadius: 75,
-                                        spreadRadius: 0)
+                                Container(
+                                    width: 3,
+                                    height: 100,
+                                    decoration: new BoxDecoration(
+                                        color: Color(0xffe0e3e5))),
+                                Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    Text('Balling',
+                                        style: TextStyle(
+                                          fontFamily: 'ProductSans',
+                                          color: Provider.of<Settings>(context).isDarkMode ? Color(0xffffffff) : Colors.grey,
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w600,
+                                          fontStyle: FontStyle.normal,
+                                        )),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        Text(
+                                            '$bowlerName - $bowlerScore ( $bowlerBalls )'),
+                                        SizedBox(
+                                          height: 10.0,
+                                        ),
+                                        Text('Wickets - $bowlerWickets'),
+                                      ],
+                                    )
                                   ],
-                                )),
-                            SizedBox(height: 10.0),
-                          ]),
-                        ),
-                        verticalOffset: MediaQuery.of(context).size.height,
-                        duration: const Duration(seconds: 1))),
-                padding: EdgeInsets.all(10.0))));
+                                )
+                              ],
+                            ),
+                            decoration: Provider.of<Settings>(context).isDarkMode ? setBlackCard : setWhiteCard,),
+                        SizedBox(height: 10.0),
+                      ]),
+                    ),
+                    verticalOffset: MediaQuery.of(context).size.height,
+                    duration: const Duration(seconds: 1))),
+            padding: EdgeInsets.all(10.0)));
   }
 }

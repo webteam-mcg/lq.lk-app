@@ -1,17 +1,19 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lq_live_app/screens/about_screen.dart';
 import 'package:lq_live_app/screens/match_screen.dart';
 import 'package:lq_live_app/screens/news_screen.dart';
 import 'package:lq_live_app/screens/tab_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
-//import 'theme/themes.dart';
-//import 'package:provider/provider.dart';
-//import 'package:shared_preferences/shared_preferences.dart';
-//import 'theme/settings.dart';
+
+import 'package:lq_live_app/settings.dart';
+import 'package:lq_live_app/themes.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -69,86 +71,68 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            launchYoutube(url);
-          },
-          child: Icon(
-            Icons.play_arrow,
-            size: 30,
-            color: Color(0xffffffff),
-          ),
-          backgroundColor: Color(0xffffaa00),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          launchYoutube(url);
+        },
+        child: Icon(
+          Icons.play_arrow,
+          size: 30,
+          color: Color(0xffffffff),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0.0,
-          title: Image(
-            image: AssetImage('assets/images/lqlklogo.png'),
-            height: 30,
-          ),
-          actions: <Widget>[
-            live == true ? Icon(Icons.score) : SizedBox.shrink(),
-          ],
+        backgroundColor: Color(0xffffaa00),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        title: Image(
+          image: AssetImage('assets/images/lqlklogo.png'),
+          height: 30,
         ),
-        body: _children[_currentIndex],
-        bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            onTap: onTabTapped, // new
-            currentIndex: _currentIndex,
-            items: [
-              BottomNavigationBarItem(
-                  icon: Image(
-                    image: AssetImage('assets/icons/Home - Dark.png'),
-                    height: 30,
-//                    width: 30,
-                  ),
-                  title: SizedBox.shrink(),
-                  activeIcon: Image(
-                    image: AssetImage('assets/icons/Home - Active.png'),
-                    height: 30,
-//                    width: 30,
-                  )),
-              BottomNavigationBarItem(
-                  icon: Image(
-                    image: AssetImage('assets/icons/List - Dark.png'),
-                    height: 30,
-//                    width: 30,
-                  ),
-                  title: SizedBox.shrink(),
-                  activeIcon: Image(
-                    image: AssetImage('assets/icons/List - Active.png'),
-                    height: 30,
-//                    width: 30,
-                  )),
-              BottomNavigationBarItem(
-                  icon: Image(
-                    image: AssetImage('assets/icons/Twitter - Dark.png'),
-                    height: 30,
-//                    width: 30,
-                  ),
-                  title: SizedBox.shrink(),
-                  activeIcon: Image(
-                    image: AssetImage('assets/icons/Twitter - Active.png'),
-                    height: 30,
-//                    width: 30,
-                  )),
-              BottomNavigationBarItem(
-                  icon: Image(
-                    image: AssetImage('assets/icons/Info - Dark.png'),
-                    height: 30,
-//                    width: 30,
-                  ),
-                  title: SizedBox.shrink(),
-                  activeIcon: Image(
-                    image: AssetImage('assets/icons/Info - Active.png'),
-                    height: 30,
-//                    width: 30,
-                  )),
-            ],
+        actions: <Widget>[
+          live == true
+              ? Image(
+                  image: AssetImage('assets/images/LIVE.png'),
+                  height: 30,
+                )
+              : SizedBox.shrink(),
+        ],
+      ),
+      body: _children[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        onTap: onTabTapped, // new
+        currentIndex: _currentIndex,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+              size: 30,
+            ),
+            title: SizedBox.shrink(),
           ),
-        );
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.format_list_bulleted,
+                size: 30,
+              ),
+              title: SizedBox.shrink()),
+          BottomNavigationBarItem(
+              icon: FaIcon(
+                FontAwesomeIcons.twitter,
+                size: 25,
+              ),
+              title: SizedBox.shrink()),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.info_outline,
+                size: 30,
+              ),
+              title: SizedBox.shrink()),
+        ],
+      ),
+    );
   }
 
   void onTabTapped(int index) {
