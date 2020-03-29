@@ -9,11 +9,9 @@ import 'package:lq_live_app/screens/about_screen.dart';
 import 'package:lq_live_app/screens/match_screen.dart';
 import 'package:lq_live_app/screens/news_screen.dart';
 import 'package:lq_live_app/screens/tab_screen.dart';
-import 'package:url_launcher/url_launcher.dart';
-
 import 'package:lq_live_app/settings.dart';
-import 'package:lq_live_app/themes.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -77,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         child: Icon(
           Icons.play_arrow,
-          size: 30,
+          size: 35,
           color: Color(0xffffffff),
         ),
         backgroundColor: Color(0xffffaa00),
@@ -86,10 +84,15 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        title: Image(
-          image: AssetImage('assets/images/lqlklogo.png'),
-          height: 30,
-        ),
+        title: Provider.of<Settings>(context).isDarkMode
+            ? Image.asset(
+                'assets/images/lqlklogo.png',
+                height: 30,
+              )
+            : Image.asset(
+                'assets/images/lqlklogolight.png',
+                height: 30,
+              ),
         actions: <Widget>[
           live == true
               ? Image(

@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:lq_live_app/models/functions_model.dart';
-
 import 'package:lq_live_app/settings.dart';
 import 'package:lq_live_app/themes.dart';
 import 'package:provider/provider.dart';
@@ -123,7 +123,10 @@ class _McgFirstState extends State<McgFirst> {
                             padding: EdgeInsets.only(top: 14.7, bottom: 11.7),
                             child: Text("Mahinda College - 1st Innings",
                                 style: TextStyle(
-                                  color: Provider.of<Settings>(context).isDarkMode ? Color(0xffffffff) : Color(0xff444b54),
+                                  color:
+                                      Provider.of<Settings>(context).isDarkMode
+                                          ? Color(0xffffffff)
+                                          : Color(0xff444b54),
                                   fontSize: 20,
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
@@ -226,16 +229,42 @@ class _McgFirstState extends State<McgFirst> {
                                   .toList())
                         ],
                       ),
-                      decoration: Provider.of<Settings>(context).isDarkMode ? setBlackCard : setWhiteCard,)
+                      decoration: Provider.of<Settings>(context).isDarkMode
+                          ? setBlackCard
+                          : setWhiteCard,
+                    )
                   : Container(
                       height: MediaQuery.of(context).size.height - 220,
                       width: MediaQuery.of(context).size.width,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[Text('data')],
+                        children: <Widget>[Container(child: FlareActor("assets/images/MCG_Ball.flr", alignment:Alignment.center,fit: BoxFit.fitHeight, animation:"Untitled"),height: 350,),Text('Yet To Be Bat',
+                            style: TextStyle(
+                              fontFamily: 'ProductSans',
+                              color: Provider.of<Settings>(context)
+                                  .isDarkMode
+                                  ? Color(0xffffffff)
+                                  : Colors.grey,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                              fontStyle: FontStyle.normal,
+                            )),Text('Tips - Use Dark Mode Toggle to switch into Dark Mode',
+                            style: TextStyle(
+                              fontFamily: 'ProductSans',
+                              color: Provider.of<Settings>(context)
+                                  .isDarkMode
+                                  ? Color(0xffffffff)
+                                  : Colors.grey,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              fontStyle: FontStyle.normal,
+                            ))],
                       ),
-                      decoration:Provider.of<Settings>(context).isDarkMode ? setBlackCard : setWhiteCard,),
+                      decoration: Provider.of<Settings>(context).isDarkMode
+                          ? setBlackCard
+                          : setWhiteCard,
+                    ),
             ),
             verticalOffset: MediaQuery.of(context).size.height,
           ),

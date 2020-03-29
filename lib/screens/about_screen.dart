@@ -5,11 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:url_launcher/url_launcher.dart';
-
 import 'package:lq_live_app/settings.dart';
 import 'package:lq_live_app/themes.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutScreen extends StatefulWidget {
   @override
@@ -56,7 +55,10 @@ class _AboutScreenState extends State<AboutScreen> {
                               padding: EdgeInsets.only(top: 14.7, bottom: 17),
                               child: Text("About Us",
                                   style: TextStyle(
-                                    color: Provider.of<Settings>(context).isDarkMode ? Color(0xffffffff) : Color(0xff444b54),
+                                    color: Provider.of<Settings>(context)
+                                            .isDarkMode
+                                        ? Color(0xffffffff)
+                                        : Color(0xff444b54),
                                     fontSize: 20,
                                     fontWeight: FontWeight.w600,
                                     fontStyle: FontStyle.normal,
@@ -72,9 +74,8 @@ class _AboutScreenState extends State<AboutScreen> {
                             ),
                             Container(
                               child: Image.asset(
-                                'assets/images/Web Team MCG.png',
+                                'assets/images/WebTeamMCG.png',
                                 height: 40,
-//                                        width: 100,
                               ),
                             ),
                             SizedBox(
@@ -98,11 +99,15 @@ class _AboutScreenState extends State<AboutScreen> {
                             ),
                             Container(
                               padding: EdgeInsets.only(),
-                              child: Image.asset(
-                                'assets/images/ARCH92 (For Light Mode).png',
-                                height: 35,
-//                                        width: 100,
-                              ),
+                              child: Provider.of<Settings>(context).isDarkMode
+                                  ? Image.asset(
+                                      'assets/images/ARCH92(ForLightMode).png',
+                                      height: 40,
+                                    )
+                                  : Image.asset(
+                                      'assets/images/ARCH92(ForDarkMode).png',
+                                      height: 40,
+                                    ),
                             ),
                             SizedBox(
                               height: 10,
@@ -126,13 +131,17 @@ class _AboutScreenState extends State<AboutScreen> {
                             ),
                           ],
                         ),
-                        decoration: Provider.of<Settings>(context).isDarkMode ? setBlackCard : setWhiteCard,
+                        decoration: Provider.of<Settings>(context).isDarkMode
+                            ? setBlackCard
+                            : setWhiteCard,
                       ),
                       SizedBox(
                         height: 10.0,
                       ),
                       Container(
-                        decoration: Provider.of<Settings>(context).isDarkMode ? setBlackCard : setWhiteCard,
+                        decoration: Provider.of<Settings>(context).isDarkMode
+                            ? setBlackCard
+                            : setWhiteCard,
                         padding: EdgeInsets.symmetric(vertical: 30.0),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -141,7 +150,7 @@ class _AboutScreenState extends State<AboutScreen> {
                             IconButton(
                                 icon: Image.asset(
                                   'assets/icons/Facebook.png',
-                                  height: 35,
+                                  height: 40,
                                 ),
                                 onPressed: () {
                                   _launchInApp(faceBook);
@@ -149,7 +158,7 @@ class _AboutScreenState extends State<AboutScreen> {
                             IconButton(
                                 icon: Image.asset(
                                   'assets/icons/Instagram.png',
-                                  height: 35,
+                                  height: 40,
                                 ),
                                 onPressed: () {
                                   _launchInApp(instagram);
@@ -157,7 +166,7 @@ class _AboutScreenState extends State<AboutScreen> {
                             IconButton(
                                 icon: Image.asset(
                                   'assets/icons/Twitter.png',
-                                  height: 35,
+                                  height: 40,
                                 ),
                                 onPressed: () {
                                   _launchInApp(twitter);
@@ -165,7 +174,7 @@ class _AboutScreenState extends State<AboutScreen> {
                             IconButton(
                                 icon: Image.asset(
                                   'assets/icons/Youtube.png',
-                                  height: 35,
+                                  height: 40,
                                 ),
                                 onPressed: () {
                                   _launchInApp(youTube);

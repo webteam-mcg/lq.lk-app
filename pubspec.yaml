@@ -32,6 +32,7 @@ dependencies:
   provider: ^4.0.1
   shared_preferences: ^0.5.3+4
   font_awesome_flutter: ^8.8.0
+  flare_flutter: ^2.0.1
 
 dev_dependencies:
   flutter_test:

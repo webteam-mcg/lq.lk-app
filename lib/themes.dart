@@ -25,7 +25,7 @@ ThemeData _buildDarkTheme() {
       primaryColor: Color(0xffffaa00),
       accentColor: Color(0xffffaa00),
       scaffoldBackgroundColor: Color(0xff1b1b1b),
-      canvasColor: Color(0xff000000));
+      canvasColor: Colors.black87);
 }
 
 BoxDecoration _buildWhiteCard() {

@@ -1,15 +1,13 @@
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:lq_live_app/settings.dart';
+import 'package:provider/provider.dart';
 
 import 'scoreboard/mcgfirst.dart';
 import 'scoreboard/mcgsecond.dart';
 import 'scoreboard/rcgfirst.dart';
 import 'scoreboard/rcgsecond.dart';
-
-import 'package:lq_live_app/settings.dart';
-import 'package:lq_live_app/themes.dart';
-import 'package:provider/provider.dart';
 
 class TabScreen extends StatefulWidget {
   TabScreen({Key key}) : super(key: key);
@@ -51,8 +49,12 @@ class _TabScreenState extends State<TabScreen>
           tabs: tabsName,
           controller: _tabController,
           isScrollable: true,
-          unselectedLabelColor: Provider.of<Settings>(context).isDarkMode ? Colors.white : Colors.black,
-          labelColor: Provider.of<Settings>(context).isDarkMode ? Colors.black : Colors.white,
+          unselectedLabelColor: Provider.of<Settings>(context).isDarkMode
+              ? Colors.white
+              : Colors.black,
+          labelColor: Provider.of<Settings>(context).isDarkMode
+              ? Colors.black
+              : Colors.white,
           indicatorSize: TabBarIndicatorSize.tab,
           indicator: new BubbleTabIndicator(
             indicatorColor: Colors.amber,
