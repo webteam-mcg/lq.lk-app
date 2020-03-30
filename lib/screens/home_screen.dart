@@ -84,6 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
+        centerTitle: true,
         title: Provider.of<Settings>(context).isDarkMode
             ? Image.asset(
                 'assets/images/lqlklogo.png',
@@ -93,14 +94,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 'assets/images/lqlklogolight.png',
                 height: 30,
               ),
-        actions: <Widget>[
-          live == true
-              ? Image(
-                  image: AssetImage('assets/images/LIVE.png'),
-                  height: 30,
-                )
-              : SizedBox.shrink(),
-        ],
+        actions: live == true ?<Widget>[Image.asset('assets/images/LIVE.png',width: 37.5,),SizedBox(width: 10.0,)]
+            : SizedBox.shrink(),
       ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(

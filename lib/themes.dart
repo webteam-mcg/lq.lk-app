@@ -8,7 +8,7 @@ final setBlackCard = _buildBlackCard();
 
 ThemeData _buildLightTheme() {
   return ThemeData(
-      platform: TargetPlatform.iOS,
+//      platform: TargetPlatform.iOS,
       fontFamily: 'ProductSans',
       brightness: Brightness.light,
       primaryColor: Color(0xffffaa00),
@@ -19,13 +19,13 @@ ThemeData _buildLightTheme() {
 
 ThemeData _buildDarkTheme() {
   return ThemeData(
-      platform: TargetPlatform.iOS,
+//      platform: TargetPlatform.iOS,
       fontFamily: 'ProductSans',
       brightness: Brightness.dark,
       primaryColor: Color(0xffffaa00),
       accentColor: Color(0xffffaa00),
-      scaffoldBackgroundColor: Color(0xff1b1b1b),
-      canvasColor: Colors.black87);
+      scaffoldBackgroundColor: Colors.black54,
+      canvasColor: Colors.black);
 }
 
 BoxDecoration _buildWhiteCard() {
@@ -44,7 +44,7 @@ BoxDecoration _buildWhiteCard() {
 
 BoxDecoration _buildBlackCard() {
   return BoxDecoration(
-    color: Color(0xff424242),
+    color: Color(0xff1b1b1b),
     borderRadius: BorderRadius.circular(15),
     boxShadow: [
       BoxShadow(

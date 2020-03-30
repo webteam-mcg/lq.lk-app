@@ -628,7 +628,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                 ? Row(
                                     children: thisSplit
                                         .map((i) => Chip(
-                                              label: Text(i.toUpperCase()),
+                                              label: Text(i.toUpperCase(),style: TextStyle(color: Colors.black),),
                                               backgroundColor: i == 'w'
                                                   ? Colors.redAccent
                                                   : Colors.amber,

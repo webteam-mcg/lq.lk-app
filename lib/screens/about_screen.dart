@@ -18,13 +18,13 @@ class AboutScreen extends StatefulWidget {
 }
 
 class _AboutScreenState extends State<AboutScreen> {
-  String webTeam = '0';
-  String arch = '1';
-  String faceBook = '2';
-  String instagram = 'https://www.youtube.com/channel/UCRnbcK82wzCZEQ1mTbKIVng';
-  String twitter = 'https://www.google.com';
-  String youTube = '5';
-  String web = '6';
+  String webTeam = 'https://www.facebook.com/webteam.mcg/';
+  String arch = 'https://www.facebook.com/arch1892/';
+  String faceBook = 'https://www.facebook.com/MahindaCollege/';
+  String instagram = 'https://www.youtube.com/channel/UCRnbcK82wzCZEQ1mTbKIVng/';
+  String twitter = 'https://twitter.com/MahindaCollege/';
+  String youTube = 'https://www.youtube.com/channel/UCRnbcK82wzCZEQ1mTbKIVng/';
+  String web = 'https://www.mahindacollege.lk';
 
   Future<void> _launchInApp(String url) async {
     if (await canLaunch(url)) {
@@ -72,12 +72,12 @@ class _AboutScreenState extends State<AboutScreen> {
                             SizedBox(
                               height: 20,
                             ),
-                            Container(
+                            IconButton(icon: Container(
                               child: Image.asset(
                                 'assets/images/WebTeamMCG.png',
                                 height: 40,
                               ),
-                            ),
+                            ), onPressed: (){_launchInApp(webTeam);}),
                             SizedBox(
                               height: 10,
                             ),
@@ -97,18 +97,19 @@ class _AboutScreenState extends State<AboutScreen> {
                             SizedBox(
                               height: 10,
                             ),
-                            Container(
+                            IconButton(icon: Container(
                               padding: EdgeInsets.only(),
                               child: Provider.of<Settings>(context).isDarkMode
                                   ? Image.asset(
-                                      'assets/images/ARCH92(ForLightMode).png',
-                                      height: 40,
-                                    )
+                                'assets/images/ARCH92(ForLightMode).png',
+                                height: 40,
+                              )
                                   : Image.asset(
-                                      'assets/images/ARCH92(ForDarkMode).png',
-                                      height: 40,
-                                    ),
-                            ),
+                                'assets/images/ARCH92(ForDarkMode).png',
+                                height: 40,
+                              ),
+                            ), onPressed: (){_launchInApp(arch);}),
+
                             SizedBox(
                               height: 10,
                             ),
