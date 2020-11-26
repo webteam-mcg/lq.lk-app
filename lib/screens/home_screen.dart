@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   int _currentIndex = 0;
-  final List<Widget> _children = [
+  final _children = [
     MatchScreen(),
     TabScreen(),
     NewsScreen(),
@@ -80,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         backgroundColor: Color(0xffffaa00),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
@@ -94,8 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 'assets/images/lqlklogolight.png',
                 height: 30,
               ),
-        actions: live == true ?<Widget>[Image.asset('assets/images/LIVE.png',width: 37.5,),SizedBox(width: 10.0,)]
-            : SizedBox.shrink(),
+
       ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -107,27 +106,29 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(
               Icons.home,
               size: 30,
-            ),
-            title: SizedBox.shrink(),
-          ),
+            ),label: 'Home'),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.format_list_bulleted,
                 size: 30,
               ),
-              title: SizedBox.shrink()),
+              label: 'Scoreboard'
+              // ignore: deprecated_member_use
+              ),
           BottomNavigationBarItem(
               icon: FaIcon(
                 FontAwesomeIcons.twitter,
                 size: 25,
               ),
-              title: SizedBox.shrink()),
+            label: 'Twitter'
+             ),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.info_outline,
                 size: 30,
               ),
-              title: SizedBox.shrink()),
+            label: "About"
+             ),
         ],
       ),
     );

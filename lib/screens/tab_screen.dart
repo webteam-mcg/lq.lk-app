@@ -18,8 +18,8 @@ class TabScreen extends StatefulWidget {
 
 class _TabScreenState extends State<TabScreen>
     with SingleTickerProviderStateMixin {
-  final List<Widget> tabs = [McgFirst(), RcgFirst(), McgSecond(), RcgSecond()];
-  final List<Widget> tabsName = [
+  final tabs = [McgFirst(), RcgFirst(), McgSecond(), RcgSecond()];
+  final tabsName = [
     Text('MCG - 1st'),
     Text('RCG - 1st'),
     Text('MCG - 2nd'),

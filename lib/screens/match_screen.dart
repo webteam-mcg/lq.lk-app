@@ -20,7 +20,7 @@ class MatchScreen extends StatefulWidget {
 
 class _MatchScreenState extends State<MatchScreen> {
   String emptyString = '';
-  String thisOver = '';
+  Map thisOver;
   int day = 1;
   int score = 0;
   int wicket = 0;
@@ -42,7 +42,7 @@ class _MatchScreenState extends State<MatchScreen> {
   int bowlerWickets = 0;
   int inning = 1;
   int mcgScoreFirstInning = 0;
-  List thisSplit;
+  List thisSplit = [];
 
   int mcgFirstScore = 0;
   int mcgFirstWickets = 0;
@@ -115,7 +115,7 @@ class _MatchScreenState extends State<MatchScreen> {
           bowlerBalls = bowler['balls'];
           bowlerWickets = bowler['wickets'];
           thisOver = dataSnapshot.data['thisOver'];
-          thisSplit = thisOver.split(' ');
+          thisSplit = thisOver.values.toList();
           inning = dataSnapshot.data['inning'];
         });
       }
@@ -254,7 +254,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: <Widget>[
-                                    SizedBox(
+                                 SizedBox(
                                       height: 10,
                                       width: 11,
                                     ),
@@ -503,7 +503,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                             ],
                                           )
                                         : SizedBox.shrink()
-                                  ],
+                                  ]
                                 ),
                                 SizedBox(
                                   width: 8.0,
@@ -574,8 +574,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                     ? Column(
                                         children: <Widget>[
                                           SizedBox(
-                                            height: 10.0,
-                                          ),
+                                            height: 10.0,),
                                           Text(specialMsg,
                                               style: TextStyle(
                                                 fontFamily: 'ProductSans',
@@ -592,8 +591,8 @@ class _MatchScreenState extends State<MatchScreen> {
                                       )
                                     : SizedBox.shrink(),
                                 SizedBox(
-                                  height: 10.0,
-                                )
+                                  height: 10.0,),
+
                               ],
                             ),
                           ],
@@ -624,11 +623,11 @@ class _MatchScreenState extends State<MatchScreen> {
                                   fontWeight: FontWeight.w600,
                                   fontStyle: FontStyle.normal,
                                 )),
-                            thisOver.isNotEmpty == true
+                            thisSplit.length >= 0
                                 ? Row(
                                     children: thisSplit
                                         .map((i) => Chip(
-                                              label: Text(i.toUpperCase(),style: TextStyle(color: Colors.black),),
+                                              label: Text(i.toString().toUpperCase(),style: TextStyle(color: Colors.black),),
                                               backgroundColor: i == 'w'
                                                   ? Colors.redAccent
                                                   : Colors.amber,
@@ -748,9 +747,9 @@ class _MatchScreenState extends State<MatchScreen> {
                                   children: <Widget>[
                                     Text(
                                         '$player1name - $player1score ( $player1balls )'),
-                                    SizedBox(
-                                      height: 10.0,
-                                    ),
+                                     SizedBox(
+                                       height: 10.0,
+                                     ),
                                     Text(
                                         '$player2name - $player2score ( $player2balls )'),
                                   ],
@@ -784,9 +783,9 @@ class _MatchScreenState extends State<MatchScreen> {
                                   children: <Widget>[
                                     Text(
                                         '$bowlerName - $bowlerScore ( $bowlerBalls )'),
-                                    SizedBox(
-                                      height: 10.0,
-                                    ),
+                                     SizedBox(
+                                       height: 10.0,
+                                     ),
                                     Text('Wickets - $bowlerWickets'),
                                   ],
                                 )
