@@ -1,6 +1,5 @@
+import 'package:flutter/material.dart' show BorderRadius, BoxDecoration, BoxShadow, Brightness, Color, Colors, Offset, ThemeData;
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
 final setLightTheme = _buildLightTheme();
 final setDarkTheme = _buildDarkTheme();
 final setWhiteCard = _buildWhiteCard();

@@ -6,8 +6,13 @@ import 'package:lq_live_app/settings.dart';
 import 'package:lq_live_app/themes.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() => runApp(MyApp1());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp1());
+}
 
 class MyApp1 extends StatelessWidget {
   @override
@@ -33,33 +38,12 @@ class MyApp extends StatefulWidget {
   // This widget is the root of your application.
   @override
   _MyAppState createState() => _MyAppState();
+
+  void setState(Function() param0) {}
 }
 
 class _MyAppState extends State<MyApp> {
-//  String _message = '';
-//
-//  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-//
-//  @override
-//  void initState() {
-//    // TODO: implement initState
-//    super.initState();
-//    getMessage();
-//  }
-//
-//  void getMessage() {
-//    _firebaseMessaging.configure(
-//        onMessage: (Map<String, dynamic> message) async {
-//      print('on message $message');
-//      setState(() => _message = message["notification"]["title"]);
-//    }, onResume: (Map<String, dynamic> message) async {
-//      print('on resume $message');
-//      setState(() => _message = message["notification"]["title"]);
-//    }, onLaunch: (Map<String, dynamic> message) async {
-//      print('on launch $message');
-//      setState(() => _message = message["notification"]["title"]);
-//    });
-//  }
+
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart' show DocumentSnapshot, FirebaseFirestore, QuerySnapshot;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -35,23 +35,21 @@ class _RcgSecondState extends State<RcgSecond> {
   StreamSubscription<QuerySnapshot> forInningDetails;
   StreamSubscription<DocumentSnapshot> dataStream;
 
-  final inningDetails = Firestore.instance
+  final inningDetails = FirebaseFirestore.instance
       .collection('innings')
       .where("team", isEqualTo: 'rcg')
       .where('inning', isEqualTo: 2)
       .snapshots();
-  final firstInningMcgBat = Firestore.instance
+  final firstInningMcgBat = FirebaseFirestore.instance
       .collection('batting')
       .where("team", isEqualTo: "rcg")
       .where("inning", isEqualTo: 2)
       .snapshots();
-  final firstInningMcgBall = Firestore.instance
+  final firstInningMcgBall = FirebaseFirestore.instance
       .collection('bowling')
       .where("team", isEqualTo: "rcg")
       .where("inning", isEqualTo: 2)
       .snapshots();
-  final documentReference =
-      Firestore.instance.collection('main').document('datastream');
 
   @override
   void initState() {
@@ -59,30 +57,26 @@ class _RcgSecondState extends State<RcgSecond> {
     super.initState();
     forSecondInningRcgBat = firstInningMcgBat.listen((querySnapshot) {
       setState(() {
-        battingTable = querySnapshot.documents;
+        battingTable = querySnapshot.docs;
       });
     });
     forSecondInningRcgBall = firstInningMcgBall.listen((querySnapshot) {
       setState(() {
-        bowlingTable = querySnapshot.documents;
-      });
-    });
-    dataStream = documentReference.snapshots().listen((dataSnapshot) {
-      setState(() {
-        showRcgSecond = dataSnapshot.data['showsecondrcg'];
+        bowlingTable = querySnapshot.docs;
       });
     });
     forInningDetails = inningDetails.listen((querySnapshot) {
-      if (querySnapshot != null) {
+      if (querySnapshot.docs.isNotEmpty == true) {
         setState(() {
-          battingTableData = querySnapshot.documents.first;
+          battingTableData = querySnapshot.docs.first;
         });
         if (battingTableData.exists) {
           setState(() {
-            rcgInningDetailsData = battingTableData.data['extra'];
-            balls = battingTableData.data['balls'];
-            score = battingTableData.data['score'];
-            wickets = battingTableData.data['wickets'];
+            showRcgSecond = querySnapshot.docs.isNotEmpty;
+            rcgInningDetailsData = battingTableData.data()['extra'];
+            balls = battingTableData.data()['balls'];
+            score = battingTableData.data()['score'];
+            wickets = battingTableData.data()['wickets'];
             b = rcgInningDetailsData['b'];
             lb = rcgInningDetailsData['lb'];
             nb = rcgInningDetailsData['nb'];
@@ -240,10 +234,10 @@ class _RcgSecondState extends State<RcgSecond> {
                               : setWhiteCard,
                         )
                       : Container(
-                    height: MediaQuery.of(context).size.height - 220,
+                    height: MediaQuery.of(context).size.height -220,
                     width: MediaQuery.of(context).size.width,
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[Container(child: FlareActor("assets/images/RCG_Ball.flr", alignment:Alignment.center,fit: BoxFit.fitHeight, animation:"Untitled"),height: 350,),Text('Yet To Be Bat',
                           style: TextStyle(
@@ -265,7 +259,7 @@ class _RcgSecondState extends State<RcgSecond> {
                             fontSize: 14,
                             fontWeight: FontWeight.w700,
                             fontStyle: FontStyle.normal,
-                          ))],
+                          )),SizedBox(height: 20,)],
                     ),
                     decoration: Provider.of<Settings>(context).isDarkMode
                         ? setBlackCard

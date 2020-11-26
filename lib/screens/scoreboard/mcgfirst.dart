@@ -1,14 +1,14 @@
-import 'dart:async';
+import 'dart:async' show StreamSubscription;
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flare_flutter/flare_actor.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:lq_live_app/models/functions_model.dart';
-import 'package:lq_live_app/settings.dart';
-import 'package:lq_live_app/themes.dart';
-import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart' show DocumentSnapshot, FirebaseFirestore, QuerySnapshot;
+import 'package:flare_flutter/flare_actor.dart' show FlareActor;
+import 'package:flutter/cupertino.dart' show Alignment, BouncingScrollPhysics, BoxDecoration, BoxFit, BuildContext, Color, Column, Container, CrossAxisAlignment, EdgeInsets, FontStyle, FontWeight, MainAxisAlignment, MediaQuery, Row, SingleChildScrollView, State, StatefulWidget, Text, TextStyle, Widget;
+import 'package:flutter/material.dart' show Alignment, BouncingScrollPhysics, BoxDecoration, BoxFit, BuildContext, Color, Colors, Column, Container, CrossAxisAlignment, DataCell, DataColumn, DataRow, DataTable, EdgeInsets, FontStyle, FontWeight, MainAxisAlignment, MediaQuery, Row, Scaffold, SingleChildScrollView, State, StatefulWidget, Text, TextStyle, Widget;
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart' show AnimationConfiguration, FadeInAnimation, SlideAnimation;
+import 'package:lq_live_app/models/functions_model.dart' show batStrike, econ, overs;
+import 'package:lq_live_app/settings.dart' show Settings;
+import 'package:lq_live_app/themes.dart' show setBlackCard, setWhiteCard;
+import 'package:provider/provider.dart' show Provider;
 
 class McgFirst extends StatefulWidget {
   @override
@@ -34,23 +34,23 @@ class _McgFirstState extends State<McgFirst> {
   StreamSubscription<QuerySnapshot> forInningDetails;
   StreamSubscription<DocumentSnapshot> dataStream;
 
-  final inningDetails = Firestore.instance
+  final inningDetails = FirebaseFirestore.instance
       .collection('innings')
       .where("team", isEqualTo: 'mcg')
       .where('inning', isEqualTo: 1)
       .snapshots();
-  final firstInningMcgBat = Firestore.instance
+  final firstInningMcgBat = FirebaseFirestore.instance
       .collection('batting')
       .where("team", isEqualTo: "mcg")
       .where("inning", isEqualTo: 1)
       .snapshots();
-  final firstInningMcgBall = Firestore.instance
+  final firstInningMcgBall = FirebaseFirestore.instance
       .collection('bowling')
       .where("team", isEqualTo: "mcg")
       .where("inning", isEqualTo: 1)
       .snapshots();
-  final documentReference =
-      Firestore.instance.collection('main').document('datastream');
+ /* final documentReference =
+      FirebaseFirestore.instance.collection('main').doc('datastream');*/
 
   @override
   void initState() {
@@ -58,30 +58,31 @@ class _McgFirstState extends State<McgFirst> {
     super.initState();
     forFirstInningMcgBat = firstInningMcgBat.listen((querySnapshot) {
       setState(() {
-        battingTable = querySnapshot.documents;
+        battingTable = querySnapshot.docs;
       });
     });
     forFirstInningMcgBall = firstInningMcgBall.listen((querySnapshot) {
       setState(() {
-        bowlingTable = querySnapshot.documents;
+        bowlingTable = querySnapshot.docs;
       });
     });
-    dataStream = documentReference.snapshots().listen((dataSnapshot) {
+/*    dataStream = documentReference.snapshots().listen((dataSnapshot) {
       setState(() {
-        showMcgFirst = dataSnapshot.data['showfirstmcg'];
+        showMcgFirst = dataSnapshot.data()['showfirstmcg'];
       });
-    });
+    });*/
     forInningDetails = inningDetails.listen((querySnapshot) {
-      if (querySnapshot != null) {
+      if (querySnapshot.docs.isNotEmpty == true) {
         setState(() {
-          battingTableData = querySnapshot.documents.first;
+          battingTableData = querySnapshot.docs.first;
         });
         if (battingTableData.exists) {
           setState(() {
-            mcgInningDetailsData = battingTableData.data['extra'];
-            balls = battingTableData.data['balls'];
-            score = battingTableData.data['score'];
-            wickets = battingTableData.data['wickets'];
+            showMcgFirst = querySnapshot.docs.isNotEmpty;
+            mcgInningDetailsData = battingTableData.data()['extra'];
+            balls = battingTableData.data()['balls'];
+            score = battingTableData.data()['score'];
+            wickets = battingTableData.data()['wickets'];
             b = mcgInningDetailsData['b'];
             lb = mcgInningDetailsData['lb'];
             nb = mcgInningDetailsData['nb'];
@@ -234,7 +235,7 @@ class _McgFirstState extends State<McgFirst> {
                           : setWhiteCard,
                     )
                   : Container(
-                      height: MediaQuery.of(context).size.height - 220,
+                      height: MediaQuery.of(context).size.height -100,
                       width: MediaQuery.of(context).size.width,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

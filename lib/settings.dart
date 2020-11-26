@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/material.dart' show ChangeNotifier;
+import 'package:shared_preferences/shared_preferences.dart' show SharedPreferences;
+import 'package:flutter/cupertino.dart';
 
 /// Class that contains all your app settings
 /// Consists only of Theme setting as of now

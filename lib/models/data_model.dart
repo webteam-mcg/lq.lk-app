@@ -17,5 +17,5 @@ class DataBall {
   int w;
   String econ;
 
-  DataBall({this.name, this.balls, this.m, this.r, this.w, this.econ});
+  DataBall({this.name,  this.balls,  this.m,  this.r,  this.w, this.econ});
 }

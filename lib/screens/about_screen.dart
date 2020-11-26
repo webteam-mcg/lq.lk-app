@@ -72,12 +72,11 @@ class _AboutScreenState extends State<AboutScreen> {
                             SizedBox(
                               height: 20,
                             ),
-                            IconButton(icon: Container(
+                            Container(padding: EdgeInsets.only(),height: 40,
                               child: Image.asset(
                                 'assets/images/WebTeamMCG.png',
-                                height: 40,
                               ),
-                            ), onPressed: (){_launchInApp(webTeam);}),
+                            ),
                             SizedBox(
                               height: 10,
                             ),
@@ -97,18 +96,16 @@ class _AboutScreenState extends State<AboutScreen> {
                             SizedBox(
                               height: 10,
                             ),
-                            IconButton(icon: Container(
-                              padding: EdgeInsets.only(),
+                            Container(
+                              padding: EdgeInsets.only(),height: 40,
                               child: Provider.of<Settings>(context).isDarkMode
                                   ? Image.asset(
                                 'assets/images/ARCH92(ForLightMode).png',
-                                height: 40,
                               )
                                   : Image.asset(
                                 'assets/images/ARCH92(ForDarkMode).png',
-                                height: 40,
                               ),
-                            ), onPressed: (){_launchInApp(arch);}),
+                            ),
 
                             SizedBox(
                               height: 10,

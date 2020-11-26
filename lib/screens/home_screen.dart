@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart' show DocumentSnapshot, FirebaseFirestore;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lq_live_app/screens/about_screen.dart';
 import 'package:lq_live_app/screens/match_screen.dart';
@@ -33,17 +33,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   int _currentIndex = 0;
-  final _children = [
-    MatchScreen(),
-    TabScreen(),
-    NewsScreen(),
-    AboutScreen()
-  ];
+  final _children = [MatchScreen(), TabScreen(), NewsScreen(), AboutScreen()];
 
   StreamSubscription<DocumentSnapshot> data;
 
   final documentReference =
-      Firestore.instance.collection('main').document('datastream');
+      FirebaseFirestore.instance.collection('main').doc('datastream');
 
   @override
   void initState() {
@@ -52,8 +47,8 @@ class _HomeScreenState extends State<HomeScreen> {
     data = documentReference.snapshots().listen((dataSnapshot) {
       if (dataSnapshot.exists) {
         setState(() {
-          url = dataSnapshot.data['youtubelink'];
-          live = dataSnapshot.data['liveicon'];
+          url = dataSnapshot.data()['youtubelink'];
+          live = dataSnapshot.data()['liveicon'];
         });
       }
     });
@@ -80,7 +75,8 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         backgroundColor: Color(0xffffaa00),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterDocked,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
@@ -94,7 +90,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 'assets/images/lqlklogolight.png',
                 height: 30,
               ),
-
       ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -103,10 +98,11 @@ class _HomeScreenState extends State<HomeScreen> {
         currentIndex: _currentIndex,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              size: 30,
-            ),label: 'Home'),
+              icon: Icon(
+                Icons.home,
+                size: 30,
+              ),
+              label: 'Home'),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.format_list_bulleted,
@@ -120,15 +116,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 FontAwesomeIcons.twitter,
                 size: 25,
               ),
-            label: 'Twitter'
-             ),
+              label: 'Twitter'),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.info_outline,
                 size: 30,
               ),
-            label: "About"
-             ),
+              label: "About"),
         ],
       ),
     );

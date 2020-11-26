@@ -1,12 +1,13 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart' show DocumentSnapshot, FirebaseFirestore, QuerySnapshot;
+import 'package:flutter/material.dart' show Alignment, BouncingScrollPhysics, BoxDecoration, BoxFit, BuildContext, Color, Colors, Column, Container, CrossAxisAlignment, DataCell, DataColumn, DataRow, DataTable, EdgeInsets, FontStyle, FontWeight, MainAxisAlignment, MediaQuery, Row, Scaffold, SingleChildScrollView, State, StatefulWidget, Text, TextStyle, Widget;
+import 'package:flutter/cupertino.dart' show Alignment, BouncingScrollPhysics, BoxDecoration, BoxFit, BuildContext, Color, Column, Container, CrossAxisAlignment, EdgeInsets, FontStyle, FontWeight, MainAxisAlignment, MediaQuery, Row, SingleChildScrollView, State, StatefulWidget, Text, TextStyle, Widget;
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:lq_live_app/models/functions_model.dart';
 import 'package:lq_live_app/settings.dart';
 import 'package:lq_live_app/themes.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' show Provider;
 import 'package:flare_flutter/flare_actor.dart';
 
 class RcgFirst extends StatefulWidget {
@@ -34,23 +35,23 @@ class _RcgFirstState extends State<RcgFirst> {
   StreamSubscription<QuerySnapshot> forInningDetails;
   StreamSubscription<DocumentSnapshot> dataStream;
 
-  final inningDetails = Firestore.instance
+  final inningDetails = FirebaseFirestore.instance
       .collection('innings')
       .where("team", isEqualTo: 'rcg')
       .where('inning', isEqualTo: 1)
       .snapshots();
-  final firstInningRcgBat = Firestore.instance
+  final firstInningRcgBat = FirebaseFirestore.instance
       .collection('batting')
       .where("team", isEqualTo: "rcg")
       .where("inning", isEqualTo: 1)
       .snapshots();
-  final firstInningRcgBall = Firestore.instance
+  final firstInningRcgBall = FirebaseFirestore.instance
       .collection('bowling')
       .where("team", isEqualTo: "rcg")
       .where("inning", isEqualTo: 1)
       .snapshots();
-  final documentReference =
-      Firestore.instance.collection('main').document('datastream');
+/*  final documentReference =
+      FirebaseFirestore.instance.collection('main').doc('datastream');*/
 
   @override
   void initState() {
@@ -58,30 +59,26 @@ class _RcgFirstState extends State<RcgFirst> {
     super.initState();
     forFirstInningRcgBat = firstInningRcgBat.listen((querySnapshot) {
       setState(() {
-        battingTable = querySnapshot.documents;
+        battingTable = querySnapshot.docs;
       });
     });
     forFirstInningRcgBall = firstInningRcgBall.listen((querySnapshot) {
       setState(() {
-        bowlingTable = querySnapshot.documents;
-      });
-    });
-    dataStream = documentReference.snapshots().listen((dataSnapshot) {
-      setState(() {
-        showRcgFirst = dataSnapshot.data['showfirstrcg'];
+        bowlingTable = querySnapshot.docs;
       });
     });
     forInningDetails = inningDetails.listen((querySnapshot) {
-      if (querySnapshot != null) {
+      if (querySnapshot.docs.isNotEmpty == true) {
         setState(() {
-          battingTableData = querySnapshot.documents.first;
+          battingTableData = querySnapshot.docs.first;
         });
         if (battingTableData.exists) {
           setState(() {
-            rcgInningDetailsData = battingTableData.data['extra'];
-            balls = battingTableData.data['balls'];
-            score = battingTableData.data['score'];
-            wickets = battingTableData.data['wickets'];
+            showRcgFirst = querySnapshot.docs.isNotEmpty;
+            rcgInningDetailsData = battingTableData.data()['extra'];
+            balls = battingTableData.data()['balls'];
+            score = battingTableData.data()['score'];
+            wickets = battingTableData.data()['wickets'];
             b = rcgInningDetailsData['b'];
             lb = rcgInningDetailsData['lb'];
             nb = rcgInningDetailsData['nb'];
@@ -239,7 +236,7 @@ class _RcgFirstState extends State<RcgFirst> {
                               : setWhiteCard,
                         )
                       : Container(
-                    height: MediaQuery.of(context).size.height - 220,
+                    height: MediaQuery.of(context).size.height - 100,
                     width: MediaQuery.of(context).size.width,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
