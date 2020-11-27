@@ -1,6 +1,6 @@
-# lq_live_app
+# lqlk2020
 
-This will be awesome
+A new Flutter application.
 
 ## Getting Started
 

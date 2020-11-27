@@ -1,8 +1,38 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart' show DocumentSnapshot, FirebaseFirestore, QuerySnapshot;
-import 'package:flutter/material.dart' show Alignment, BouncingScrollPhysics, BoxDecoration, BoxFit, BuildContext, Color, Colors, Column, Container, CrossAxisAlignment, DataCell, DataColumn, DataRow, DataTable, EdgeInsets, FontStyle, FontWeight, MainAxisAlignment, MediaQuery, Row, Scaffold, SingleChildScrollView, State, StatefulWidget, Text, TextStyle, Widget;
-import 'package:flutter/cupertino.dart' show Alignment, BouncingScrollPhysics, BoxDecoration, BoxFit, BuildContext, Color, Column, Container, CrossAxisAlignment, EdgeInsets, FontStyle, FontWeight, MainAxisAlignment, MediaQuery, Row, SingleChildScrollView, State, StatefulWidget, Text, TextStyle, Widget;
+import 'package:cloud_firestore/cloud_firestore.dart'
+    show DocumentSnapshot, FirebaseFirestore, QuerySnapshot;
+import 'package:flutter/material.dart'
+    show
+        Alignment,
+        BouncingScrollPhysics,
+        BoxDecoration,
+        BoxFit,
+        BuildContext,
+        Color,
+        Colors,
+        Column,
+        Container,
+        CrossAxisAlignment,
+        DataCell,
+        DataColumn,
+        DataRow,
+        DataTable,
+        EdgeInsets,
+        FontStyle,
+        FontWeight,
+        MainAxisAlignment,
+        MediaQuery,
+        Row,
+        Scaffold,
+        SingleChildScrollView,
+        State,
+        StatefulWidget,
+        Text,
+        TextStyle,
+        Widget;
+import 'package:flutter/cupertino.dart'
+    show Alignment, BouncingScrollPhysics, BoxDecoration, BoxFit, BuildContext, Color, Column, Container, CrossAxisAlignment, EdgeInsets, FontStyle, FontWeight, MainAxisAlignment, MediaQuery, Row, SingleChildScrollView, SizedBox, State, StatefulWidget, Text, TextStyle, Widget;
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:lq_live_app/models/functions_model.dart';
 import 'package:lq_live_app/settings.dart';
@@ -236,37 +266,48 @@ class _RcgFirstState extends State<RcgFirst> {
                               : setWhiteCard,
                         )
                       : Container(
-                    height: MediaQuery.of(context).size.height - 100,
-                    width: MediaQuery.of(context).size.width,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[Container(child: FlareActor("assets/images/RCG_Ball.flr", alignment:Alignment.center,fit: BoxFit.fitHeight, animation:"Untitled"),height: 350,),Text('Yet To Be Bat',
-                          style: TextStyle(
-                            fontFamily: 'ProductSans',
-                            color: Provider.of<Settings>(context)
-                                .isDarkMode
-                                ? Color(0xffffffff)
-                                : Colors.grey,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                            fontStyle: FontStyle.normal,
-                          )),Text('Tips - Use Dark Mode Toggle to switch into Dark Mode',
-                          style: TextStyle(
-                            fontFamily: 'ProductSans',
-                            color: Provider.of<Settings>(context)
-                                .isDarkMode
-                                ? Color(0xffffffff)
-                                : Colors.grey,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700,
-                            fontStyle: FontStyle.normal,
-                          ))],
-                    ),
-                    decoration: Provider.of<Settings>(context).isDarkMode
-                        ? setBlackCard
-                        : setWhiteCard,
-                  )),
+                          height: MediaQuery.of(context).size.height - 250,
+                          width: MediaQuery.of(context).size.width,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Container(
+                                child: FlareActor("assets/images/RCG_Ball.flr",
+                                    alignment: Alignment.center,
+                                    fit: BoxFit.fitHeight,
+                                    animation: "Untitled"),
+                                height: 350,
+                              ),SizedBox(height: 20,),
+                              Text('Yet To Be Bat',
+                                  style: TextStyle(
+                                    fontFamily: 'ProductSans',
+                                    color: Provider.of<Settings>(context)
+                                            .isDarkMode
+                                        ? Color(0xffffffff)
+                                        : Colors.grey,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w700,
+                                    fontStyle: FontStyle.normal,
+                                  )),SizedBox(height: 50,),
+                              Text(
+                                  'Tips - Use Dark Mode Toggle to switch into Dark Mode',
+                                  style: TextStyle(
+                                    fontFamily: 'ProductSans',
+                                    color: Provider.of<Settings>(context)
+                                            .isDarkMode
+                                        ? Color(0xffffffff)
+                                        : Colors.grey,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w700,
+                                    fontStyle: FontStyle.normal,
+                                  )),
+                            ],
+                          ),
+                          decoration: Provider.of<Settings>(context).isDarkMode
+                              ? setBlackCard
+                              : setWhiteCard,
+                        )),
               verticalOffset: MediaQuery.of(context).size.height),
           duration: const Duration(seconds: 1),
         ),

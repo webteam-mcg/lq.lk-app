@@ -1,11 +1,43 @@
 import 'dart:async' show StreamSubscription;
 
-import 'package:cloud_firestore/cloud_firestore.dart' show DocumentSnapshot, FirebaseFirestore, QuerySnapshot;
+import 'package:cloud_firestore/cloud_firestore.dart'
+    show DocumentSnapshot, FirebaseFirestore, QuerySnapshot;
 import 'package:flare_flutter/flare_actor.dart' show FlareActor;
-import 'package:flutter/cupertino.dart' show Alignment, BouncingScrollPhysics, BoxDecoration, BoxFit, BuildContext, Color, Column, Container, CrossAxisAlignment, EdgeInsets, FontStyle, FontWeight, MainAxisAlignment, MediaQuery, Row, SingleChildScrollView, State, StatefulWidget, Text, TextStyle, Widget;
-import 'package:flutter/material.dart' show Alignment, BouncingScrollPhysics, BoxDecoration, BoxFit, BuildContext, Color, Colors, Column, Container, CrossAxisAlignment, DataCell, DataColumn, DataRow, DataTable, EdgeInsets, FontStyle, FontWeight, MainAxisAlignment, MediaQuery, Row, Scaffold, SingleChildScrollView, State, StatefulWidget, Text, TextStyle, Widget;
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart' show AnimationConfiguration, FadeInAnimation, SlideAnimation;
-import 'package:lq_live_app/models/functions_model.dart' show batStrike, econ, overs;
+import 'package:flutter/cupertino.dart'
+    show Alignment, BouncingScrollPhysics, BoxDecoration, BoxFit, BuildContext, Color, Column, Container, CrossAxisAlignment, EdgeInsets, FontStyle, FontWeight, MainAxisAlignment, MediaQuery, Row, SingleChildScrollView, SizedBox, State, StatefulWidget, Text, TextStyle, Widget;
+import 'package:flutter/material.dart'
+    show
+        Alignment,
+        BouncingScrollPhysics,
+        BoxDecoration,
+        BoxFit,
+        BuildContext,
+        Color,
+        Colors,
+        Column,
+        Container,
+        CrossAxisAlignment,
+        DataCell,
+        DataColumn,
+        DataRow,
+        DataTable,
+        EdgeInsets,
+        FontStyle,
+        FontWeight,
+        MainAxisAlignment,
+        MediaQuery,
+        Row,
+        Scaffold,
+        SingleChildScrollView,
+        State,
+        StatefulWidget,
+        Text,
+        TextStyle,
+        Widget;
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart'
+    show AnimationConfiguration, FadeInAnimation, SlideAnimation;
+import 'package:lq_live_app/models/functions_model.dart'
+    show batStrike, econ, overs;
 import 'package:lq_live_app/settings.dart' show Settings;
 import 'package:lq_live_app/themes.dart' show setBlackCard, setWhiteCard;
 import 'package:provider/provider.dart' show Provider;
@@ -49,7 +81,7 @@ class _McgFirstState extends State<McgFirst> {
       .where("team", isEqualTo: "mcg")
       .where("inning", isEqualTo: 1)
       .snapshots();
- /* final documentReference =
+  /* final documentReference =
       FirebaseFirestore.instance.collection('main').doc('datastream');*/
 
   @override
@@ -235,32 +267,41 @@ class _McgFirstState extends State<McgFirst> {
                           : setWhiteCard,
                     )
                   : Container(
-                      height: MediaQuery.of(context).size.height -100,
+                      height: MediaQuery.of(context).size.height - 250,
                       width: MediaQuery.of(context).size.width,
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[Container(child: FlareActor("assets/images/MCG_Ball.flr", alignment:Alignment.center,fit: BoxFit.fitHeight, animation:"Untitled"),height: 350,),Text('Yet To Be Bat',
-                            style: TextStyle(
-                              fontFamily: 'ProductSans',
-                              color: Provider.of<Settings>(context)
-                                  .isDarkMode
-                                  ? Color(0xffffffff)
-                                  : Colors.grey,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700,
-                              fontStyle: FontStyle.normal,
-                            )),Text('Tips - Use Dark Mode Toggle to switch into Dark Mode',
-                            style: TextStyle(
-                              fontFamily: 'ProductSans',
-                              color: Provider.of<Settings>(context)
-                                  .isDarkMode
-                                  ? Color(0xffffffff)
-                                  : Colors.grey,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w700,
-                              fontStyle: FontStyle.normal,
-                            ))],
+                        children: <Widget>[
+                          Container(
+                            child: FlareActor("assets/images/MCG_Ball.flr",
+                                alignment: Alignment.center,
+                                fit: BoxFit.fitHeight,
+                                animation: "Untitled"),
+                            height: 350,
+                          ),SizedBox(height: 20,),
+                          Text('Yet To Be Bat',
+                              style: TextStyle(
+                                fontFamily: 'ProductSans',
+                                color: Provider.of<Settings>(context).isDarkMode
+                                    ? Color(0xffffffff)
+                                    : Colors.grey,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                                fontStyle: FontStyle.normal,
+                              )),SizedBox(height: 40,),
+                          Text(
+                              'Tips - Use Dark Mode Toggle to switch into Dark Mode',
+                              style: TextStyle(
+                                fontFamily: 'ProductSans',
+                                color: Provider.of<Settings>(context).isDarkMode
+                                    ? Color(0xffffffff)
+                                    : Colors.grey,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w700,
+                                fontStyle: FontStyle.normal,
+                              ))
+                        ],
                       ),
                       decoration: Provider.of<Settings>(context).isDarkMode
                           ? setBlackCard

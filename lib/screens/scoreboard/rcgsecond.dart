@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart' show DocumentSnapshot, FirebaseFirestore, QuerySnapshot;
+import 'package:cloud_firestore/cloud_firestore.dart'
+    show DocumentSnapshot, FirebaseFirestore, QuerySnapshot;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -234,37 +235,51 @@ class _RcgSecondState extends State<RcgSecond> {
                               : setWhiteCard,
                         )
                       : Container(
-                    height: MediaQuery.of(context).size.height -220,
-                    width: MediaQuery.of(context).size.width,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[Container(child: FlareActor("assets/images/RCG_Ball.flr", alignment:Alignment.center,fit: BoxFit.fitHeight, animation:"Untitled"),height: 350,),Text('Yet To Be Bat',
-                          style: TextStyle(
-                            fontFamily: 'ProductSans',
-                            color: Provider.of<Settings>(context)
-                                .isDarkMode
-                                ? Color(0xffffffff)
-                                : Colors.grey,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                            fontStyle: FontStyle.normal,
-                          )),Text('Tips - Use Dark Mode Toggle to switch into Dark Mode',
-                          style: TextStyle(
-                            fontFamily: 'ProductSans',
-                            color: Provider.of<Settings>(context)
-                                .isDarkMode
-                                ? Color(0xffffffff)
-                                : Colors.grey,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700,
-                            fontStyle: FontStyle.normal,
-                          )),SizedBox(height: 20,)],
-                    ),
-                    decoration: Provider.of<Settings>(context).isDarkMode
-                        ? setBlackCard
-                        : setWhiteCard,
-                  )),
+                          height: MediaQuery.of(context).size.height - 250,
+                          width: MediaQuery.of(context).size.width,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Container(
+                                child: FlareActor("assets/images/RCG_Ball.flr",
+                                    alignment: Alignment.center,
+                                    fit: BoxFit.fitHeight,
+                                    animation: "Untitled"),
+                                height: 350,
+                              ),SizedBox(height: 20,),
+                              Text('Yet To Be Bat',
+                                  style: TextStyle(
+                                    fontFamily: 'ProductSans',
+                                    color: Provider.of<Settings>(context)
+                                            .isDarkMode
+                                        ? Color(0xffffffff)
+                                        : Colors.grey,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w700,
+                                    fontStyle: FontStyle.normal,
+                                  )),SizedBox(height: 40,),
+                              Text(
+                                  'Tips - Use Dark Mode Toggle to switch into Dark Mode',
+                                  style: TextStyle(
+                                    fontFamily: 'ProductSans',
+                                    color: Provider.of<Settings>(context)
+                                            .isDarkMode
+                                        ? Color(0xffffffff)
+                                        : Colors.grey,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w700,
+                                    fontStyle: FontStyle.normal,
+                                  )),
+                              SizedBox(
+                                height: 20,
+                              )
+                            ],
+                          ),
+                          decoration: Provider.of<Settings>(context).isDarkMode
+                              ? setBlackCard
+                              : setWhiteCard,
+                        )),
               verticalOffset: MediaQuery.of(context).size.height),
           duration: const Duration(seconds: 1),
         ),
