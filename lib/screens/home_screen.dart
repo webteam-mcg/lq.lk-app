@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart' show DocumentSnapshot, FirebaseFirestore;
+import 'package:cloud_firestore/cloud_firestore.dart' show DocumentSnapshot, FirebaseFirestore,QuerySnapshot;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,9 +23,22 @@ class _HomeScreenState extends State<HomeScreen> {
   String url = 'https://www.youtube.com/channel/UCRnbcK82wzCZEQ1mTbKIVng';
 
   Future<void> launchYoutube(String url) async {
+
+    var collection = FirebaseFirestore.instance.collection('main');
+    var docSnapshot = await collection.doc('live').get();
+    if (docSnapshot.exists) {
+      Map<String, dynamic> data = docSnapshot.data();
+      var value = data['youtube_link']; // <-- The value you want to retrieve.
+      url = value;
+
+      // Call setState if needed.
+    }
+    print(url);
+
+
     if (await canLaunch(url)) {
       final bool nativeAppLaunchSucceeded =
-          await launch(url, forceSafariVC: false, universalLinksOnly: true);
+      await launch(url, forceSafariVC: false, universalLinksOnly: true);
       if (!nativeAppLaunchSucceeded) {
         await launch(url, forceSafariVC: true);
       }
@@ -35,10 +48,11 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
   final _children = [MatchScreen(), TabScreen(), NewsScreen(), AboutScreen()];
 
+
   StreamSubscription<DocumentSnapshot> data;
 
   final documentReference =
-      FirebaseFirestore.instance.collection('main').doc('datastream');
+  FirebaseFirestore.instance.collection('main').doc('datastream');
 
   @override
   void initState() {
@@ -76,20 +90,20 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Color(0xffffaa00),
       ),
       floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniCenterDocked,
+      FloatingActionButtonLocation.miniCenterDocked,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         centerTitle: true,
         title: Provider.of<Settings>(context).isDarkMode
             ? Image.asset(
-                'assets/images/lqlklogo.png',
-                height: 30,
-              )
+          'assets/images/lqlklogo.png',
+          height: 30,
+        )
             : Image.asset(
-                'assets/images/lqlklogolight.png',
-                height: 30,
-              ),
+          'assets/images/lqlklogolight.png',
+          height: 30,
+        ),
       ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -105,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
               label: 'Home'),
           BottomNavigationBarItem(
               icon: Icon(
-                Icons.format_list_bulleted,
+                FontAwesomeIcons.globe,
                 size: 30,
               ),
               label: 'Scoreboard'
