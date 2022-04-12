@@ -21,7 +21,7 @@ class _AboutScreenState extends State<AboutScreen> {
   String webTeam = 'https://www.facebook.com/webteam.mcg/';
   String arch = 'https://www.facebook.com/arch1892/';
   String faceBook = 'https://www.facebook.com/MahindaCollege/';
-  String instagram = 'https://www.youtube.com/channel/UCRnbcK82wzCZEQ1mTbKIVng/';
+  String instagram = 'https://www.instagram.com/mahindacollege/';
   String twitter = 'https://twitter.com/MahindaCollege/';
   String youTube = 'https://www.youtube.com/channel/UCRnbcK82wzCZEQ1mTbKIVng/';
   String web = 'https://www.mahindacollege.lk';

@@ -180,7 +180,10 @@ class _McgSecondState extends State<McgSecond> {
                                     EdgeInsets.only(top: 14.7, bottom: 11.7),
                                 child: Text("Mahinda College - 2nd Innings",
                                     style: TextStyle(
-                                      color: Color(0xff444b54),
+                                      color:
+                                      Provider.of<Settings>(context).isDarkMode
+                                          ? Color(0xffffffff)
+                                          : Color(0xff444b54),
                                       fontSize: 20,
                                       fontWeight: FontWeight.w400,
                                       fontStyle: FontStyle.normal,

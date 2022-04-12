@@ -557,7 +557,7 @@ class _MatchScreenState extends State<MatchScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
-                                Text("115th Lovers' Quarrel",
+                                Text("117th Lovers' Quarrel",
                                     style: TextStyle(
                                       fontFamily: 'ProductSans',
                                       color: Provider.of<Settings>(context)
@@ -707,7 +707,7 @@ class _MatchScreenState extends State<MatchScreen> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
-                              Text("115th Lovers' Quarrel",
+                              Text("117th Lovers' Quarrel",
                                   style: TextStyle(
                                     fontFamily: 'ProductSans',
                                     color: Provider.of<Settings>(context)
@@ -756,6 +756,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                       fontSize: 17,
                                       fontWeight: FontWeight.w600,
                                       fontStyle: FontStyle.normal,
+
                                     )),
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.center,

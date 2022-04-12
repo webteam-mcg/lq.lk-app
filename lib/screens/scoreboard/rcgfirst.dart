@@ -99,10 +99,10 @@ class _RcgFirstState extends State<RcgFirst> {
     });
     forInningDetails = inningDetails.listen((querySnapshot) {
       if (querySnapshot.docs.isNotEmpty == true) {
-        setState(() {
-          battingTableData = querySnapshot.docs.first;
-        });
-        if (battingTableData.exists) {
+       // setState(() {
+          // battingTableData = querySnapshot.docs.first;
+       // });
+        /*if (battingTableData.exists) {
           setState(() {
             showRcgFirst = querySnapshot.docs.isNotEmpty;
             rcgInningDetailsData = battingTableData.data()['extra'];
@@ -116,6 +116,7 @@ class _RcgFirstState extends State<RcgFirst> {
             over = overs(balls);
           });
         }
+        */
       }
     });
   }
