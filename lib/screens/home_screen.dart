@@ -8,7 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lq_live_app/screens/about_screen.dart';
 import 'package:lq_live_app/screens/match_screen.dart';
 import 'package:lq_live_app/screens/news_screen.dart';
-import 'package:lq_live_app/screens/tab_screen.dart';
+import 'package:lq_live_app/screens/twitter_screen.dart';
 import 'package:lq_live_app/settings.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -21,7 +21,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   bool live = false;
   String url = 'https://www.youtube.com/channel/UCRnbcK82wzCZEQ1mTbKIVng';
-
+  
   Future<void> launchYoutube(String url) async {
 
     var collection = FirebaseFirestore.instance.collection('main');
@@ -46,8 +46,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   int _currentIndex = 0;
-  final _children = [MatchScreen(), TabScreen(), NewsScreen(), AboutScreen()];
-
+//  final _children = [MatchScreen(), TabScreen(), NewsScreen(), AboutScreen()];
+  final _children = [MatchScreen(), NewsScreen(), TwitterScreen(),  AboutScreen()];
 
   StreamSubscription<DocumentSnapshot> data;
 
@@ -122,9 +122,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 FontAwesomeIcons.globe,
                 size: 30,
               ),
-              label: 'Scoreboard'
-              // ignore: deprecated_member_use
-              ),
+              label: 'Lq.lk'
+            // ignore: deprecated_member_use
+          ),
           BottomNavigationBarItem(
               icon: FaIcon(
                 FontAwesomeIcons.twitter,

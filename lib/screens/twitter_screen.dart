@@ -6,19 +6,19 @@ import 'package:lq_live_app/themes.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class NewsScreen extends StatefulWidget {
+class TwitterScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _NewsScreenState();
+    return _TwitterScreenState();
   }
 }
 
-class _NewsScreenState extends State<NewsScreen> {
+class _TwitterScreenState extends State<TwitterScreen> {
   // String darkUrl = 'http://apps.kushan.info/twitter/';
   // String whiteUrl = 'http://apps.kushan.info/twitter/light.html';
   // <a class="twitter-timeline" href="https://twitter.com/TwitterDev?ref_src=twsrc%5Etfw">Tweets by TwitterDev</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-  String whiteUrl = 'https://www.lq.lk';
-  String darkUrl = 'https://www.lq.lk';
+  String whiteUrl = 'https://twitter.com/MahindaCollege';
+  String darkUrl = 'https://twitter.com/MahindaCollege';
 
   @override
   Widget build(BuildContext context) {
@@ -35,15 +35,15 @@ class _NewsScreenState extends State<NewsScreen> {
                           height: MediaQuery.of(context).size.height - 160,
                           child: Provider.of<Settings>(context).isDarkMode
                               ? WebView(
-                                  initialUrl: darkUrl,
-                                  javascriptMode: JavascriptMode.unrestricted,
-                                  gestureNavigationEnabled: false,
-                                )
+                            initialUrl: darkUrl,
+                            javascriptMode: JavascriptMode.unrestricted,
+                            gestureNavigationEnabled: false,
+                          )
                               : WebView(
-                                  initialUrl: whiteUrl,
-                                  javascriptMode: JavascriptMode.unrestricted,
-                                  gestureNavigationEnabled: false,
-                                ),
+                            initialUrl: whiteUrl,
+                            javascriptMode: JavascriptMode.unrestricted,
+                            gestureNavigationEnabled: false,
+                          ),
                           decoration: Provider.of<Settings>(context).isDarkMode
                               ? setBlackCard
                               : setWhiteCard)),
