@@ -21,7 +21,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   bool live = false;
   String url = 'https://www.youtube.com/channel/UCRnbcK82wzCZEQ1mTbKIVng';
-  
+
   Future<void> launchYoutube(String url) async {
 
     var collection = FirebaseFirestore.instance.collection('main');
@@ -29,8 +29,12 @@ class _HomeScreenState extends State<HomeScreen> {
     if (docSnapshot.exists) {
       Map<String, dynamic> data = docSnapshot.data();
       var value = data['youtube_link']; // <-- The value you want to retrieve.
-      url = value;
+      if(url==null){
 
+      }
+      else {
+        url = value;
+      }
       // Call setState if needed.
     }
     print(url);

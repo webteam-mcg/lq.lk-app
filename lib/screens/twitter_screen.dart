@@ -18,7 +18,9 @@ class _TwitterScreenState extends State<TwitterScreen> {
   // String whiteUrl = 'http://apps.kushan.info/twitter/light.html';
   // <a class="twitter-timeline" href="https://twitter.com/TwitterDev?ref_src=twsrc%5Etfw">Tweets by TwitterDev</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   String whiteUrl = 'https://twitter.com/MahindaCollege';
-  String darkUrl = 'https://twitter.com/MahindaCollege';
+  // String darkUrl = 'https://twitter.com/MahindaCollege';
+  //String whiteUrl = 'https://twitter.anuk41.repl.co/lightt.html';
+  String darkUrl = 'https://twitter.anuk41.repl.co/darkt.html';
 
   @override
   Widget build(BuildContext context) {

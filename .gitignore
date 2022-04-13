@@ -45,3 +45,11 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# the keystore
+# https://docs.flutter.dev/deployment/android#create-an-upload-keystore
+upload-keystore.jks
+
+# referance to keystore
+# https://docs.flutter.dev/deployment/android#reference-the-keystore-from-the-app
+key.properties

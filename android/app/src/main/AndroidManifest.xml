@@ -1,9 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="lk.lq.lqlk2020">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
    <application
-        android:label="lqlk2020"
+       android:label="lq.lk"
        android:usesCleartextTraffic="true"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/lq_logo">
 
         <activity
             android:name=".MainActivity"

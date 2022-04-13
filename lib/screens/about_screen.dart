@@ -220,7 +220,7 @@ class _AboutScreenState extends State<AboutScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: <Widget>[
-                              Text('-SOTG 20'),
+                              Text('-SOTG 22'),
                               Text('Made with ❤ at'),
                               Text('WebTeam MCG')
                             ],
