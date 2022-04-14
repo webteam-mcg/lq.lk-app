@@ -197,8 +197,8 @@ class _McgSecondState extends State<McgSecond> {
                                     DataColumn(label: Text('Batsman')),
                                     DataColumn(label: Text('R')),
                                     DataColumn(label: Text('B')),
-                                    DataColumn(label: Text('4s')),
-                                    DataColumn(label: Text('6s')),
+                                    DataColumn(label: Text('four')),
+                                    DataColumn(label: Text('six')),
                                     DataColumn(label: Text('R/S')),
                                   ],
                                   rows: battingTable
@@ -209,9 +209,9 @@ class _McgSecondState extends State<McgSecond> {
                                             DataCell(
                                                 Text(bat['balls'].toString())),
                                             DataCell(
-                                                Text(bat['4s'].toString())),
+                                                Text(bat['four'].toString())),
                                             DataCell(
-                                                Text(bat['6s'].toString())),
+                                                Text(bat['six'].toString())),
                                             DataCell(Text(batStrike(
                                                 bat['score'], bat['balls']))),
                                           ]))

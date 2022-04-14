@@ -14,8 +14,8 @@ class NewsScreen extends StatefulWidget {
 }
 
 class _NewsScreenState extends State<NewsScreen> {
-  String darkUrl = 'http://apps.kushan.info/twitter/';
-  String whiteUrl = 'http://apps.kushan.info/twitter/light.html';
+  String darkUrl = 'https://embed-tweets-to-lq-app.pages.dev/dark.html';
+  String whiteUrl = 'https://embed-tweets-to-lq-app.pages.dev/light.html';
 
   @override
   Widget build(BuildContext context) {

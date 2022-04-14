@@ -137,8 +137,8 @@ class _RcgSecondState extends State<RcgSecond> {
                                     DataColumn(label: Text('Batsman')),
                                     DataColumn(label: Text('R')),
                                     DataColumn(label: Text('B')),
-                                    DataColumn(label: Text('4s')),
-                                    DataColumn(label: Text('6s')),
+                                    DataColumn(label: Text('four')),
+                                    DataColumn(label: Text('six')),
                                     DataColumn(label: Text('R/S')),
                                   ],
                                   rows: battingTable
@@ -149,9 +149,9 @@ class _RcgSecondState extends State<RcgSecond> {
                                             DataCell(
                                                 Text(bat['balls'].toString())),
                                             DataCell(
-                                                Text(bat['4s'].toString())),
+                                                Text(bat['four'].toString())),
                                             DataCell(
-                                                Text(bat['6s'].toString())),
+                                                Text(bat['six'].toString())),
                                             DataCell(Text(batStrike(
                                                 bat['score'], bat['balls']))),
                                           ]))
@@ -247,7 +247,10 @@ class _RcgSecondState extends State<RcgSecond> {
                                     fit: BoxFit.fitHeight,
                                     animation: "Untitled"),
                                 height: 350,
-                              ),SizedBox(height: 20,),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
                               Text('Yet To Be Bat',
                                   style: TextStyle(
                                     fontFamily: 'ProductSans',
@@ -258,7 +261,10 @@ class _RcgSecondState extends State<RcgSecond> {
                                     fontSize: 20,
                                     fontWeight: FontWeight.w700,
                                     fontStyle: FontStyle.normal,
-                                  )),SizedBox(height: 40,),
+                                  )),
+                              SizedBox(
+                                height: 40,
+                              ),
                               Text(
                                   'Tips - Use Dark Mode Toggle to switch into Dark Mode',
                                   style: TextStyle(

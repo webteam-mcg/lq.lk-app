@@ -4,7 +4,29 @@ import 'package:cloud_firestore/cloud_firestore.dart'
     show DocumentSnapshot, FirebaseFirestore, QuerySnapshot;
 import 'package:flare_flutter/flare_actor.dart' show FlareActor;
 import 'package:flutter/cupertino.dart'
-    show Alignment, BouncingScrollPhysics, BoxDecoration, BoxFit, BuildContext, Color, Column, Container, CrossAxisAlignment, EdgeInsets, FontStyle, FontWeight, MainAxisAlignment, MediaQuery, Row, SingleChildScrollView, SizedBox, State, StatefulWidget, Text, TextStyle, Widget;
+    show
+        Alignment,
+        BouncingScrollPhysics,
+        BoxDecoration,
+        BoxFit,
+        BuildContext,
+        Color,
+        Column,
+        Container,
+        CrossAxisAlignment,
+        EdgeInsets,
+        FontStyle,
+        FontWeight,
+        MainAxisAlignment,
+        MediaQuery,
+        Row,
+        SingleChildScrollView,
+        SizedBox,
+        State,
+        StatefulWidget,
+        Text,
+        TextStyle,
+        Widget;
 import 'package:flutter/material.dart'
     show
         Alignment,
@@ -176,8 +198,8 @@ class _McgFirstState extends State<McgFirst> {
                                 DataColumn(label: Text('Batsman')),
                                 DataColumn(label: Text('R')),
                                 DataColumn(label: Text('B')),
-                                DataColumn(label: Text('4s')),
-                                DataColumn(label: Text('6s')),
+                                DataColumn(label: Text('four')),
+                                DataColumn(label: Text('six')),
                                 DataColumn(label: Text('R/S')),
                               ],
                               rows: battingTable
@@ -185,8 +207,8 @@ class _McgFirstState extends State<McgFirst> {
                                         DataCell(Text(bat['name'])),
                                         DataCell(Text(bat['score'].toString())),
                                         DataCell(Text(bat['balls'].toString())),
-                                        DataCell(Text(bat['4s'].toString())),
-                                        DataCell(Text(bat['6s'].toString())),
+                                        DataCell(Text(bat['four'].toString())),
+                                        DataCell(Text(bat['six'].toString())),
                                         DataCell(Text(batStrike(
                                             bat['score'], bat['balls']))),
                                       ]))
@@ -279,7 +301,10 @@ class _McgFirstState extends State<McgFirst> {
                                 fit: BoxFit.fitHeight,
                                 animation: "Untitled"),
                             height: 350,
-                          ),SizedBox(height: 20,),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
                           Text('Yet To Be Bat',
                               style: TextStyle(
                                 fontFamily: 'ProductSans',
@@ -289,7 +314,10 @@ class _McgFirstState extends State<McgFirst> {
                                 fontSize: 20,
                                 fontWeight: FontWeight.w700,
                                 fontStyle: FontStyle.normal,
-                              )),SizedBox(height: 40,),
+                              )),
+                          SizedBox(
+                            height: 40,
+                          ),
                           Text(
                               'Tips - Use Dark Mode Toggle to switch into Dark Mode',
                               style: TextStyle(
