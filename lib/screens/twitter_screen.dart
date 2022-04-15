@@ -17,9 +17,9 @@ class _TwitterScreenState extends State<TwitterScreen> {
   // String darkUrl = 'http://apps.kushan.info/twitter/';
   // String whiteUrl = 'http://apps.kushan.info/twitter/light.html';
   // <a class="twitter-timeline" href="https://twitter.com/TwitterDev?ref_src=twsrc%5Etfw">Tweets by TwitterDev</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-  String whiteUrl = 'https://twitter.com/MahindaCollege';
+  // String whiteUrl = 'https://twitter.com/MahindaCollege';
   // String darkUrl = 'https://twitter.com/MahindaCollege';
-  //String whiteUrl = 'https://twitter.anuk41.repl.co/lightt.html';
+  String whiteUrl = 'https://twitter.anuk41.repl.co/lightt.html';
   String darkUrl = 'https://twitter.anuk41.repl.co/darkt.html';
 
   @override
@@ -27,12 +27,12 @@ class _TwitterScreenState extends State<TwitterScreen> {
     return Scaffold(
       body: SingleChildScrollView(
           physics: NeverScrollableScrollPhysics(),
-          padding: EdgeInsets.all(10.0),
+           padding: EdgeInsets.all(10.0),
           child: AnimationConfiguration.synchronized(
               child: SlideAnimation(
                   child: FadeInAnimation(
                       child: Container(
-                          padding: EdgeInsets.all(4.0),
+                          padding: EdgeInsets.all(0.0),
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.height - 160,
                           child: Provider.of<Settings>(context).isDarkMode

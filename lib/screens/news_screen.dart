@@ -30,7 +30,7 @@ class _NewsScreenState extends State<NewsScreen> {
               child: SlideAnimation(
                   child: FadeInAnimation(
                       child: Container(
-                          padding: EdgeInsets.all(4.0),
+                          padding: EdgeInsets.all(0.0),
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.height - 160,
                           child: Provider.of<Settings>(context).isDarkMode
