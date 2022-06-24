@@ -19,7 +19,8 @@ class _NewsScreenState extends State<NewsScreen> {
   // <a class="twitter-timeline" href="https://twitter.com/TwitterDev?ref_src=twsrc%5Etfw">Tweets by TwitterDev</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   // String whiteUrl = 'https://www.lq.lk';
   // String darkUrl = 'https://www.lq.lk';
-  String whiteUrl = 'https://rebrand.ly/yx9olh3';
+  //String whiteUrl = 'https://rebrand.ly/yx9olh3';
+  String whiteUrl = 'https://rebrand.ly/bc4dc7';
   String darkUrl = 'https://rebrand.ly/yx9olh3';
 
   @override
