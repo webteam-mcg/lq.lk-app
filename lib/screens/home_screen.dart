@@ -82,7 +82,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           launchYoutube(url);
@@ -96,8 +95,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButtonLocation:
       FloatingActionButtonLocation.miniCenterDocked,
-
-       */
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
@@ -126,23 +123,22 @@ class _HomeScreenState extends State<HomeScreen> {
               label: 'Home'),
           BottomNavigationBarItem(
               icon: Icon(
-                //FontAwesomeIcons.globe,
-                Icons.format_list_bulleted,
+                FontAwesomeIcons.globe,
                 size: 30,
               ),
-              label: 'Scoreboard'
+              label: 'Lq.lk'
             // ignore: deprecated_member_use
           ),
           BottomNavigationBarItem(
               icon: FaIcon(
                 FontAwesomeIcons.twitter,
-                size: 30,
+                size: 25,
               ),
               label: 'Twitter'),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.info_outline,
-                size: 25,
+                size: 30,
               ),
               label: "About"),
         ],

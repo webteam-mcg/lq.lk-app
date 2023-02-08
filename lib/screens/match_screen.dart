@@ -212,7 +212,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                     fontWeight: FontWeight.w600,
                                     fontStyle: FontStyle.normal,
                                   ))
-                              : Text('Richmond College',
+                              : Text('RICHMOND COLLEGE',
                                   style: TextStyle(
                                     fontFamily: 'ProductSans',
 //                                      color: Colors.black,
@@ -284,7 +284,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                   ],
                                 ),
                                 SizedBox(
-                                  width: 8.0,
+                                  width: 5.0,
                                 ),
                                 Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -332,7 +332,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                             ],
                                           ),
                                           SizedBox(
-                                            width: 40.0,
+                                            width: 17.0,
                                           ),
                                           Text("1st",
                                               style: TextStyle(
@@ -347,7 +347,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                                 fontStyle: FontStyle.normal,
                                               )),
                                           SizedBox(
-                                            width: 40.0,
+                                            width: 17.0,
                                           ),
                                           Column(
                                             mainAxisAlignment:
@@ -557,7 +557,7 @@ class _MatchScreenState extends State<MatchScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
-                                Text("117th Lovers' Quarrel",
+                                Text("118th Lovers' Quarrel",
                                     style: TextStyle(
                                       fontFamily: 'ProductSans',
                                       color: Provider.of<Settings>(context)
@@ -707,7 +707,7 @@ class _MatchScreenState extends State<MatchScreen> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
-                              Text("117th Lovers' Quarrel",
+                              Text("118th Lovers' Quarrel",
                                   style: TextStyle(
                                     fontFamily: 'ProductSans',
                                     color: Provider.of<Settings>(context)
