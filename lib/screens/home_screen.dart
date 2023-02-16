@@ -122,19 +122,25 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               label: 'Home'),
           BottomNavigationBarItem(
-              icon: Icon(
-                FontAwesomeIcons.globe,
-                size: 30,
+              icon: Padding(
+                padding: const EdgeInsets.only(right: 28.0),
+                child: Icon(
+                  FontAwesomeIcons.list,
+                  size: 30,
+                ),
               ),
-              label: 'Lq.lk'
+              label: 'Scorecard          '
             // ignore: deprecated_member_use
           ),
           BottomNavigationBarItem(
-              icon: FaIcon(
-                FontAwesomeIcons.twitter,
-                size: 25,
+              icon: Padding(
+                padding: const EdgeInsets.only(left:28.0),
+                child: FaIcon(
+                  FontAwesomeIcons.twitter,
+                  size: 25,
+                ),
               ),
-              label: 'Twitter'),
+              label: '        Twitter'),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.info_outline,
