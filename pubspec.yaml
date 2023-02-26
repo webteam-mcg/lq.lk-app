@@ -23,7 +23,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cloud_firestore:
-  firebase_messaging: ^7.0.3
+  firebase_messaging:
   url_launcher:
   flutter_staggered_animations: ^0.1.2
   webview_flutter: ^1.0.7
@@ -32,6 +32,9 @@ dependencies:
   shared_preferences: ^0.5.3+4
   font_awesome_flutter: ^8.8.0
   flare_flutter: ^2.0.1
+  camera: 0.10.3+1
+  tflite:
+  sliding_up_panel:
 
 dev_dependencies:
   flutter_test:
@@ -53,6 +56,8 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/labels.txt
+    - assets/ssd_mobilenet.tflite
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 

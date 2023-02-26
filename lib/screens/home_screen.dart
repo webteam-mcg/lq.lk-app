@@ -12,6 +12,7 @@ import 'package:lq_live_app/screens/twitter_screen.dart';
 import 'package:lq_live_app/settings.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'scan_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -108,6 +109,13 @@ class _HomeScreenState extends State<HomeScreen> {
           'assets/images/lqlklogolight.png',
           height: 30,
         ),
+        actions: [IconButton(onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ScanScreen()),
+          );
+        },
+            icon: Icon(Icons.camera))],
       ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
