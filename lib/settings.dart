@@ -9,7 +9,7 @@ class Settings extends ChangeNotifier {
 
   Settings(this.sharedPreferences);
 
-  bool get isDarkMode => sharedPreferences?.getBool("isDarkMode") ?? false;
+  bool get isDarkMode => sharedPreferences?.getBool("isDarkMode") ?? true;
 
   void setDarkMode(bool val) {
     sharedPreferences?.setBool("isDarkMode", val);

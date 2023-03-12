@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart' show DocumentSnapshot, FirebaseFirestore,QuerySnapshot;
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lq_live_app/screens/about_screen.dart';
 import 'package:lq_live_app/screens/match_screen.dart';
@@ -25,8 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> launchYoutube(String url) async {
 
-    var collection = FirebaseFirestore.instance.collection('main');
-    var docSnapshot = await collection.doc('live').get();
+    var collection = FirebaseFirestore.instance.collection('appdata');
+    var docSnapshot = await collection.doc('data').get();
     if (docSnapshot.exists) {
       Map<String, dynamic> data = docSnapshot.data();
       var value = data['youtube_link']; // <-- The value you want to retrieve.
@@ -85,18 +83,29 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          launchYoutube(url);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ScanScreen()),
+          );
+          //launchYoutube(url);
         },
+        /*
         child: Icon(
           Icons.play_arrow,
           size: 35,
           color: Color(0xffffffff),
+        ),
+        */
+        child: Image.asset(
+          'assets/icons/pulse.png',
+          height: 30,
         ),
         backgroundColor: Color(0xffffaa00),
       ),
       floatingActionButtonLocation:
       FloatingActionButtonLocation.miniCenterDocked,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         centerTitle: true,
@@ -109,13 +118,17 @@ class _HomeScreenState extends State<HomeScreen> {
           'assets/images/lqlklogolight.png',
           height: 30,
         ),
+        /*
         actions: [IconButton(onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => ScanScreen()),
           );
         },
-            icon: Icon(Icons.camera))],
+            icon: Icon(Icons.camera,
+            color: Provider.of<Settings>(context).isDarkMode?Colors.white :Colors.black,
+            ))],
+        */
       ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -124,17 +137,31 @@ class _HomeScreenState extends State<HomeScreen> {
         currentIndex: _currentIndex,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                size: 30,
+              icon: ImageIcon(
+                AssetImage("assets/icons/home.png"),
+                size: 28,
               ),
               label: 'Home'),
-          BottomNavigationBarItem(
+          /*
+         BottomNavigationBarItem(
+
               icon: Padding(
                 padding: const EdgeInsets.only(right: 28.0),
                 child: Icon(
                   FontAwesomeIcons.list,
                   size: 30,
+                ),
+              ),
+              label: 'Scorecard          '
+            // ignore: deprecated_member_use
+          ),
+          */
+          BottomNavigationBarItem(
+              icon: Padding(
+                padding: const EdgeInsets.only(right: 28.0),
+                child: ImageIcon(
+                  AssetImage("assets/icons/table.png"),
+                  size: 28,
                 ),
               ),
               label: 'Scorecard          '
@@ -150,9 +177,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               label: '        Twitter'),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.info_outline,
-                size: 30,
+              icon: ImageIcon(
+                AssetImage("assets/icons/info-button.png"),
+                size: 28,
               ),
               label: "About"),
         ],

@@ -36,7 +36,8 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     aaptOptions {
-        noCompress 'ssd_mobilenet.tflite'
+        // noCompress 'ssd_mobilenet.tflite'
+        noCompress 'android.tflite'
         noCompress 'lite'
     }
     compileSdkVersion flutter.compileSdkVersion

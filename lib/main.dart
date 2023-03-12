@@ -12,8 +12,6 @@ import 'package:camera/camera.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final cameras = await availableCameras();
-  final firstCamera = cameras.first;
   await Firebase.initializeApp();
   runApp(MyApp1());
 }
@@ -48,7 +46,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   // final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-  final List<Message> messages = [];
+  // final List<Message> messages = [];
 
   @override
   void initState() {

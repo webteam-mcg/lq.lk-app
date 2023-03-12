@@ -1,7 +1,7 @@
 import 'dart:async' show StreamSubscription;
 
 import 'package:cloud_firestore/cloud_firestore.dart' show DocumentSnapshot, FirebaseFirestore, QuerySnapshot;
-import 'package:flutter/material.dart' show AssetImage, BouncingScrollPhysics, BoxDecoration, BuildContext, Center, Chip, Color, Colors, Column, Container, CrossAxisAlignment, EdgeInsets, FontStyle, FontWeight, Image, MainAxisAlignment, MainAxisSize, MediaQuery, Row, Scaffold, SingleChildScrollView, SizedBox, State, StatefulWidget, Text, TextStyle, Widget;
+import 'package:flutter/material.dart' show Icons,FloatingActionButton,AssetImage, BouncingScrollPhysics, BoxDecoration, BuildContext, Center, Chip, Color, Colors, Column, Container, CrossAxisAlignment, EdgeInsets, FontStyle, FontWeight, Image, MainAxisAlignment, MainAxisSize, MediaQuery, Row, Scaffold, SingleChildScrollView, SizedBox, State, StatefulWidget, Text, TextStyle, Widget;
 import 'package:flutter/rendering.dart' show AssetImage, BoxDecoration, Color, CrossAxisAlignment, EdgeInsets, FontStyle, FontWeight, MainAxisAlignment, MainAxisSize, TextStyle;
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,6 +10,7 @@ import 'package:lq_live_app/models/functions_model.dart';
 import 'package:lq_live_app/settings.dart';
 import 'package:lq_live_app/themes.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MatchScreen extends StatefulWidget {
   @override
@@ -25,7 +26,7 @@ class _MatchScreenState extends State<MatchScreen> {
   int score = 0;
   int wicket = 0;
   int ball = 0;
-  String college = 'MAHINDA COLLEGE';
+  String college = 'Mahinda College';
   String specialMsg = '';
   Map player1;
   Map player2;
@@ -87,6 +88,35 @@ class _MatchScreenState extends State<MatchScreen> {
   var secondInningMcgData;
   var firstInningRcgData;
   var secondInningRcgData;
+
+  String url = 'https://www.youtube.com/channel/UCRnbcK82wzCZEQ1mTbKIVng';
+
+  Future<void> launchYoutube(String url) async {
+
+    var collection = FirebaseFirestore.instance.collection('appdata');
+    var docSnapshot = await collection.doc('data').get();
+    if (docSnapshot.exists) {
+      Map<String, dynamic> data = docSnapshot.data();
+      var value = data['youtube_link']; // <-- The value you want to retrieve.
+      if(url==null){
+
+      }
+      else {
+        url = value;
+      }
+      // Call setState if needed.
+    }
+    print(url);
+
+
+    if (await canLaunch(url)) {
+      final bool nativeAppLaunchSucceeded =
+      await launch(url, forceSafariVC: false, universalLinksOnly: true);
+      if (!nativeAppLaunchSucceeded) {
+        await launch(url, forceSafariVC: true);
+      }
+    }
+  }
 
   @override
   void initState() {
@@ -204,7 +234,7 @@ class _MatchScreenState extends State<MatchScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           college == 'mcg'
-                              ? Text('MAHINDA COLLEGE',
+                              ? Text('Mahinda College',
                                   style: TextStyle(
                                     fontFamily: 'ProductSans',
 //                                          color: Colors.black,
@@ -212,7 +242,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                     fontWeight: FontWeight.w600,
                                     fontStyle: FontStyle.normal,
                                   ))
-                              : Text('RICHMOND COLLEGE',
+                              : Text('Richmond College',
                                   style: TextStyle(
                                     fontFamily: 'ProductSans',
 //                                      color: Colors.black,
@@ -616,6 +646,7 @@ class _MatchScreenState extends State<MatchScreen> {
                       SizedBox(height: 10.0),
                       Container(
                         height: MediaQuery.of(context).size.height / 7+10,
+                        width: MediaQuery.of(context).size.width,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -635,24 +666,32 @@ class _MatchScreenState extends State<MatchScreen> {
                                   fontStyle: FontStyle.normal,
                                 )),
                             thisSplit.length >= 0
-                                ? Row(
-                                    children: thisSplit
-                                        .map((i) => Chip(
-                                              label: Text(
-                                                i.toString().toUpperCase(),
-                                                style: TextStyle(
-                                                    color: Colors.black),
-                                              ),
-                                              backgroundColor: i == 'w'
-                                                  ? Colors.redAccent
-                                                  : Colors.amber,
-                                            ))
-                                        .toList(),
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.values[5],
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                  )
+                                ? SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                  child: ConstrainedBox(
+                                    constraints: BoxConstraints(
+                                      minWidth: MediaQuery.of(context).size.width-20,
+                                    ),
+                                    child: Row(
+                                        children: thisSplit
+                                            .map((i) => Chip(
+                                                  label: Text(
+                                                    i.toString().toUpperCase(),
+                                                    style: TextStyle(
+                                                        color: Colors.black),
+                                                  ),
+                                                  backgroundColor: i == 'w'
+                                                      ? Colors.redAccent
+                                                      : Colors.amber,
+                                                ))
+                                            .toList(),
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.values[5],
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                      ),
+                                  ),
+                                )
                                 : SizedBox(
                                     width: MediaQuery.of(context).size.height,
                                     height: 45,
@@ -702,7 +741,7 @@ class _MatchScreenState extends State<MatchScreen> {
                       ),
                       SizedBox(height: 10.0),
                       Container(
-                        height: MediaQuery.of(context).size.height / 8,
+                        height: MediaQuery.of(context).size.height / 5,
                         child: Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -729,6 +768,19 @@ class _MatchScreenState extends State<MatchScreen> {
                                     fontWeight: FontWeight.w600,
                                     fontStyle: FontStyle.normal,
                                   )),
+                              FloatingActionButton.extended(
+                                elevation: 0,
+                                onPressed: () {
+                                  launchYoutube(url);
+                                  // Add your onPressed code here!
+                                },
+                                label: const Text('Watch the match live'),
+                                icon: const Icon(
+                                  Icons.play_arrow,
+                                ),
+                               // backgroundColor: Color(0xffffaa00),
+                                backgroundColor: Colors.amber,
+                              ),
                             ],
                           ),
                         ),
@@ -740,75 +792,86 @@ class _MatchScreenState extends State<MatchScreen> {
                       Container(
                         height: MediaQuery.of(context).size.height / 7,
                         width: double.infinity,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Text('Batting',
-                                    style: TextStyle(
-                                      fontFamily: 'ProductSans',
-                                      color: Provider.of<Settings>(context)
-                                              .isDarkMode
-                                          ? Color(0xffffffff)
-                                          : Colors.grey,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w600,
-                                      fontStyle: FontStyle.normal,
-
-                                    )),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Text(
-                                        '$player1name - $player1score ( $player1balls )'),
-                                    SizedBox(
-                                      height: 10.0,
-                                    ),
-                                    Text(
-                                        '$player2name - $player2score ( $player2balls )'),
-                                  ],
-                                )
-                              ],
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: ConstrainedBox(
+                            constraints: BoxConstraints(
+                              minWidth: MediaQuery.of(context).size.width-20,
                             ),
-                            Container(
-                                width: 1.5,
-                                height:
-                                    MediaQuery.of(context).size.height / 7 - 20,
-                                decoration: new BoxDecoration(
-                                    color: Color(0xffe0e3e5))),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Text('Balling',
-                                    style: TextStyle(
-                                      fontFamily: 'ProductSans',
-                                      color: Provider.of<Settings>(context)
-                                              .isDarkMode
-                                          ? Color(0xffffffff)
-                                          : Colors.grey,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w600,
-                                      fontStyle: FontStyle.normal,
-                                    )),
-                                Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                            child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: <Widget>[
-                                    Text(
-                                        '$bowlerName - $bowlerScore ( $bowlerBalls )'),
-                                    SizedBox(
-                                      height: 10.0,
-                                    ),
-                                    Text('Wickets - $bowlerWickets'),
+                                      Column(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        children: <Widget>[
+                                          Text('Batting',
+                                              style: TextStyle(
+                                                fontFamily: 'ProductSans',
+                                                color: Provider.of<Settings>(context)
+                                                        .isDarkMode
+                                                    ? Color(0xffffffff)
+                                                    : Colors.grey,
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.w600,
+                                                fontStyle: FontStyle.normal,
+
+                                              )),
+                                          Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              Text(
+                                                  '$player1name - $player1score ( $player1balls )'),
+                                              SizedBox(
+                                                height: 10.0,
+                                              ),
+                                              Text(
+                                                  '$player2name - $player2score ( $player2balls )'),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+
+                                    Container(
+                                        width: 1.5,
+                                        height:
+                                            MediaQuery.of(context).size.height / 7 - 20,
+                                        decoration: new BoxDecoration(
+                                            color: Color(0xffe0e3e5))),
+                                     Column(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        children: <Widget>[
+                                          Text('Balling',
+                                              style: TextStyle(
+                                                fontFamily: 'ProductSans',
+                                                color: Provider.of<Settings>(context)
+                                                        .isDarkMode
+                                                    ? Color(0xffffffff)
+                                                    : Colors.grey,
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.w600,
+                                                fontStyle: FontStyle.normal,
+                                              )),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: <Widget>[
+                                              Text(
+                                                  '$bowlerName - $bowlerScore ( $bowlerBalls )'),
+                                              SizedBox(
+                                                height: 10.0,
+                                              ),
+                                              Text('Wickets - $bowlerWickets'),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+
                                   ],
-                                )
-                              ],
-                            )
-                          ],
+                                ),
+                          ),
                         ),
+
                         decoration: Provider.of<Settings>(context).isDarkMode
                             ? setBlackCard
                             : setWhiteCard,

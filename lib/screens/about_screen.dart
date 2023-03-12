@@ -9,6 +9,8 @@ import 'package:lq_live_app/settings.dart';
 import 'package:lq_live_app/themes.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:cloud_firestore/cloud_firestore.dart' show DocumentSnapshot, FirebaseFirestore, QuerySnapshot;
+
 
 class AboutScreen extends StatefulWidget {
   @override
@@ -25,6 +27,33 @@ class _AboutScreenState extends State<AboutScreen> {
   String twitter = 'https://twitter.com/MahindaCollege/';
   String youTube = 'https://www.youtube.com/channel/UCRnbcK82wzCZEQ1mTbKIVng/';
   String web = 'https://www.mahindacollege.lk';
+  String tosurl = "https://www.freeprivacypolicy.com/live/e50a3e1a-1762-48ae-a3d8-4d925cefe2c0";
+
+  Future<void> launchTos(String tosurl) async {
+
+    var collection = FirebaseFirestore.instance.collection('appdata');
+    var docSnapshot = await collection.doc('data').get();
+    if (docSnapshot.exists) {
+      Map<String, dynamic> data = docSnapshot.data();
+      var value = data['termsAndC']; // <-- The value you want to retrieve.
+      if(tosurl==null){
+
+      }
+      else {
+        tosurl = value;
+      }
+      // Call setState if needed.
+    }
+
+
+    if (await canLaunch(tosurl)) {
+      final bool nativeAppLaunchSucceeded =
+      await launch(tosurl, forceSafariVC: false, universalLinksOnly: true);
+      if (!nativeAppLaunchSucceeded) {
+        await launch(tosurl, forceSafariVC: true);
+      }
+    }
+  }
 
   Future<void> _launchInApp(String url) async {
     if (await canLaunch(url)) {
@@ -100,10 +129,10 @@ class _AboutScreenState extends State<AboutScreen> {
                               padding: EdgeInsets.only(),height: 40,
                               child: Provider.of<Settings>(context).isDarkMode
                                   ? Image.asset(
-                                'assets/images/ARCH92(ForLightMode).png',
+                                'assets/images/ARCH92(ForDarkmode)2.png',
                               )
                                   : Image.asset(
-                                'assets/images/ARCH92(ForDarkMode).png',
+                                'assets/images/ARCH92(ForLightMode).png',
                               ),
                             ),
 
@@ -132,6 +161,16 @@ class _AboutScreenState extends State<AboutScreen> {
                         decoration: Provider.of<Settings>(context).isDarkMode
                             ? setBlackCard
                             : setWhiteCard,
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Container(
+                        decoration: Provider.of<Settings>(context).isDarkMode
+                            ? setBlackCard
+                            : setWhiteCard,
+                       // padding: EdgeInsets.symmetric(vertical: 30.0),
+                        child: ClipRRect(borderRadius: BorderRadius.circular(15),child: Image(image: AssetImage('assets/images/weDefy.jpg'),fit: BoxFit.fitWidth,),)
                       ),
                       SizedBox(
                         height: 10.0,
@@ -220,9 +259,9 @@ class _AboutScreenState extends State<AboutScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: <Widget>[
-                              Text('-SOTG 23'),
-                              Text('Made with ❤ at'),
-                              Text('WebTeam MCG')
+                              Text('-SOTG 23',style: TextStyle(fontSize: 10),),
+                              Text('Made with ❤ at',style: TextStyle(fontSize: 10),),
+                              Text('WebTeam MCG',style: TextStyle(fontSize: 10),)
                             ],
                           ),
                         ],
