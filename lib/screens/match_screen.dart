@@ -840,7 +840,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                      Column(
                                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                         children: <Widget>[
-                                          Text('Balling',
+                                          Text('Bowling',
                                               style: TextStyle(
                                                 fontFamily: 'ProductSans',
                                                 color: Provider.of<Settings>(context)
