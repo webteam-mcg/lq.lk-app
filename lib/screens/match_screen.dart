@@ -314,13 +314,16 @@ class _MatchScreenState extends State<MatchScreen> {
                                   ],
                                 ),
                                 SizedBox(
-                                  width: 5.0,
+                                  width: 8.0,
                                 ),
                                 Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: <Widget>[
+                                      SizedBox(
+                                        height:10,
+                                      ),
                                       Row(
                                         children: <Widget>[
                                           Column(
@@ -339,7 +342,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                                                 .isDarkMode
                                                             ? Color(0xffffffff)
                                                             : Colors.black,
-                                                    fontSize: 16.7,
+                                                    fontSize: 20,
                                                     fontWeight: FontWeight.w700,
                                                     fontStyle: FontStyle.normal,
                                                   )),
@@ -355,7 +358,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                                                 .isDarkMode
                                                             ? Color(0xffffffff)
                                                             : Colors.grey,
-                                                    fontSize: 12,
+                                                    fontSize: 15,
                                                     fontWeight: FontWeight.w700,
                                                     fontStyle: FontStyle.normal,
                                                   )),
@@ -364,7 +367,8 @@ class _MatchScreenState extends State<MatchScreen> {
                                           SizedBox(
                                             width: 17.0,
                                           ),
-                                          Text("1st",
+
+                                          Text("  ",
                                               style: TextStyle(
                                                 fontFamily: 'ProductSans',
                                                 color: Provider.of<Settings>(
@@ -376,6 +380,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                                 fontWeight: FontWeight.w700,
                                                 fontStyle: FontStyle.normal,
                                               )),
+
                                           SizedBox(
                                             width: 17.0,
                                           ),
@@ -395,7 +400,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                                                 .isDarkMode
                                                             ? Color(0xffffffff)
                                                             : Colors.black,
-                                                    fontSize: 16.7,
+                                                    fontSize: 20,
                                                     fontWeight: FontWeight.w700,
                                                     fontStyle: FontStyle.normal,
                                                   )),
@@ -411,7 +416,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                                                 .isDarkMode
                                                             ? Color(0xffffffff)
                                                             : Colors.grey,
-                                                    fontSize: 12,
+                                                    fontSize: 15,
                                                     fontWeight: FontWeight.w700,
                                                     fontStyle: FontStyle.normal,
                                                   )),
@@ -420,9 +425,9 @@ class _MatchScreenState extends State<MatchScreen> {
                                         ],
                                       ),
                                       SizedBox(
-                                        height: 10.0,
+                                        height: 0.0,
                                       ),
-                                      inning == 2
+                                      inning == 3
                                           ? Row(
                                               children: <Widget>[
                                                 Column(
@@ -546,7 +551,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                           : SizedBox.shrink()
                                     ]),
                                 SizedBox(
-                                  width: 8.0,
+                                  width: 5.0,
                                 ),
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -598,7 +603,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                       fontWeight: FontWeight.w700,
                                       fontStyle: FontStyle.normal,
                                     )),
-                                Text('Day $day',
+                                Text('One Day Encounter',
                                     style: TextStyle(
                                       fontFamily: 'ProductSans',
                                       color: Provider.of<Settings>(context)
@@ -641,7 +646,7 @@ class _MatchScreenState extends State<MatchScreen> {
                         decoration: Provider.of<Settings>(context).isDarkMode
                             ? setBlackCard
                             : setWhiteCard,
-                        height: MediaQuery.of(context).size.height / 4+35,
+                        height: MediaQuery.of(context).size.height / 4+25,
                       ),
                       SizedBox(height: 10.0),
                       Container(
@@ -757,7 +762,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                     fontWeight: FontWeight.w600,
                                     fontStyle: FontStyle.normal,
                                   )),
-                              Text('Day $day',
+                              Text('One Day Encounter',
                                   style: TextStyle(
                                     fontFamily: 'ProductSans',
                                     color: Provider.of<Settings>(context)
